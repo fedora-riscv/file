@@ -2,12 +2,16 @@
 
 Summary: A utility for determining file types.
 Name: file
-Version: 4.02
-Release: 2
+Version: 4.07
+Release: 1
 License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 Patch0: file-4.02-rh.patch
+Patch1: file-4.02-zlib.patch
+Patch2: file-offset.patch
+Patch3: file-4.07-debian.patch
+Patch4: file-selinux.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 
 %description
@@ -22,6 +26,10 @@ useful utility.
 %prep
 %setup -q
 %patch0 -p1 -b .rh
+%patch1 -p1 -b .zlib
+%patch2 -p1 -b .offset
+%patch3 -p1 -b .debian
+%patch4 -p1 -b .selinux
 
 %build
 CFLAGS="%{optflags} -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE" \
@@ -62,6 +70,26 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libmagic.*
 
 %changelog
+* Sun Jan 18 2004 Jeff Johnson <jbj@jbj.org> 4.07-1
+- upgrade to 4.07.
+- deal gracefully with unreadable files (#113207).
+- detect PO files (from Debian).
+
+* Tue Dec 16 2003 Jeff Johnson <jbj@jbj.org> 4.06-1
+- upgrade to file-4.06.
+
+* Mon Nov 10 2003 Tim Waugh <twaugh@redhat.com> 4.02-4
+- Minimal fix for busy loop problem (bug #109495).
+
+* Mon Oct 13 2003 Jeff Johnson <jbj@jbj.org> 4.05-1
+- upgrade to 4.05.
+
+* Thu Oct  9 2003 Jeff Johnson <jbj@jbj.org> 4.02-3
+- use zlib rather than exec'ing gzip.
+
+-* Thu Aug 28 2003 Dan Walsh <dwalsh@redhat.com>
+-- Add Selinux support.
+
 * Wed Jun 04 2003 Elliot Lee <sopwith@redhat.com>
 - rebuilt
 
