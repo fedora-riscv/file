@@ -3,7 +3,7 @@
 Summary: A utility for determining file types.
 Name: file
 Version: 4.12
-Release: 1
+Release: 2
 License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -12,6 +12,7 @@ Patch1: file-4.10-debian.patch
 Patch2: file-selinux.patch
 #Patch3: file-stringop.patch
 Patch4: file-4.12-magic.patch
+Patch5: file-4.12-compress.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: zlib-devel
 
@@ -31,6 +32,7 @@ useful utility.
 %patch2 -p1 -b .selinux
 #%patch3 -p1 -b .stringop
 %patch4 -p1 -b .magic
+%patch5 -p1 -b .compress
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 mv doc/libmagic.man_ doc/libmagic.man
@@ -75,6 +77,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libmagic.*
 
 %changelog
+* Mon Jan 03 2005 Radek Vokal <rvokal@redhat.com> - 4.12-2
+- fixed crashes in threaded environment (#143871) <arjanv@redhat.com>
+
 * Thu Dec 02 2004 Radek Vokal <rvokal@redhat.com> - 4.12-1
 - upgrade to file-4.12
 - removed Tim's patch, tuned magic patch
