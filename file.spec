@@ -1,18 +1,20 @@
+%define __libtoolize :
+
 Summary: A utility for determining file types.
 Name: file
-Version: 3.35
-Release: 2
-Copyright: distributable
+Version: 3.37
+Release: 5
+License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 Source1: magic.mime
 Patch0: file-3.27-rh.patch
 Patch1: file-3.33-ia64.patch
-Patch2: file-3.30-magic5.patch
 Patch3: file-3.30-fnovfl.patch
 Patch4: file-3.35-elf.patch
-Prefix: %{_prefix}
-BuildRoot: %{_tmppath}/%{name}-root
+Patch5: file-3.37-perlfix.patch
+Patch6: file-3.37-missint.patch
+BuildRoot: %{_tmppath}/%{name}-%{version}-root
 
 %description
 The file command is used to identify a particular file according to the
@@ -27,14 +29,13 @@ useful utility.
 %setup -q
 %patch0 -p1
 %patch1 -p1 -b .ia64
-%patch2 -p1 -b .magic5
-%patch3 -p1 -b .fnovfl
-%patch4 -p1 -R
+%patch5 -p1 
+%patch6 -p1 -b .missint
 
 %build
+CFLAGS="%{optflags} -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE"
 
-automake
-%configure
+%configure --enable-fsect-man5
 make
 
 %install
@@ -46,10 +47,9 @@ mkdir -p ${RPM_BUILD_ROOT}%{_datadir}
 
 %makeinstall
 
-{ cd $RPM_BUILD_ROOT
-  strip .%{_bindir}/file
-  cp %SOURCE1 .%{_datadir}/magic.mime
-}
+pushd $RPM_BUILD_ROOT
+cp %SOURCE1 .%{_datadir}/magic.mime
+popd
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -61,12 +61,27 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man*/*
 
 %changelog
+* Tue Feb 26 2002 Trond Eivind Glomsrød <teg@redhat.com> 3.37-5
+- Rebuild
+
+* Mon Jan 14 2002 Trond Eivind Glomsrød <teg@redhat.com> 3.37-4
+- Fix missing include of <stdint.h> (#58209)
+
+* Tue Dec 11 2001 Trond Eivind Glomsrød <teg@redhat.com> 3.37-2
+- Add CFLAGS to handle large files (#53576)
+
+* Mon Dec 10 2001 Trond Eivind Glomsrød <teg@redhat.com> 3.37-1
+- 3.37
+- s/Copyright/License/
+- build with --enable-fsect-man5, drop patch
+- disable two old patches
+
 * Fri Jul 06 2001 Florian La Roche <Florian.LaRoche@redhat.de>
 - revert a patch to Magdir/elf, which breaks many libtool scripts
   in several rpm packages
 
 * Mon Jun 25 2001 Crutcher Dunnavant <crutcher@redhat.com>
-- itterate to 3.35
+- iterate to 3.35
 
 * Sun Jun 24 2001 Elliot Lee <sopwith@redhat.com>
 - Bump release + rebuild.
