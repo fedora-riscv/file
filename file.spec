@@ -2,16 +2,14 @@
 
 Summary: A utility for determining file types.
 Name: file
-Version: 4.07
-Release: 5
+Version: 4.10
+Release: 1
 License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
-Patch0: file-4.02-rh.patch
-Patch1: file-4.02-zlib.patch
-Patch2: file-4.07-note.patch
-Patch3: file-4.07-debian.patch
-Patch4: file-selinux.patch
+Patch0: file-4.10-rh.patch
+Patch1: file-4.10-debian.patch
+Patch2: file-selinux.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 
 %description
@@ -26,10 +24,8 @@ useful utility.
 %prep
 %setup -q
 %patch0 -p1 -b .rh
-%patch1 -p1 -b .zlib
-%patch2 -p1 -b .note
-%patch3 -p1 -b .debian
-%patch4 -p1 -b .selinux
+%patch1 -p1 -b .debian
+%patch2 -p1 -b .selinux
 
 %build
 CFLAGS="%{optflags} -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE" \
@@ -71,6 +67,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libmagic.*
 
 %changelog
+* Wed Aug 11 2004 Radek Vokal <rvokal@redhat.com>
+- zlib patch deleted, note patch deleted, rh patch updated, debian patch updated
+- upgrade to file-4.10
+
 * Tue Jun 15 2004 Elliot Lee <sopwith@redhat.com>
 - rebuilt
 
