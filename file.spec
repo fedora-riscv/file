@@ -1,23 +1,15 @@
-%define enable_japanese 1
-
 Summary: A utility for determining file types.
 Name: file
-Version: 3.30
-Release: 7j1
+Version: 3.33
+Release: 1
 Copyright: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 Source1: magic.mime
-# Japanese Source
-Source10: file-jman19991015.tar.gz
 Patch0: file-3.27-rh.patch
-Patch1: file-3.28-ia64.patch
+Patch1: file-3.33-ia64.patch
 Patch2: file-3.30-magic5.patch
 Patch3: file-3.30-fnovfl.patch
-Patch4: file-3.30-test.patch
-# Japanese patch
-Patch10: file-3.30-jtext.patch
-
 Prefix: %{_prefix}
 BuildRoot: %{_tmppath}/%{name}-root
 
@@ -33,13 +25,9 @@ useful utility.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
+%patch1 -p1 -b .ia64
 %patch2 -p1 -b .magic5
 %patch3 -p1 -b .fnovfl
-%patch4 -p1 -b .test
-%if %{enable_japanese}
-%patch10 -p1 -b .jp1
-%endif
 
 %build
 
@@ -51,7 +39,6 @@ make
 rm -rf $RPM_BUILD_ROOT
 mkdir -p ${RPM_BUILD_ROOT}%{_bindir}
 mkdir -p ${RPM_BUILD_ROOT}%{_mandir}/man1
-mkdir -p ${RPM_BUILD_ROOT}%{_mandir}/ja/man1
 mkdir -p ${RPM_BUILD_ROOT}%{_mandir}/man5
 mkdir -p ${RPM_BUILD_ROOT}%{_datadir}
 
@@ -62,12 +49,6 @@ mkdir -p ${RPM_BUILD_ROOT}%{_datadir}
   cp %SOURCE1 .%{_datadir}/magic.mime
 }
 
-%if %{enable_japanese}
-{ cd $RPM_BUILD_ROOT%{_mandir}/ja
-  tar zxvf %SOURCE10
-}
-%endif
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -76,14 +57,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/*
 %{_datadir}/magic*
 %{_mandir}/man*/*
-%{_mandir}/ja/*/*
 
 %changelog
-* Wed Aug 30 2000 ISHIKAWA Mutsumi <ishikawa@redhat.com>
-- applied a patch to detect japanese, from RH6.2J.
-- ja patch: fixed patching to Makefile.in
-- ja patch: changed the patch to be able to build in 3.30.
-- Spefial Thanks for Masato Taruishi <taru@debian.org>
+* Sun Nov 26 2000 Jeff Johnson <jbj@redhat.com>
+- update to 3.33.
 
 * Mon Aug 14 2000 Preston Brown <pbrown@redhat.com>
 - Bill made the patch but didn't apply it. :)
