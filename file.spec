@@ -3,7 +3,7 @@
 Summary: A utility for determining file types.
 Name: file
 Version: 4.13
-Release: 2
+Release: 3
 License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -12,6 +12,7 @@ Patch1: file-4.10-debian.patch
 Patch2: file-selinux.patch
 Patch4: file-4.13-magic.patch
 Patch6: file-4.12-core64.patch
+Patch7: file-4.13-fsdump.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: zlib-devel
 
@@ -31,6 +32,7 @@ useful utility.
 %patch2 -p1 -b .selinux
 %patch4 -p1 -b .magic
 %patch6 -p1 -b .core64
+%patch7 -p1 -b .fsdump
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 mv doc/libmagic.man_ doc/libmagic.man
@@ -75,6 +77,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libmagic.*
 
 %changelog
+* Mon Mar 07 2005 Radek Vokal <rvokal@redhat.com> - 4.13-3
+- check for shared libs before fs dump files (#149868)
+
 * Fri Mar 04 2005 Radek Vokal <rvokal@redhat.com> - 4.13-2
 - gcc4 rebuilt
 
