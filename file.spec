@@ -3,7 +3,7 @@
 Summary: A utility for determining file types.
 Name: file
 Version: 4.10
-Release: 2
+Release: 3
 License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -11,7 +11,9 @@ Patch0: file-4.10-rh.patch
 Patch1: file-4.10-debian.patch
 Patch2: file-selinux.patch
 Patch3: file-stringop.patch
+Patch4: file-4.10-magic.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
+BuildRequires: zlib-devel
 
 %description
 The file command is used to identify a particular file according to the
@@ -28,6 +30,7 @@ useful utility.
 %patch1 -p1 -b .debian
 %patch2 -p1 -b .selinux
 %patch3 -p1 -b .stringop
+%patch4 -p1 -b .magic
 
 %build
 CFLAGS="%{optflags} -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE" \
@@ -69,6 +72,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libmagic.*
 
 %changelog
+* Thu Nov 18 2004 Radek Vokal <rvokal@redhat.com> 4.10-3
+- set of patches from debian.org
+- new magic types (#128763)
+- zlib added to BuildReq (#125294)
+
 * Tue Oct 12 2004 Tim Waugh <twaugh@redhat.com> 4.10-2
 - Fixed occasional segfault (bug #131892).
 
