@@ -2,17 +2,15 @@
 
 Summary: A utility for determining file types.
 Name: file
-Version: 4.12
-Release: 3
+Version: 4.13
+Release: 1
 License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 Patch0: file-4.10-rh.patch
 Patch1: file-4.10-debian.patch
 Patch2: file-selinux.patch
-#Patch3: file-stringop.patch
-Patch4: file-4.12-magic.patch
-Patch5: file-4.12-compress.patch
+Patch4: file-4.13-magic.patch
 Patch6: file-4.12-core64.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: zlib-devel
@@ -31,9 +29,7 @@ useful utility.
 %patch0 -p1 -b .rh
 %patch1 -p1 -b .debian
 %patch2 -p1 -b .selinux
-#%patch3 -p1 -b .stringop
 %patch4 -p1 -b .magic
-%patch5 -p1 -b .compress
 %patch6 -p1 -b .core64
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
@@ -79,6 +75,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libmagic.*
 
 %changelog
+* Tue Feb 15 2005 Radek Vokal <rvokal@redhat.com> - 4.13-1
+- new version, fixing few bugs, patch clean-up
+- consistent output for bzip files (#147440)
+
 * Mon Jan 24 2005 Radek Vokal <rvokal@redhat.com> - 4.12-3
 - core64 patch fixing output on core files (#145354) <kzak@redhat.com>
 - minor change in magic patch
