@@ -1,6 +1,6 @@
 Summary: A utility for determining file types.
 Name: file
-Version: 3.33
+Version: 3.35
 Release: 1
 Copyright: distributable
 Group: Applications/File
@@ -59,6 +59,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man*/*
 
 %changelog
+* Mon Jun 25 2001 Crutcher Dunnavant <crutcher@redhat.com>
+- itterate to 3.35
+
+* Sun Jun 24 2001 Elliot Lee <sopwith@redhat.com>
+- Bump release + rebuild.
+
 * Sun Nov 26 2000 Jeff Johnson <jbj@redhat.com>
 - update to 3.33.
 
