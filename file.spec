@@ -3,13 +3,14 @@
 Summary: A utility for determining file types.
 Name: file
 Version: 4.10
-Release: 1
+Release: 2
 License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 Patch0: file-4.10-rh.patch
 Patch1: file-4.10-debian.patch
 Patch2: file-selinux.patch
+Patch3: file-stringop.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 
 %description
@@ -26,6 +27,7 @@ useful utility.
 %patch0 -p1 -b .rh
 %patch1 -p1 -b .debian
 %patch2 -p1 -b .selinux
+%patch3 -p1 -b .stringop
 
 %build
 CFLAGS="%{optflags} -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE" \
@@ -67,6 +69,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libmagic.*
 
 %changelog
+* Tue Oct 12 2004 Tim Waugh <twaugh@redhat.com> 4.10-2
+- Fixed occasional segfault (bug #131892).
+
 * Wed Aug 11 2004 Radek Vokal <rvokal@redhat.com>
 - zlib patch deleted, note patch deleted, rh patch updated, debian patch updated
 - upgrade to file-4.10
