@@ -2,18 +2,17 @@
 
 Summary: A utility for determining file types.
 Name: file
-Version: 3.37
-Release: 8
+Version: 3.39
+Release: 9
 License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
-Patch0: file-3.27-rh.patch
-Patch1: file-3.33-ia64.patch
-Patch3: file-3.30-fnovfl.patch
-Patch4: file-3.35-elf.patch
-Patch5: file-3.37-perlfix.patch
-Patch6: file-3.37-missint.patch
 Source1: file-3.37-mng.patch
+Patch0: file-3.39-rh.patch
+Patch1: file-3.39-ppc.patch
+Patch2: file-3.39-note.patch
+Patch3: file-3.39-vorbis.patch
+Patch4: file-3.39-cksize.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 
 %description
@@ -27,14 +26,14 @@ useful utility.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1 -b .ia64
-%patch5 -p1 
-%patch6 -p1 -b .missint
+%patch0 -p1 -b .rh
+%patch1 -p1 -b .ppc
+%patch2 -p1 -b .note
+%patch3 -p1 -b .vorbis
+%patch4 -p1 -b .cksize
 
 %build
-CFLAGS="%{optflags} -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE"
-
+CFLAGS="%{optflags} -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE" \
 %configure --enable-fsect-man5
 make
 
@@ -44,11 +43,12 @@ rm -rf $RPM_BUILD_ROOT
 mkdir -p ${RPM_BUILD_ROOT}%{_bindir}
 mkdir -p ${RPM_BUILD_ROOT}%{_mandir}/man1
 mkdir -p ${RPM_BUILD_ROOT}%{_mandir}/man5
-mkdir -p ${RPM_BUILD_ROOT}%{_datadir}
+mkdir -p ${RPM_BUILD_ROOT}%{_datadir}/misc
 
 patch -p1 < %SOURCE1
 
 %makeinstall
+ln -s ../magic ${RPM_BUILD_ROOT}%{_datadir}/misc/magic 
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -57,9 +57,38 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %{_bindir}/*
 %{_datadir}/magic*
+%{_datadir}/misc/*
 %{_mandir}/man*/*
 
 %changelog
+* Thu Feb 27 2003 Jeff Johnson <jbj@redhat.com> 3.39-9
+- check size read from elf header (#85297).
+
+* Tue Feb 18 2003 Matt Wilson <msw@redhat.com> 3.39-8
+- add FHS compatibility symlink from /usr/share/misc/magic -> ../magic
+  (#84509)
+
+* Fri Feb 14 2003 Jeff Johnson <jbj@redhat.com> 3.39-7
+- the "real" fix to the vorbis/ogg magic details (#82810).
+
+* Mon Jan 27 2003 Jeff Johnson <jbj@redhat.com> 3.39-6
+- avoid vorbis/ogg magic details (#82810).
+
+* Wed Jan 22 2003 Tim Powers <timp@redhat.com> 3.39-5
+- rebuilt
+
+* Sun Jan 12 2003 Nalin Dahyabhai <nalin@redhat.com> 3.39-4
+- PT_NOTE, take 3
+
+* Fri Jan 10 2003 Nalin Dahyabhai <nalin@redhat.com> 3.39-3
+- don't barf in ELF headers with align = 0
+
+* Tue Jan  7 2003 Nalin Dahyabhai <nalin@redhat.com> 3.39-2
+- don't get lost when looking at PT_NOTE sections
+
+* Sat Oct 26 2002 Jeff Johnson <jbj@redhat.com> 3.39-1
+- update to 3.39.
+
 * Fri Jun 21 2002 Tim Powers <timp@redhat.com>
 - automated rebuild
 
