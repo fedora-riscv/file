@@ -3,7 +3,7 @@
 Summary: A utility for determining file types.
 Name: file
 Version: 4.13
-Release: 1
+Release: 2
 License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -75,6 +75,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libmagic.*
 
 %changelog
+* Fri Mar 04 2005 Radek Vokal <rvokal@redhat.com> - 4.13-2
+- gcc4 rebuilt
+
 * Tue Feb 15 2005 Radek Vokal <rvokal@redhat.com> - 4.13-1
 - new version, fixing few bugs, patch clean-up
 - consistent output for bzip files (#147440)
