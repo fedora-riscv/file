@@ -1,7 +1,7 @@
 Summary: A utility for determining file types.
 Name: file
 Version: 3.35
-Release: 1
+Release: 2
 Copyright: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -10,6 +10,7 @@ Patch0: file-3.27-rh.patch
 Patch1: file-3.33-ia64.patch
 Patch2: file-3.30-magic5.patch
 Patch3: file-3.30-fnovfl.patch
+Patch4: file-3.35-elf.patch
 Prefix: %{_prefix}
 BuildRoot: %{_tmppath}/%{name}-root
 
@@ -28,6 +29,7 @@ useful utility.
 %patch1 -p1 -b .ia64
 %patch2 -p1 -b .magic5
 %patch3 -p1 -b .fnovfl
+%patch4 -p1 -R
 
 %build
 
@@ -59,6 +61,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man*/*
 
 %changelog
+* Fri Jul 06 2001 Florian La Roche <Florian.LaRoche@redhat.de>
+- revert a patch to Magdir/elf, which breaks many libtool scripts
+  in several rpm packages
+
 * Mon Jun 25 2001 Crutcher Dunnavant <crutcher@redhat.com>
 - itterate to 3.35
 
