@@ -3,17 +3,17 @@
 Summary: A utility for determining file types.
 Name: file
 Version: 3.37
-Release: 5
+Release: 7
 License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
-Source1: magic.mime
 Patch0: file-3.27-rh.patch
 Patch1: file-3.33-ia64.patch
 Patch3: file-3.30-fnovfl.patch
 Patch4: file-3.35-elf.patch
 Patch5: file-3.37-perlfix.patch
 Patch6: file-3.37-missint.patch
+Source1: file-3.37-mng.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 
 %description
@@ -38,6 +38,7 @@ CFLAGS="%{optflags} -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE"
 %configure --enable-fsect-man5
 make
 
+
 %install
 rm -rf $RPM_BUILD_ROOT
 mkdir -p ${RPM_BUILD_ROOT}%{_bindir}
@@ -45,11 +46,9 @@ mkdir -p ${RPM_BUILD_ROOT}%{_mandir}/man1
 mkdir -p ${RPM_BUILD_ROOT}%{_mandir}/man5
 mkdir -p ${RPM_BUILD_ROOT}%{_datadir}
 
-%makeinstall
+patch -p1 < %SOURCE1
 
-pushd $RPM_BUILD_ROOT
-cp %SOURCE1 .%{_datadir}/magic.mime
-popd
+%makeinstall
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -61,6 +60,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man*/*
 
 %changelog
+* Thu May 23 2002 Tim Powers <timp@redhat.com>
+- automated rebuild
+
+* Mon May  6 2002 Trond Eivind Glomsrød <teg@redhat.com> 3.37-6
+- Don't use an old magic.mime 
+- Add mng detection (#64229)
+
 * Tue Feb 26 2002 Trond Eivind Glomsrød <teg@redhat.com> 3.37-5
 - Rebuild
 
