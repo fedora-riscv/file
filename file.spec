@@ -2,16 +2,16 @@
 
 Summary: A utility for determining file types.
 Name: file
-Version: 4.10
-Release: 4
+Version: 4.12
+Release: 1
 License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 Patch0: file-4.10-rh.patch
 Patch1: file-4.10-debian.patch
 Patch2: file-selinux.patch
-Patch3: file-stringop.patch
-Patch4: file-4.10-magic.patch
+#Patch3: file-stringop.patch
+Patch4: file-4.12-magic.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: zlib-devel
 
@@ -29,7 +29,7 @@ useful utility.
 %patch0 -p1 -b .rh
 %patch1 -p1 -b .debian
 %patch2 -p1 -b .selinux
-%patch3 -p1 -b .stringop
+#%patch3 -p1 -b .stringop
 %patch4 -p1 -b .magic
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
@@ -75,6 +75,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libmagic.*
 
 %changelog
+* Thu Dec 02 2004 Radek Vokal <rvokal@redhat.com> - 4.12-1
+- upgrade to file-4.12
+- removed Tim's patch, tuned magic patch
+
 * Sat Nov 20 2004 Miloslav Trmac <mitr@redhat.com> - 4.10-4
 - Convert libmagic.3 to UTF-8
 
