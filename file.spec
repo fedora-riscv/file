@@ -2,17 +2,12 @@
 
 Summary: A utility for determining file types.
 Name: file
-Version: 3.39
-Release: 9
+Version: 4.02
+Release: 2
 License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
-Source1: file-3.37-mng.patch
-Patch0: file-3.39-rh.patch
-Patch1: file-3.39-ppc.patch
-Patch2: file-3.39-note.patch
-Patch3: file-3.39-vorbis.patch
-Patch4: file-3.39-cksize.patch
+Patch0: file-4.02-rh.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 
 %description
@@ -27,10 +22,6 @@ useful utility.
 %prep
 %setup -q
 %patch0 -p1 -b .rh
-%patch1 -p1 -b .ppc
-%patch2 -p1 -b .note
-%patch3 -p1 -b .vorbis
-%patch4 -p1 -b .cksize
 
 %build
 CFLAGS="%{optflags} -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE" \
@@ -45,22 +36,41 @@ mkdir -p ${RPM_BUILD_ROOT}%{_mandir}/man1
 mkdir -p ${RPM_BUILD_ROOT}%{_mandir}/man5
 mkdir -p ${RPM_BUILD_ROOT}%{_datadir}/misc
 
-patch -p1 < %SOURCE1
-
 %makeinstall
+ln -s file/magic ${RPM_BUILD_ROOT}%{_datadir}/magic
+ln -s file/magic.mime ${RPM_BUILD_ROOT}%{_datadir}/magic.mime
+
 ln -s ../magic ${RPM_BUILD_ROOT}%{_datadir}/misc/magic 
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post -p /sbin/ldconfig
+
+%postun -p /sbin/ldconfig
+
 %files
 %defattr(-,root,root)
 %{_bindir}/*
 %{_datadir}/magic*
+%{_datadir}/file/*
 %{_datadir}/misc/*
-%{_mandir}/man*/*
+%{_mandir}/man[15]/*
+
+%{_includedir}/magic.h
+%{_mandir}/man3/*
+%{_libdir}/libmagic.*
 
 %changelog
+* Wed Jun 04 2003 Elliot Lee <sopwith@redhat.com>
+- rebuilt
+
+* Sat May 24 2003 Florian La Roche <Florian.LaRoche@redhat.de>
+- add ldconfig to post/postun
+
+* Mon Apr 21 2003 Jeff Johnson <jbj@redhat.com> 4.02-1
+- upgrade to file-4.02.
+
 * Thu Feb 27 2003 Jeff Johnson <jbj@redhat.com> 3.39-9
 - check size read from elf header (#85297).
 
