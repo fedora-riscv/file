@@ -3,7 +3,7 @@
 Summary: A utility for determining file types.
 Name: file
 Version: 4.10
-Release: 3
+Release: 4
 License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -31,6 +31,9 @@ useful utility.
 %patch2 -p1 -b .selinux
 %patch3 -p1 -b .stringop
 %patch4 -p1 -b .magic
+
+iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
+mv doc/libmagic.man_ doc/libmagic.man
 
 %build
 CFLAGS="%{optflags} -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE" \
@@ -72,6 +75,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libmagic.*
 
 %changelog
+* Sat Nov 20 2004 Miloslav Trmac <mitr@redhat.com> - 4.10-4
+- Convert libmagic.3 to UTF-8
+
 * Thu Nov 18 2004 Radek Vokal <rvokal@redhat.com> 4.10-3
 - set of patches from debian.org
 - new magic types (#128763)
