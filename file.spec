@@ -3,7 +3,7 @@
 Summary: A utility for determining file types.
 Name: file
 Version: 3.37
-Release: 7
+Release: 8
 License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -60,6 +60,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man*/*
 
 %changelog
+* Fri Jun 21 2002 Tim Powers <timp@redhat.com>
+- automated rebuild
+
 * Thu May 23 2002 Tim Powers <timp@redhat.com>
 - automated rebuild
 
