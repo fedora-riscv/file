@@ -3,13 +3,13 @@
 Summary: A utility for determining file types.
 Name: file
 Version: 4.07
-Release: 2.1
+Release: 4
 License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 Patch0: file-4.02-rh.patch
 Patch1: file-4.02-zlib.patch
-Patch2: file-offset.patch
+Patch2: file-4.07-note.patch
 Patch3: file-4.07-debian.patch
 Patch4: file-selinux.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
@@ -27,7 +27,7 @@ useful utility.
 %setup -q
 %patch0 -p1 -b .rh
 %patch1 -p1 -b .zlib
-%patch2 -p1 -b .offset
+%patch2 -p1 -b .note
 %patch3 -p1 -b .debian
 %patch4 -p1 -b .selinux
 
@@ -59,6 +59,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root)
+%doc LEGAL.NOTICE README
 %{_bindir}/*
 %{_datadir}/magic*
 %{_datadir}/file/*
@@ -70,6 +71,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libmagic.*
 
 %changelog
+* Mon May 10 2004 Jakub Jelinek <jakub@redhat.com>
+- fix ELF note handling (#109495)
+
+* Tue Mar 23 2004 Karsten Hopp <karsten@redhat.de> 4.07-3 
+- add docs (#115966)
+
 * Tue Mar 02 2004 Elliot Lee <sopwith@redhat.com>
 - rebuilt
 
