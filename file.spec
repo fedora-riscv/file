@@ -3,16 +3,17 @@
 Summary: A utility for determining file types.
 Name: file
 Version: 4.13
-Release: 3
+Release: 4
 License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 Patch0: file-4.10-rh.patch
 Patch1: file-4.10-debian.patch
 Patch2: file-selinux.patch
-Patch4: file-4.13-magic.patch
-Patch6: file-4.12-core64.patch
-Patch7: file-4.13-fsdump.patch
+Patch3: file-4.13-magic.patch
+Patch4: file-4.12-core64.patch
+Patch5: file-4.13-fsdump.patch
+Patch6: file-4.13-quick.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: zlib-devel
 
@@ -30,9 +31,10 @@ useful utility.
 %patch0 -p1 -b .rh
 %patch1 -p1 -b .debian
 %patch2 -p1 -b .selinux
-%patch4 -p1 -b .magic
-%patch6 -p1 -b .core64
-%patch7 -p1 -b .fsdump
+%patch3 -p1 -b .magic
+%patch4 -p1 -b .core64
+%patch5 -p1 -b .fsdump
+%patch6 -p1 -b .quick
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 mv doc/libmagic.man_ doc/libmagic.man
@@ -77,6 +79,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libmagic.*
 
 %changelog
+* Mon Apr 11 2005 Radek Vokal <rvokal@redhat.com> - 4.13-4
+- check Cyrus files before Apple Quicktime movies (#154342) 
+
 * Mon Mar 07 2005 Radek Vokal <rvokal@redhat.com> - 4.13-3
 - check for shared libs before fs dump files (#149868)
 
