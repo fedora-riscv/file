@@ -3,7 +3,7 @@
 Summary: A utility for determining file types.
 Name: file
 Version: 4.13
-Release: 4
+Release: 5
 License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -14,6 +14,7 @@ Patch3: file-4.13-magic.patch
 Patch4: file-4.12-core64.patch
 Patch5: file-4.13-fsdump.patch
 Patch6: file-4.13-quick.patch
+Patch7: file-4.13-howmany.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: zlib-devel
 
@@ -35,6 +36,7 @@ useful utility.
 %patch4 -p1 -b .core64
 %patch5 -p1 -b .fsdump
 %patch6 -p1 -b .quick
+%patch7 -p1 -b .howmany
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 mv doc/libmagic.man_ doc/libmagic.man
@@ -79,6 +81,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libmagic.*
 
 %changelog
+* Mon Jul 04 2005 Radek Vokal <rvokal@redhat.com> - 4.14-5
+- fixed reiserfs check (#162378)
+
 * Mon Apr 11 2005 Radek Vokal <rvokal@redhat.com> - 4.13-4
 - check Cyrus files before Apple Quicktime movies (#154342) 
 
