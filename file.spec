@@ -2,19 +2,17 @@
 
 Summary: A utility for determining file types.
 Name: file
-Version: 4.13
-Release: 5
+Version: 4.14
+Release: 1
 License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 Patch0: file-4.10-rh.patch
 Patch1: file-4.10-debian.patch
 Patch2: file-selinux.patch
-Patch3: file-4.13-magic.patch
-Patch4: file-4.12-core64.patch
+Patch3: file-4.14-magic.patch
 Patch5: file-4.13-fsdump.patch
 Patch6: file-4.13-quick.patch
-Patch7: file-4.13-howmany.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: zlib-devel
 
@@ -33,10 +31,8 @@ useful utility.
 %patch1 -p1 -b .debian
 %patch2 -p1 -b .selinux
 %patch3 -p1 -b .magic
-%patch4 -p1 -b .core64
 %patch5 -p1 -b .fsdump
 %patch6 -p1 -b .quick
-%patch7 -p1 -b .howmany
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 mv doc/libmagic.man_ doc/libmagic.man
@@ -81,7 +77,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libmagic.*
 
 %changelog
-* Mon Jul 04 2005 Radek Vokal <rvokal@redhat.com> - 4.14-5
+* Thu Jul 14 2005 Radek Vokal <rvokal@redhat.com> - 4.14-1
+- sync with upstream, patch clean-up
+
+* Mon Jul 04 2005 Radek Vokal <rvokal@redhat.com> - 4.13-5
 - fixed reiserfs check (#162378)
 
 * Mon Apr 11 2005 Radek Vokal <rvokal@redhat.com> - 4.13-4
