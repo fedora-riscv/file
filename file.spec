@@ -13,6 +13,7 @@ Patch2: file-selinux.patch
 Patch3: file-4.14-magic.patch
 Patch5: file-4.13-fsdump.patch
 Patch6: file-4.13-quick.patch
+Patch7: file-4.14-magic_mime.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: zlib-devel
 
@@ -33,6 +34,7 @@ useful utility.
 %patch3 -p1 -b .magic
 %patch5 -p1 -b .fsdump
 %patch6 -p1 -b .quick
+%patch7 -b .magic_mime
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 mv doc/libmagic.man_ doc/libmagic.man
@@ -77,6 +79,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libmagic.*
 
 %changelog
+* Fri Jul 22 2005 Radek Vokal <rvokal@redhat.com> - 4.14-2
+- fixed mime types recognition (#163866) <mandriva.org>
+
 * Thu Jul 14 2005 Radek Vokal <rvokal@redhat.com> - 4.14-1
 - sync with upstream, patch clean-up
 
