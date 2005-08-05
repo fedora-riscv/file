@@ -3,7 +3,7 @@
 Summary: A utility for determining file types.
 Name: file
 Version: 4.14
-Release: 2
+Release: 3
 License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -14,6 +14,7 @@ Patch3: file-4.14-magic.patch
 Patch5: file-4.13-fsdump.patch
 Patch6: file-4.13-quick.patch
 Patch7: file-4.14-magic_mime.patch
+Patch8: file-4.14-kill3ds.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: zlib-devel
 
@@ -35,6 +36,7 @@ useful utility.
 %patch5 -p1 -b .fsdump
 %patch6 -p1 -b .quick
 %patch7 -b .magic_mime
+%patch8 -p1 -b .kill3ds
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 mv doc/libmagic.man_ doc/libmagic.man
@@ -79,6 +81,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libmagic.*
 
 %changelog
+* Fri Aug 05 2005 Radek Vokal <rvokal@redhat.com> - 4.14-3
+- mime for 3ds files removed, conflicts with text files (#165165)
+
 * Fri Jul 22 2005 Radek Vokal <rvokal@redhat.com> - 4.14-2
 - fixed mime types recognition (#163866) <mandriva.org>
 
