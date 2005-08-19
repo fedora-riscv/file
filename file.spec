@@ -7,7 +7,7 @@ Release: 1
 License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
-Patch0: file-4.10-rh.patch
+#Patch0: file-4.10-rh.patch
 Patch1: file-4.10-debian.patch
 Patch2: file-selinux.patch
 Patch3: file-4.14-magic.patch
