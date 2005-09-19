@@ -3,7 +3,7 @@
 Summary: A utility for determining file types.
 Name: file
 Version: 4.15
-Release: 2
+Release: 3
 License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -79,6 +79,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libmagic.*
 
 %changelog
+* Mon Sep 19 2005 Radek Vokal <rvokal@redhat.com> - 4.15-3
+- small fix in previously added patch, now it works for multiple params
+
 * Mon Sep 19 2005 Radek Vokal <rvokal@redhat.com> - 4.15-2
 - print xxx-style only once (#168617)
 
