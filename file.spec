@@ -3,7 +3,7 @@
 Summary: A utility for determining file types.
 Name: file
 Version: 4.15
-Release: 3
+Release: 4
 License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -14,6 +14,7 @@ Patch3: file-4.14-magic.patch
 Patch5: file-4.13-fsdump.patch
 Patch6: file-4.13-quick.patch
 Patch7: file-4.15-style.patch
+Patch8: file-4.15-berkeley.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: zlib-devel
 
@@ -35,6 +36,7 @@ useful utility.
 %patch5 -p1 -b .fsdump
 %patch6 -p1 -b .quick
 %patch7 -p1 -b .style
+%patch8 -p1 -b .berkeley
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 mv doc/libmagic.man_ doc/libmagic.man
@@ -79,6 +81,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libmagic.*
 
 %changelog
+* Mon Oct 03 2005 Radek Vokal <rvokal@redhat.com> - 4.15-4
+- file output for Berkeley DB gains Cracklib (#168917)
+
 * Mon Sep 19 2005 Radek Vokal <rvokal@redhat.com> - 4.15-3
 - small fix in previously added patch, now it works for multiple params
 
