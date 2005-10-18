@@ -2,18 +2,16 @@
 
 Summary: A utility for determining file types.
 Name: file
-Version: 4.15
-Release: 4
+Version: 4.16
+Release: 1
 License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
-#Patch0: file-4.10-rh.patch
 Patch1: file-4.10-debian.patch
 Patch2: file-selinux.patch
-Patch3: file-4.14-magic.patch
+Patch3: file-4.16-magic.patch
 Patch5: file-4.13-fsdump.patch
 Patch6: file-4.13-quick.patch
-Patch7: file-4.15-style.patch
 Patch8: file-4.15-berkeley.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: zlib-devel
@@ -29,13 +27,11 @@ useful utility.
 
 %prep
 %setup -q
-#%patch0 -p1 -b .rh
 %patch1 -p1 -b .debian
 %patch2 -p1 -b .selinux
 %patch3 -p1 -b .magic
 %patch5 -p1 -b .fsdump
 %patch6 -p1 -b .quick
-%patch7 -p1 -b .style
 %patch8 -p1 -b .berkeley
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
@@ -81,6 +77,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libmagic.*
 
 %changelog
+* Tue Oct 18 2005 Radek Vokal <rvokal@redhat.com> - 4.16-1
+- upgrade to upstream
+
 * Mon Oct 03 2005 Radek Vokal <rvokal@redhat.com> - 4.15-4
 - file output for Berkeley DB gains Cracklib (#168917)
 
