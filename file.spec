@@ -3,7 +3,7 @@
 Summary: A utility for determining file types.
 Name: file
 Version: 4.16
-Release: 1
+Release: 2
 License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -13,6 +13,7 @@ Patch3: file-4.16-magic.patch
 Patch5: file-4.13-fsdump.patch
 Patch6: file-4.13-quick.patch
 Patch8: file-4.15-berkeley.patch
+Patch9: file-4.16-readelf.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: zlib-devel
 
@@ -33,6 +34,7 @@ useful utility.
 %patch5 -p1 -b .fsdump
 %patch6 -p1 -b .quick
 %patch8 -p1 -b .berkeley
+%patch9 -p1 -b .corefile
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 mv doc/libmagic.man_ doc/libmagic.man
@@ -77,6 +79,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libmagic.*
 
 %changelog
+* Mon Oct 31 2005 Radek Vokal <rvokal@redhat.com> - 4.16-2
+- fix core files output, show "from" (#172015)
+
 * Tue Oct 18 2005 Radek Vokal <rvokal@redhat.com> - 4.16-1
 - upgrade to upstream
 
