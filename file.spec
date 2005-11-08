@@ -3,7 +3,7 @@
 Summary: A utility for determining file types.
 Name: file
 Version: 4.16
-Release: 2
+Release: 3
 License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -53,9 +53,10 @@ mkdir -p ${RPM_BUILD_ROOT}%{_mandir}/man5
 mkdir -p ${RPM_BUILD_ROOT}%{_datadir}/misc
 
 %makeinstall
+rm -f ${RPM_BUILD_ROOT}%{_libdir}/*.la
+
 ln -s file/magic ${RPM_BUILD_ROOT}%{_datadir}/magic
 ln -s file/magic.mime ${RPM_BUILD_ROOT}%{_datadir}/magic.mime
-
 ln -s ../magic ${RPM_BUILD_ROOT}%{_datadir}/misc/magic 
 
 %clean
@@ -79,6 +80,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libmagic.*
 
 %changelog
+* Tue Nov 08 2005 Radek Vokal <rvokal@redhat.com> - 4.16-3
+- remove .la files (#172633)
+
 * Mon Oct 31 2005 Radek Vokal <rvokal@redhat.com> - 4.16-2
 - fix core files output, show "from" (#172015)
 
