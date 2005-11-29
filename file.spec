@@ -3,7 +3,7 @@
 Summary: A utility for determining file types.
 Name: file
 Version: 4.16
-Release: 3
+Release: 4
 License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -14,6 +14,7 @@ Patch5: file-4.13-fsdump.patch
 Patch6: file-4.13-quick.patch
 Patch8: file-4.15-berkeley.patch
 Patch9: file-4.16-readelf.patch
+Patch10: file-4.16-dont_use_isprint.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: zlib-devel
 
@@ -35,6 +36,7 @@ useful utility.
 %patch6 -p1 -b .quick
 %patch8 -p1 -b .berkeley
 %patch9 -p1 -b .corefile
+%patch10 -p1 -b .isprint
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 mv doc/libmagic.man_ doc/libmagic.man
@@ -80,6 +82,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libmagic.*
 
 %changelog
+* Tue Nov 29 2005 Radek Vokal <rvokal@redhat.com> - 4.16-4
+- printf utf8 filenames and don't use isprint() (#174348)
+
 * Tue Nov 08 2005 Radek Vokal <rvokal@redhat.com> - 4.16-3
 - remove .la files (#172633)
 
