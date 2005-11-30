@@ -7,6 +7,7 @@ Release: 4
 License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
+URL:	http://www.darwinsys.com/file/
 Patch1: file-4.10-debian.patch
 Patch2: file-selinux.patch
 Patch3: file-4.16-magic.patch
