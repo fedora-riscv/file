@@ -3,7 +3,7 @@
 Summary: A utility for determining file types.
 Name: file
 Version: 4.16
-Release: 4.1
+Release: 5
 License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -16,6 +16,7 @@ Patch6: file-4.13-quick.patch
 Patch8: file-4.15-berkeley.patch
 Patch9: file-4.16-readelf.patch
 Patch10: file-4.16-dont_use_isprint.patch
+Patch11: file-4.16-fix-array-64bit.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: zlib-devel
 
@@ -38,6 +39,7 @@ useful utility.
 %patch8 -p1 -b .berkeley
 %patch9 -p1 -b .corefile
 %patch10 -p1 -b .isprint
+%patch11 -p0 -b .64bit
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 mv doc/libmagic.man_ doc/libmagic.man
@@ -83,6 +85,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libmagic.*
 
 %changelog
+* Fri Jan 13 2006 Radek Vokal <rvokal@redhat.com> 4.16-5
+- fix for 64bit arrays
+
 * Fri Dec 09 2005 Jesse Keating <jkeating@redhat.com>
 - rebuilt
 
