@@ -3,7 +3,7 @@
 Summary: A utility for determining file types.
 Name: file
 Version: 4.16
-Release: 5
+Release: 6
 License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -17,6 +17,7 @@ Patch8: file-4.15-berkeley.patch
 Patch9: file-4.16-readelf.patch
 Patch10: file-4.16-dont_use_isprint.patch
 Patch11: file-4.16-fix-array-64bit.patch
+Patch12: file-4.16-xen.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: zlib-devel
 
@@ -40,6 +41,7 @@ useful utility.
 %patch9 -p1 -b .corefile
 %patch10 -p1 -b .isprint
 %patch11 -p0 -b .64bit
+%patch12 -p1 -b .xen
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 mv doc/libmagic.man_ doc/libmagic.man
@@ -85,6 +87,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libmagic.*
 
 %changelog
+* Sun Feb 04 2006 Radek Vokál <rvokal@redhat.com> 4.16-6
+- xen patch, recognizes Xen saved domain
+
 * Fri Jan 13 2006 Radek Vokal <rvokal@redhat.com> 4.16-5
 - fix for 64bit arrays
 
