@@ -2,21 +2,18 @@
 
 Summary: A utility for determining file types.
 Name: file
-Version: 4.16
-Release: 6.2
+Version: 4.17
+Release: 1
 License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 URL:	http://www.darwinsys.com/file/
 Patch1: file-4.10-debian.patch
 Patch2: file-selinux.patch
-Patch3: file-4.16-magic.patch
+Patch3: file-4.17-magic.patch
 Patch5: file-4.13-fsdump.patch
 Patch6: file-4.13-quick.patch
 Patch8: file-4.15-berkeley.patch
-Patch9: file-4.16-readelf.patch
-Patch10: file-4.16-dont_use_isprint.patch
-Patch11: file-4.16-fix-array-64bit.patch
 Patch12: file-4.16-xen.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: zlib-devel
@@ -38,9 +35,6 @@ useful utility.
 %patch5 -p1 -b .fsdump
 %patch6 -p1 -b .quick
 %patch8 -p1 -b .berkeley
-%patch9 -p1 -b .corefile
-%patch10 -p1 -b .isprint
-%patch11 -p0 -b .64bit
 %patch12 -p1 -b .xen
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
@@ -87,6 +81,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libmagic.*
 
 %changelog
+* Mon Mar 13 2006 Radek Vokál <rvokal@redhat.com> 4.17-1
+- upgrade to file-4.17, patch clean-up
+
 * Fri Feb 10 2006 Jesse Keating <jkeating@redhat.com> - 4.16-6.2
 - bump again for double-long bug on ppc(64)
 
