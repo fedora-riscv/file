@@ -3,7 +3,7 @@
 Summary: A utility for determining file types.
 Name: file
 Version: 4.17
-Release: 1
+Release: 2
 License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -15,6 +15,9 @@ Patch5: file-4.13-fsdump.patch
 Patch6: file-4.13-quick.patch
 Patch8: file-4.15-berkeley.patch
 Patch12: file-4.16-xen.patch
+Patch13: file-4.17-init-mem.patch
+Patch14: file-4.17-wctype-header.patch
+Patch15: file-4.17-mp3_flac.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: zlib-devel
 
@@ -36,6 +39,9 @@ useful utility.
 %patch6 -p1 -b .quick
 %patch8 -p1 -b .berkeley
 %patch12 -p1 -b .xen
+%patch13 -p1 -b .mem
+%patch14 -p1 -b .wctype
+%patch15 -p1 -b .mp3
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 mv doc/libmagic.man_ doc/libmagic.man
@@ -81,6 +87,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libmagic.*
 
 %changelog
+* Tue Mar 14 2006 Radek Vokál <rvokal@redhat.com> 4.17-2
+- fix segfault when compiling magic
+- add check for wctype.h
+- fix for flac and mp3 files
+
 * Mon Mar 13 2006 Radek Vokál <rvokal@redhat.com> 4.17-1
 - upgrade to file-4.17, patch clean-up
 
