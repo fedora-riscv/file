@@ -3,7 +3,7 @@
 Summary: A utility for determining file types.
 Name: file
 Version: 4.17
-Release: 2
+Release: 3
 License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -18,6 +18,7 @@ Patch12: file-4.16-xen.patch
 Patch13: file-4.17-init-mem.patch
 Patch14: file-4.17-wctype-header.patch
 Patch15: file-4.17-mp3_flac.patch
+Patch16: file-4.17-oracle.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: zlib-devel
 
@@ -42,6 +43,7 @@ useful utility.
 %patch13 -p1 -b .mem
 %patch14 -p1 -b .wctype
 %patch15 -p1 -b .mp3
+%patch16 -p1 -b .oracle
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 mv doc/libmagic.man_ doc/libmagic.man
@@ -87,6 +89,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libmagic.*
 
 %changelog
+* Fri Apr 21 2006 Radek Vokál <rvokal@redhat.com> 4.17-3
+- add support for OCFS or ASM (#189017)
+
 * Tue Mar 14 2006 Radek Vokál <rvokal@redhat.com> 4.17-2
 - fix segfault when compiling magic
 - add check for wctype.h
