@@ -3,7 +3,7 @@
 Summary: A utility for determining file types.
 Name: file
 Version: 4.17
-Release: 3
+Release: 4
 License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -19,6 +19,7 @@ Patch13: file-4.17-init-mem.patch
 Patch14: file-4.17-wctype-header.patch
 Patch15: file-4.17-mp3_flac.patch
 Patch16: file-4.17-oracle.patch
+Patch17: file-4.17-clamav.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: zlib-devel
 
@@ -44,6 +45,7 @@ useful utility.
 %patch14 -p1 -b .wctype
 %patch15 -p1 -b .mp3
 %patch16 -p1 -b .oracle
+%patch17 -p1 -b .clamav
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 mv doc/libmagic.man_ doc/libmagic.man
@@ -80,7 +82,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc LEGAL.NOTICE README
 %{_bindir}/*
 %{_datadir}/magic*
-%{_datadir}/file/*
+%{_datadir}/file
 %{_datadir}/misc/*
 %{_mandir}/man[15]/*
 
@@ -89,6 +91,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libmagic.*
 
 %changelog
+* Wed May 24 2006 Radek Vokál <rvokal@redhat.com> 4.17-4
+- /usr/share/file is owned by package (#192858)
+- fix magic for Clamav files (#192406)
+
 * Fri Apr 21 2006 Radek Vokál <rvokal@redhat.com> 4.17-3
 - add support for OCFS or ASM (#189017)
 
