@@ -3,7 +3,7 @@
 Summary: A utility for determining file types.
 Name: file
 Version: 4.17
-Release: 4
+Release: 5
 License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -20,6 +20,7 @@ Patch14: file-4.17-wctype-header.patch
 Patch15: file-4.17-mp3_flac.patch
 Patch16: file-4.17-oracle.patch
 Patch17: file-4.17-clamav.patch
+Patch18: file-4.17-powerpoint.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: zlib-devel
 
@@ -46,6 +47,7 @@ useful utility.
 %patch15 -p1 -b .mp3
 %patch16 -p1 -b .oracle
 %patch17 -p1 -b .clamav
+%patch18 -p1 -b .powerpoint
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 mv doc/libmagic.man_ doc/libmagic.man
@@ -91,6 +93,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libmagic.*
 
 %changelog
+* Mon Jul 10 2006 Radek Vokal <rvokal@redhat.com> 4.17-5
+- fix powerpoint mine (#190373) <vonsch@gmail.com>
+
 * Wed May 24 2006 Radek Vokál <rvokal@redhat.com> 4.17-4
 - /usr/share/file is owned by package (#192858)
 - fix magic for Clamav files (#192406)
