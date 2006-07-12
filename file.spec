@@ -3,7 +3,7 @@
 Summary: A utility for determining file types.
 Name: file
 Version: 4.17
-Release: 5
+Release: 5.1
 License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -93,6 +93,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libmagic.*
 
 %changelog
+* Wed Jul 12 2006 Jesse Keating <jkeating@redhat.com> - 4.17-5.1
+- rebuild
+
 * Mon Jul 10 2006 Radek Vokal <rvokal@redhat.com> 4.17-5
 - fix powerpoint mine (#190373) <vonsch@gmail.com>
 
