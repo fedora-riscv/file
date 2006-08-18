@@ -1,0 +1,11 @@
+--- file-4.17/magic/Magdir/commands.bash	2006-03-02 22:50:25.000000000 +0100
++++ file-4.17/magic/Magdir/commands	2006-08-17 16:38:39.000000000 +0200
+@@ -28,7 +28,7 @@
+ 0	string/b	#!\ /bin/awk		awk script text executable
+ 0	string/b	#!\ /usr/bin/awk	awk script text executable
+ # update to distinguish from *.vcf files
+-0	regex		BEGIN[[:space:]]*[{]	awk script text
++0	regex		[^'"]BEGIN[[:space:]]*[{]	awk script text
+ 
+ # AT&T Bell Labs' Plan 9 shell
+ 0	string/b	#!\ /bin/rc	Plan 9 rc shell script text executable

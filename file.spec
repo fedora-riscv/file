@@ -3,7 +3,7 @@
 Summary: A utility for determining file types.
 Name: file
 Version: 4.17
-Release: 6
+Release: 7
 License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -22,6 +22,7 @@ Patch16: file-4.17-oracle.patch
 Patch17: file-4.17-clamav.patch
 Patch18: file-4.17-powerpoint.patch
 Patch19: file-4.17-empty.patch
+Patch20: file-4.17-bash.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: zlib-devel
 
@@ -50,6 +51,7 @@ useful utility.
 %patch17 -p1 -b .clamav
 %patch18 -p1 -b .powerpoint
 %patch19 -p1 -b .empty
+%patch20 -p1 -b .bash
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 mv doc/libmagic.man_ doc/libmagic.man
@@ -95,6 +97,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libmagic.*
 
 %changelog
+* Fri Aug 18 2006 Martin Bacovsky <mbacovsk@redhat.com> - 4.17-7
+- fix recognition of bash script with embed awk (#202185)
+
 * Thu Aug 03 2006 Martin Bacovsky <mbacovsk@redhat.com> - 4.17-6
 - fix gziped empty file (#72986)
 
