@@ -3,7 +3,7 @@
 Summary: A utility for determining file types.
 Name: file
 Version: 4.17
-Release: 7
+Release: 8
 License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -97,6 +97,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libmagic.*
 
 %changelog
+* Wed Aug 23 2006 Martin Bacovsky <mbacovsky@redhat.com> - 4.17-8
+- fix recognition of perl script with embed awk (#203610) 
+
 * Fri Aug 18 2006 Martin Bacovsky <mbacovsk@redhat.com> - 4.17-7
 - fix recognition of bash script with embed awk (#202185)
 
