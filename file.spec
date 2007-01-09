@@ -2,27 +2,28 @@
 
 Summary: A utility for determining file types.
 Name: file
-Version: 4.17
-Release: 8
+Version: 4.19
+Release: 1%{?dist}
 License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 URL:	http://www.darwinsys.com/file/
-Patch1: file-4.10-debian.patch
+Patch1: file-4.19-debian.patch
 Patch2: file-selinux.patch
-Patch3: file-4.17-magic.patch
+Patch3: file-4.19-magic.patch
 Patch5: file-4.13-fsdump.patch
 Patch6: file-4.13-quick.patch
 Patch8: file-4.15-berkeley.patch
 Patch12: file-4.16-xen.patch
-Patch13: file-4.17-init-mem.patch
-Patch14: file-4.17-wctype-header.patch
-Patch15: file-4.17-mp3_flac.patch
-Patch16: file-4.17-oracle.patch
+Patch16: file-4.19-oracle.patch
 Patch17: file-4.17-clamav.patch
 Patch18: file-4.17-powerpoint.patch
-Patch19: file-4.17-empty.patch
 Patch20: file-4.17-bash.patch
+Patch21: file-4.19-ELF.patch
+
+#Patch19: file-4.17-empty.patch
+
+Requires: file-libs = %{version}
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: zlib-devel
 
@@ -35,6 +36,23 @@ different graphics formats.
 You should install the file package, since the file command is such a
 useful utility.
 
+%package libs
+Summary: Libraries for applications using libmagic
+Group:   Applications/File
+
+%description libs
+
+Libraries for applications using the bzip2 compression format.
+%package devel
+Summary:  Libraries and header files for file development
+Group:    Applications/File
+Requires: %{name} = %{version}
+
+%description devel
+The file-devel package contains the header files and libmagic library
+necessary for developing programs using libmagic.
+
+
 %prep
 %setup -q
 %patch1 -p1 -b .debian
@@ -44,14 +62,12 @@ useful utility.
 %patch6 -p1 -b .quick
 %patch8 -p1 -b .berkeley
 %patch12 -p1 -b .xen
-%patch13 -p1 -b .mem
-%patch14 -p1 -b .wctype
-%patch15 -p1 -b .mp3
 %patch16 -p1 -b .oracle
 %patch17 -p1 -b .clamav
 %patch18 -p1 -b .powerpoint
-%patch19 -p1 -b .empty
+#%patch19 -p1 -b .empty
 %patch20 -p1 -b .bash
+%patch21 -p1 -b .ELF
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 mv doc/libmagic.man_ doc/libmagic.man
@@ -92,11 +108,28 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/misc/*
 %{_mandir}/man[15]/*
 
-%{_includedir}/magic.h
+%files libs
+%defattr(-,root,root)
+%{_libdir}/*so.*
 %{_mandir}/man3/*
-%{_libdir}/libmagic.*
+
+%files devel
+%defattr(0644, root, root, 0755)
+%attr(755,root,root) %{_libdir}/*.a
+%attr(755,root,root) %{_libdir}/*.so
+%{_includedir}/magic.h
+
 
 %changelog
+* Tue Jan  9 2007 Martin Bacovsky <mbacovsk@redhat.com> - 4.19-1.fc7
+- Resolves: #208880 - Pointless file(1) error message while detecting ELF 64-bit file
+    thanks to <jakub@redhat.com> for patch
+- Resolves: #214992 - file-devel should own %_includedir/* %_libdir/lib*.so
+- Resolves: #203548 - a -devel package should be split out for libmagic
+- upgrade to new upstream 4.19
+- patch revision and cleaning
+- split package to file, file-devel and file-libs
+
 * Wed Aug 23 2006 Martin Bacovsky <mbacovsky@redhat.com> - 4.17-8
 - fix recognition of perl script with embed awk (#203610) 
 
