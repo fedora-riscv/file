@@ -3,7 +3,7 @@
 Summary: A utility for determining file types.
 Name: file
 Version: 4.19
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -20,6 +20,7 @@ Patch17: file-4.17-clamav.patch
 Patch18: file-4.17-powerpoint.patch
 Patch20: file-4.17-bash.patch
 Patch21: file-4.19-ELF.patch
+Patch22: file-4.19-ooffice.patch
 
 #Patch19: file-4.17-empty.patch
 
@@ -68,6 +69,7 @@ necessary for developing programs using libmagic.
 #%patch19 -p1 -b .empty
 %patch20 -p1 -b .bash
 %patch21 -p1 -b .ELF
+%patch22 -p1 -b .ooffice
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 mv doc/libmagic.man_ doc/libmagic.man
@@ -103,15 +105,15 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %doc LEGAL.NOTICE README
 %{_bindir}/*
-%{_datadir}/magic*
-%{_datadir}/file
-%{_datadir}/misc/*
-%{_mandir}/man[15]/*
+%{_mandir}/man1/*
 
 %files libs
 %defattr(-,root,root)
 %{_libdir}/*so.*
-%{_mandir}/man3/*
+%{_mandir}/man[35]/*
+%{_datadir}/magic*
+%{_datadir}/file
+%{_datadir}/misc/*
 
 %files devel
 %defattr(0644, root, root, 0755)
@@ -121,6 +123,10 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu Jan 25 2007 Martin Bacovsky <mbacovsk@redhat.com> - 4.19-2.fc7
+- Resolves: #223297 - file does not recognize OpenOffice "native" formats
+- Resolves: #224344 - Magic rules should be in file-libs
+
 * Tue Jan  9 2007 Martin Bacovsky <mbacovsk@redhat.com> - 4.19-1.fc7
 - Resolves: #208880 - Pointless file(1) error message while detecting ELF 64-bit file
     thanks to <jakub@redhat.com> for patch
