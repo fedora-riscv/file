@@ -1,10 +1,10 @@
 %define __libtoolize :
 
-Summary: A utility for determining file types.
+Summary: A utility for determining file types
 Name: file
 Version: 4.19
-Release: 2%{?dist}
-License: distributable
+Release: 3%{?dist}
+License: Distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 URL:	http://www.darwinsys.com/file/
@@ -25,7 +25,7 @@ Patch22: file-4.19-ooffice.patch
 #Patch19: file-4.17-empty.patch
 
 Requires: file-libs = %{version}
-BuildRoot: %{_tmppath}/%{name}-%{version}-root
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: zlib-devel
 
 %description
@@ -97,32 +97,36 @@ ln -s ../magic ${RPM_BUILD_ROOT}%{_datadir}/misc/magic
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post -p /sbin/ldconfig
+%post libs -p /sbin/ldconfig
 
-%postun -p /sbin/ldconfig
+%postun libs -p /sbin/ldconfig
 
 %files
-%defattr(-,root,root)
+%defattr(-,root,root,-)
 %doc LEGAL.NOTICE README
 %{_bindir}/*
 %{_mandir}/man1/*
 
 %files libs
-%defattr(-,root,root)
+%defattr(-,root,root,-)
 %{_libdir}/*so.*
-%{_mandir}/man[35]/*
 %{_datadir}/magic*
+%{_mandir}/man5/*
 %{_datadir}/file
 %{_datadir}/misc/*
 
 %files devel
-%defattr(0644, root, root, 0755)
-%attr(755,root,root) %{_libdir}/*.a
-%attr(755,root,root) %{_libdir}/*.so
+%defattr(-,root,root,-)
+%{_libdir}/*.a
+%{_libdir}/*.so
 %{_includedir}/magic.h
+%{_mandir}/man3/*
 
 
 %changelog
+* Mon Feb 19 2007 Martin Bacovsky <mbacovsk@redhat.com> - 4.19-3.fc7
+- Resolves: #225750 - Merge Review: file
+
 * Thu Jan 25 2007 Martin Bacovsky <mbacovsk@redhat.com> - 4.19-2.fc7
 - Resolves: #223297 - file does not recognize OpenOffice "native" formats
 - Resolves: #224344 - Magic rules should be in file-libs
@@ -130,7 +134,7 @@ rm -rf $RPM_BUILD_ROOT
 * Tue Jan  9 2007 Martin Bacovsky <mbacovsk@redhat.com> - 4.19-1.fc7
 - Resolves: #208880 - Pointless file(1) error message while detecting ELF 64-bit file
     thanks to <jakub@redhat.com> for patch
-- Resolves: #214992 - file-devel should own %_includedir/* %_libdir/lib*.so
+- Resolves: #214992 - file-devel should own %%_includedir/* %%_libdir/lib*.so
 - Resolves: #203548 - a -devel package should be split out for libmagic
 - upgrade to new upstream 4.19
 - patch revision and cleaning
@@ -151,19 +155,19 @@ rm -rf $RPM_BUILD_ROOT
 * Mon Jul 10 2006 Radek Vokal <rvokal@redhat.com> 4.17-5
 - fix powerpoint mine (#190373) <vonsch@gmail.com>
 
-* Wed May 24 2006 Radek Vokál <rvokal@redhat.com> 4.17-4
+* Wed May 24 2006 Radek Vokal <rvokal@redhat.com> 4.17-4
 - /usr/share/file is owned by package (#192858)
 - fix magic for Clamav files (#192406)
 
-* Fri Apr 21 2006 Radek Vokál <rvokal@redhat.com> 4.17-3
+* Fri Apr 21 2006 Radek Vokal <rvokal@redhat.com> 4.17-3
 - add support for OCFS or ASM (#189017)
 
-* Tue Mar 14 2006 Radek Vokál <rvokal@redhat.com> 4.17-2
+* Tue Mar 14 2006 Radek Vokal <rvokal@redhat.com> 4.17-2
 - fix segfault when compiling magic
 - add check for wctype.h
 - fix for flac and mp3 files
 
-* Mon Mar 13 2006 Radek Vokál <rvokal@redhat.com> 4.17-1
+* Mon Mar 13 2006 Radek Vokal <rvokal@redhat.com> 4.17-1
 - upgrade to file-4.17, patch clean-up
 
 * Fri Feb 10 2006 Jesse Keating <jkeating@redhat.com> - 4.16-6.2
@@ -172,7 +176,7 @@ rm -rf $RPM_BUILD_ROOT
 * Tue Feb 07 2006 Jesse Keating <jkeating@redhat.com> - 4.16-6.1
 - rebuilt for new gcc4.1 snapshot and glibc changes
 
-* Sun Feb 04 2006 Radek Vokál <rvokal@redhat.com> 4.16-6
+* Sun Feb 04 2006 Radek Vokal <rvokal@redhat.com> 4.16-6
 - xen patch, recognizes Xen saved domain
 
 * Fri Jan 13 2006 Radek Vokal <rvokal@redhat.com> 4.16-5
@@ -337,20 +341,20 @@ rm -rf $RPM_BUILD_ROOT
 * Thu May 23 2002 Tim Powers <timp@redhat.com>
 - automated rebuild
 
-* Mon May  6 2002 Trond Eivind Glomsr�d <teg@redhat.com> 3.37-6
+* Mon May  6 2002 Trond Eivind Glomsrød <teg@redhat.com> 3.37-6
 - Don't use an old magic.mime 
 - Add mng detection (#64229)
 
-* Tue Feb 26 2002 Trond Eivind Glomsr�d <teg@redhat.com> 3.37-5
+* Tue Feb 26 2002 Trond Eivind Glomsrød <teg@redhat.com> 3.37-5
 - Rebuild
 
-* Mon Jan 14 2002 Trond Eivind Glomsr�d <teg@redhat.com> 3.37-4
+* Mon Jan 14 2002 Trond Eivind Glomsrød <teg@redhat.com> 3.37-4
 - Fix missing include of <stdint.h> (#58209)
 
-* Tue Dec 11 2001 Trond Eivind Glomsr�d <teg@redhat.com> 3.37-2
+* Tue Dec 11 2001 Trond Eivind Glomsrød <teg@redhat.com> 3.37-2
 - Add CFLAGS to handle large files (#53576)
 
-* Mon Dec 10 2001 Trond Eivind Glomsr�d <teg@redhat.com> 3.37-1
+* Mon Dec 10 2001 Trond Eivind Glomsrød <teg@redhat.com> 3.37-1
 - 3.37
 - s/Copyright/License/
 - build with --enable-fsect-man5, drop patch
@@ -377,7 +381,7 @@ rm -rf $RPM_BUILD_ROOT
 
 * Mon Jul 31 2000 Jeff Johnson <jbj@redhat.com>
 - fix off-by-1 error when creating filename for use with -i.
-- include a copy of GNOME /etc/mime-types in %{_datadir}/magic.mime (#14741).
+- include a copy of GNOME /etc/mime-types in %%{_datadir}/magic.mime (#14741).
 
 * Sat Jul 22 2000 Jeff Johnson <jbj@redhat.com>
 - install magic as man5/magic.5 with other formats (#11172).
