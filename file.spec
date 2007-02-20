@@ -77,6 +77,9 @@ mv doc/libmagic.man_ doc/libmagic.man
 %build
 CFLAGS="%{optflags} -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE" \
 %configure --enable-fsect-man5 --disable-rpath
+# remove hardcoded library paths from local libtool
+sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
+sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
 make
 
 
