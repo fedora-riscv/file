@@ -3,7 +3,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 4.19
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: Distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -76,7 +76,7 @@ mv doc/libmagic.man_ doc/libmagic.man
 
 %build
 CFLAGS="%{optflags} -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE" \
-%configure --enable-fsect-man5
+%configure --enable-fsect-man5 --disable-rpath
 make
 
 
@@ -124,6 +124,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Feb 20 2007 Martin Bacovsky <mbacovsk@redhat.com> - 4.19-4.fc7
+- rpath in file removal
+
 * Mon Feb 19 2007 Martin Bacovsky <mbacovsk@redhat.com> - 4.19-3.fc7
 - Resolves: #225750 - Merge Review: file
 
