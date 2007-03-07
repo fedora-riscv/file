@@ -2,8 +2,8 @@
 
 Summary: A utility for determining file types
 Name: file
-Version: 4.19
-Release: 4%{?dist}
+Version: 4.20
+Release: 1%{?dist}
 License: Distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -21,8 +21,7 @@ Patch18: file-4.17-powerpoint.patch
 Patch20: file-4.17-bash.patch
 Patch21: file-4.19-ELF.patch
 Patch22: file-4.19-ooffice.patch
-
-#Patch19: file-4.17-empty.patch
+Patch23: file-4.20-REG_STARTEND.patch
 
 Requires: file-libs = %{version}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -70,6 +69,7 @@ necessary for developing programs using libmagic.
 %patch20 -p1 -b .bash
 %patch21 -p1 -b .ELF
 %patch22 -p1 -b .ooffice
+%patch23 -p1 -b .REG_STARTEND
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 mv doc/libmagic.man_ doc/libmagic.man
@@ -127,17 +127,20 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
-* Tue Feb 20 2007 Martin Bacovsky <mbacovsk@redhat.com> - 4.19-4.fc7
+* Wed Mar  7 2007 Martin Bacovsky <mbacovsk@redhat.com> - 4.20-1
+- upgrade to new upstream 4.20
+
+* Tue Feb 20 2007 Martin Bacovsky <mbacovsk@redhat.com> - 4.19-4
 - rpath in file removal
 
-* Mon Feb 19 2007 Martin Bacovsky <mbacovsk@redhat.com> - 4.19-3.fc7
+* Mon Feb 19 2007 Martin Bacovsky <mbacovsk@redhat.com> - 4.19-3
 - Resolves: #225750 - Merge Review: file
 
-* Thu Jan 25 2007 Martin Bacovsky <mbacovsk@redhat.com> - 4.19-2.fc7
+* Thu Jan 25 2007 Martin Bacovsky <mbacovsk@redhat.com> - 4.19-2
 - Resolves: #223297 - file does not recognize OpenOffice "native" formats
 - Resolves: #224344 - Magic rules should be in file-libs
 
-* Tue Jan  9 2007 Martin Bacovsky <mbacovsk@redhat.com> - 4.19-1.fc7
+* Tue Jan  9 2007 Martin Bacovsky <mbacovsk@redhat.com> - 4.19-1
 - Resolves: #208880 - Pointless file(1) error message while detecting ELF 64-bit file
     thanks to <jakub@redhat.com> for patch
 - Resolves: #214992 - file-devel should own %%_includedir/* %%_libdir/lib*.so

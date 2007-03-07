@@ -53,15 +53,6 @@
  0	string	package0	Newton package, NOS 1.x,
 --- file-4.19/magic/magic.mime.magic	2007-01-09 17:49:55.000000000 +0100
 +++ file-4.19/magic/magic.mime	2007-01-09 18:08:43.000000000 +0100
-@@ -193,7 +193,7 @@
- 0       beshort         0x4De1          audio/MP4A-LATM
- 
- # MPEG Layer 3 sound files
--0       beshort		&0xffe0		audio/mpeg
-+0       beshort&0xfffe  =0xfffa         audio/mpeg
- #MP3 with ID3 tag
- 0	string		ID3		audio/mpeg
- # Ogg/Vorbis
 @@ -397,16 +397,14 @@
  #
  # from Daniel Quinlan <quinlan@yggdrasil.com>
