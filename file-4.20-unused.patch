@@ -1,0 +1,28 @@
+--- file-4.20/src/file.c.unused	2007-03-12 13:13:17.000000000 +0100
++++ file-4.20/src/file.c	2007-03-12 13:15:50.000000000 +0100
+@@ -358,7 +358,7 @@
+ 
+ private void
+ /*ARGSUSED*/
+-load(const char *m __unused, int flags)
++load(const char *m f__unused, int flags)
+ {
+ 	if (magic)
+ 		return;
+--- file-4.20/src/file.h.unused	2007-03-12 13:12:32.000000000 +0100
++++ file-4.20/src/file.h	2007-03-12 13:15:40.000000000 +0100
+@@ -79,11 +79,11 @@
+ #endif
+ #endif
+ 
+-#ifndef __unused
++#ifndef f__unused
+ #if __GNUC_PREREQ__(2, 7)
+-#define	__unused	__attribute__((__unused__))
++#define	f__unused	__attribute__((__unused__))
+ #else
+-#define	__unused	/* delete */
++#define	f__unused	/* delete */
+ #endif
+ #endif
+ 

@@ -22,6 +22,7 @@ Patch20: file-4.17-bash.patch
 Patch21: file-4.19-ELF.patch
 Patch22: file-4.19-ooffice.patch
 Patch23: file-4.20-REG_STARTEND.patch
+Patch24: file-4.20-unused.patch
 
 Requires: file-libs = %{version}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -70,6 +71,7 @@ necessary for developing programs using libmagic.
 %patch21 -p1 -b .ELF
 %patch22 -p1 -b .ooffice
 %patch23 -p1 -b .REG_STARTEND
+%patch24 -p1 -b .unused
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 mv doc/libmagic.man_ doc/libmagic.man
