@@ -1,32 +1,19 @@
---- file-4.19/magic/Magdir/revision.magic	2007-01-09 17:49:30.000000000 +0100
-+++ file-4.19/magic/Magdir/revision	2007-01-09 17:59:01.000000000 +0100
-@@ -3,3 +3,9 @@
- # file(1) magic for revision control files
+--- file-4.21/magic/Magdir/revision.magic	2007-04-09 18:33:07.000000000 +0200
++++ file-4.21/magic/Magdir/revision	2007-05-28 21:41:15.000000000 +0200
+@@ -4,6 +4,11 @@
  # From Hendrik Scholz <hendrik@scholz.net>
- 0   string /1\ :pserver:    cvs password text file
-+
-+
+ 0	string	/1\ :pserver:	cvs password text file
+ 
 +# Subversion (SVN) dumps
 +# Uwe Zeisberger <zeisberg@informatik.uni-freiburg.de>
 +0       string  SVN-fs-dump-format-version:     Subversion dumpfile
 +>28     string  >\0                             (version: %s)
---- file-4.19/magic/Magdir/images.magic	2007-01-09 17:49:12.000000000 +0100
-+++ file-4.19/magic/Magdir/images	2007-01-09 17:57:07.000000000 +0100
-@@ -524,6 +524,12 @@
- 0	belong	0x0e031301	Hierarchical Data Format (version 4) data
- 0	string	\211HDF\r\n\032	Hierarchical Data Format (version 5) data
- 
-+# The boot loaders syslinux and isolinux use a RLE based image format
-+# called SLL16 to store splash screens.
-+0	lelong		0x1413f33d	Syslinux SLL16 image data,
-+>4	leshort		>0		%hd x
-+>6	leshort		>0		%hd
 +
- # From: Tobias Burnus <burnus@net-b.de>
- # Xara (for a while: Corel Xara) is a graphic package, see
- # http://www.xara.com/ for Windows and as GPL application for
---- file-4.19/magic/Magdir/apple.magic	2007-01-09 17:48:49.000000000 +0100
-+++ file-4.19/magic/Magdir/apple	2007-01-09 17:54:25.000000000 +0100
+ # Conary changesets
+ # From: Jonathan Smith <smithj@rpath.com>
+ 0	belong	0xea3f81bb	Conary changeset data
+--- file-4.21/magic/Magdir/apple.magic	2006-03-02 23:10:26.000000000 +0100
++++ file-4.21/magic/Magdir/apple	2007-05-28 21:33:01.000000000 +0200
 @@ -10,6 +10,23 @@
  0	belong		0x00051600		AppleSingle encoded Macintosh file
  0	belong		0x00051607		AppleDouble encoded Macintosh file
@@ -51,9 +38,33 @@
  # magic for Newton PDA package formats
  # from Ruda Moura <ruda@helllabs.org>
  0	string	package0	Newton package, NOS 1.x,
---- file-4.19/magic/magic.mime.magic	2007-01-09 17:49:55.000000000 +0100
-+++ file-4.19/magic/magic.mime	2007-01-09 18:08:43.000000000 +0100
-@@ -397,16 +397,14 @@
+--- file-4.21/magic/Magdir/images.magic	2007-05-03 17:11:33.000000000 +0200
++++ file-4.21/magic/Magdir/images	2007-05-28 21:33:01.000000000 +0200
+@@ -525,6 +525,12 @@
+ 0	belong	0x0e031301	Hierarchical Data Format (version 4) data
+ 0	string	\211HDF\r\n\032	Hierarchical Data Format (version 5) data
+ 
++# The boot loaders syslinux and isolinux use a RLE based image format
++# called SLL16 to store splash screens.
++0	lelong		0x1413f33d	Syslinux SLL16 image data,
++>4	leshort		>0		%hd x
++>6	leshort		>0		%hd
++
+ # From: Tobias Burnus <burnus@net-b.de>
+ # Xara (for a while: Corel Xara) is a graphic package, see
+ # http://www.xara.com/ for Windows and as GPL application for
+--- file-4.21/magic/magic.mime.magic	2007-04-03 23:11:32.000000000 +0200
++++ file-4.21/magic/magic.mime	2007-05-28 21:47:26.000000000 +0200
+@@ -196,7 +196,7 @@
+ # modified by Joerg Jenderek
+ # GRR the original test are too common for many DOS files
+ # so test 1 <= kbits nibble <= E
+-0       beshort		&0xffe0		
++0       beshort&0xfffe  =0xfffa         audio/mpeg
+ >2	ubyte&0xF0	>0x0F		
+ >>2	ubyte&0xF0	<0xE1		audio/mpeg
+ #MP3 with ID3 tag
+@@ -402,16 +402,14 @@
  #
  # from Daniel Quinlan <quinlan@yggdrasil.com>
  #
@@ -77,7 +88,7 @@
  
  #------------------------------------------------------------------------------
  # images:  file(1) magic for image formats (see also "c-lang" for XPM bitmaps)
-@@ -469,7 +467,7 @@
+@@ -474,7 +472,7 @@
  0	beshort		0xffd8		image/jpeg
  
  # PC bitmaps (OS/2, Windoze BMP files)  (Greg Roelofs, newt@uchicago.edu)
@@ -86,7 +97,7 @@
  #>14	byte		12		(OS/2 1.x format)
  #>14	byte		64		(OS/2 2.x format)
  #>14	byte		40		(Windows 3.x format)
-@@ -924,6 +922,12 @@
+@@ -939,6 +937,12 @@
  0	string	fLaC		audio/x-flac
  0	string	CWS		application/x-shockwave-flash
  
@@ -99,8 +110,8 @@
  # Hangul Document Files:
  # Reversed-engineered HWP magic numbers
  # From: Won-Kyu Park <wkpark@kldp.org>
---- file-4.19/src/fsmagic.c.magic	2007-01-09 17:47:35.000000000 +0100
-+++ file-4.19/src/fsmagic.c	2007-01-09 17:51:23.000000000 +0100
+--- file-4.21/src/fsmagic.c.magic	2007-01-12 18:40:53.000000000 +0100
++++ file-4.21/src/fsmagic.c	2007-05-28 21:33:01.000000000 +0200
 @@ -92,7 +92,8 @@
  		if (file_printf(ms, "cannot open `%s' (%s)",
  		    fn, strerror(errno)) == -1)
