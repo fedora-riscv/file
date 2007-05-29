@@ -1,8 +1,8 @@
---- file-4.19/magic/Magdir/filesystems.oracle	2007-01-09 18:14:04.000000000 +0100
-+++ file-4.19/magic/Magdir/filesystems	2007-01-09 18:15:15.000000000 +0100
-@@ -979,6 +979,19 @@
- >>>>>>>>&0      bedate          =0                      full dump
- >>>>>>>>&0      bedate          !0                      incremental since: %s
+--- file-4.21/magic/Magdir/filesystems.oracle	2007-05-16 02:02:54.000000000 +0200
++++ file-4.21/magic/Magdir/filesystems	2007-05-28 21:55:58.000000000 +0200
+@@ -1197,6 +1197,19 @@
+ >>>2         short   2048       AXP generated)
+ >>>2         short   4096       I64 generated)
  
 +# Oracle Clustered Filesystem - Aaron Botsis <redhat@digitalmafia.org>
 +8       string          OracleCFS       Oracle Clustered Filesystem,
@@ -17,6 +17,6 @@
 +32      string          ORCLCLRD        Oracle ASM Volume (cleared),
 +>40     string          x               Disk Name: %0.12s
 +
- # VMS backup savesets - gerardo.cacciari@gmail.com
- # had to comment out GEM Image and G3 raw data  entries due to conflict
- #0            byte    x
+ # Compaq/HP RILOE floppy image
+ # From: Dirk Jagdmann <doj@cubic.org>
+ 0	string	CPQRFBLO	Compaq/HP RILOE floppy image

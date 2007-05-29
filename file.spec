@@ -2,7 +2,7 @@
 
 Summary: A utility for determining file types
 Name: file
-Version: 4.20
+Version: 4.21
 Release: 1%{?dist}
 License: Distributable
 Group: Applications/File
@@ -10,19 +10,17 @@ Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 URL:	http://www.darwinsys.com/file/
 Patch1: file-4.19-debian.patch
 Patch2: file-selinux.patch
-Patch3: file-4.19-magic.patch
+Patch3: file-4.21-magic.patch
 Patch5: file-4.13-fsdump.patch
 Patch6: file-4.13-quick.patch
 Patch8: file-4.15-berkeley.patch
 Patch12: file-4.16-xen.patch
-Patch16: file-4.19-oracle.patch
+Patch16: file-4.21-oracle.patch
 Patch17: file-4.17-clamav.patch
 Patch18: file-4.17-powerpoint.patch
 Patch20: file-4.17-bash.patch
 Patch21: file-4.19-ELF.patch
 Patch22: file-4.19-ooffice.patch
-Patch23: file-4.20-REG_STARTEND.patch
-Patch24: file-4.20-unused.patch
 
 Requires: file-libs = %{version}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -66,12 +64,9 @@ necessary for developing programs using libmagic.
 %patch16 -p1 -b .oracle
 %patch17 -p1 -b .clamav
 %patch18 -p1 -b .powerpoint
-#%patch19 -p1 -b .empty
 %patch20 -p1 -b .bash
 %patch21 -p1 -b .ELF
 %patch22 -p1 -b .ooffice
-%patch23 -p1 -b .REG_STARTEND
-%patch24 -p1 -b .unused
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 mv doc/libmagic.man_ doc/libmagic.man
@@ -129,6 +124,10 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue May 29 2007 Martin Bacovsky <mbacovsk@redhat.com> - 4.21-1
+- upgrade to new upstream 4.21
+- resolves: #241034: CVE-2007-2799 file integer overflow
+
 * Wed Mar  7 2007 Martin Bacovsky <mbacovsk@redhat.com> - 4.20-1
 - upgrade to new upstream 4.20
 
