@@ -3,7 +3,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 4.21
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: Distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -22,7 +22,7 @@ Patch20: file-4.17-bash.patch
 Patch21: file-4.19-ELF.patch
 Patch22: file-4.19-ooffice.patch
 
-Requires: file-libs = %{version}
+Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: zlib-devel
 
@@ -41,11 +41,12 @@ Group:   Applications/File
 
 %description libs
 
-Libraries for applications using the bzip2 compression format.
+Libraries for applications using libmagic.
+
 %package devel
 Summary:  Libraries and header files for file development
 Group:    Applications/File
-Requires: %{name} = %{version}
+Requires: %{name} = %{version}-%{release}
 
 %description devel
 The file-devel package contains the header files and libmagic library
@@ -124,6 +125,11 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Jul  4 2007 Martin Bacovsky <mbacovsk@redhat.com> - 4.21-2
+- resolves: #246700: RPM description isn't related to product
+- resolves: #238789: file-devel depends on %{version} but not on %{version}-%{release}
+- resolves: #235267: for core files, file doesn't display the executable name
+
 * Tue May 29 2007 Martin Bacovsky <mbacovsk@redhat.com> - 4.21-1
 - upgrade to new upstream 4.21
 - resolves: #241034: CVE-2007-2799 file integer overflow
