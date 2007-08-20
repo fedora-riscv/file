@@ -3,7 +3,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 4.21
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: Distributable
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -17,10 +17,11 @@ Patch8: file-4.15-berkeley.patch
 Patch12: file-4.16-xen.patch
 Patch16: file-4.21-oracle.patch
 Patch17: file-4.17-clamav.patch
-Patch18: file-4.17-powerpoint.patch
 Patch20: file-4.17-bash.patch
 Patch21: file-4.19-ELF.patch
 Patch22: file-4.19-ooffice.patch
+patch23: file-4.21-core_from.patch
+patch24: file-4.21-msoffice.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -64,10 +65,11 @@ necessary for developing programs using libmagic.
 %patch12 -p1 -b .xen
 %patch16 -p1 -b .oracle
 %patch17 -p1 -b .clamav
-%patch18 -p1 -b .powerpoint
 %patch20 -p1 -b .bash
 %patch21 -p1 -b .ELF
 %patch22 -p1 -b .ooffice
+%patch23 -p1 -b .core_from
+%patch24 -p1 -b .msoffice
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 mv doc/libmagic.man_ doc/libmagic.man
@@ -125,6 +127,11 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Aug 15 2007 Martin Bacovsky <mbacovsk@redhat.com> - 4.21-3
+- resolves: #172015: no longer reports filename of crashed app when run on core files.
+- resolves: #249578: Weird output from "file -i"
+- resolves: #234817: file reports wrong filetype for microsoft word file
+
 * Wed Jul  4 2007 Martin Bacovsky <mbacovsk@redhat.com> - 4.21-2
 - resolves: #246700: RPM description isn't related to product
 - resolves: #238789: file-devel depends on %{version} but not on %{version}-%{release}
