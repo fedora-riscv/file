@@ -1,13 +1,15 @@
+%{!?python_sitelib: %define python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
+%{!?python_sitearch: %define python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1)")}
 %define __libtoolize :
 
 Summary: A utility for determining file types
 Name: file
 Version: 4.21
-Release: 3%{?dist}
-License: Distributable
+Release: 5%{?dist}
+License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
-URL:	http://www.darwinsys.com/file/
+URL: http://www.darwinsys.com/file/
 Patch1: file-4.19-debian.patch
 Patch2: file-selinux.patch
 Patch3: file-4.21-magic.patch
@@ -22,6 +24,8 @@ Patch21: file-4.19-ELF.patch
 Patch22: file-4.19-ooffice.patch
 patch23: file-4.21-core_from.patch
 patch24: file-4.21-msoffice.patch
+patch25: file-4.21-efi.patch
+patch26: file-4.21-pybuild.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -53,6 +57,16 @@ Requires: %{name} = %{version}-%{release}
 The file-devel package contains the header files and libmagic library
 necessary for developing programs using libmagic.
 
+%package -n python-magic
+Summary: Python bindings for the libmagic API
+Group:   Development/Libraries
+BuildRequires: python-devel
+Requires: %{name} = %{version}-%{release}
+
+%description -n python-magic
+This package contains the Python bindings to allow access to the
+libmagic API. The libmagic library is also used by the familiar
+file(1) command.
 
 %prep
 %setup -q
@@ -70,8 +84,11 @@ necessary for developing programs using libmagic.
 %patch22 -p1 -b .ooffice
 %patch23 -p1 -b .core_from
 %patch24 -p1 -b .msoffice
+%patch25 -p1 -b .efi
+%patch26 -p1 -b .pybuild
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
+touch -r doc/libmagic.man doc/libmagic.man_
 mv doc/libmagic.man_ doc/libmagic.man
 
 %build
@@ -81,7 +98,8 @@ CFLAGS="%{optflags} -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE" \
 sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
 sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
 make
-
+cd python
+CFLAGS="%{optflags}" %{__python} setup.py build
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -90,12 +108,17 @@ mkdir -p ${RPM_BUILD_ROOT}%{_mandir}/man1
 mkdir -p ${RPM_BUILD_ROOT}%{_mandir}/man5
 mkdir -p ${RPM_BUILD_ROOT}%{_datadir}/misc
 
-%makeinstall
+make DESTDIR=${RPM_BUILD_ROOT} install
 rm -f ${RPM_BUILD_ROOT}%{_libdir}/*.la
 
 ln -s file/magic ${RPM_BUILD_ROOT}%{_datadir}/magic
 ln -s file/magic.mime ${RPM_BUILD_ROOT}%{_datadir}/magic.mime
 ln -s ../magic ${RPM_BUILD_ROOT}%{_datadir}/misc/magic 
+
+cd python
+%{__python} setup.py install -O1 --skip-build --root ${RPM_BUILD_ROOT}
+%{__install} -d ${RPM_BUILD_ROOT}%{_datadir}/%{name}
+%{__install} -D example.py ${RPM_BUILD_ROOT}/%{_docdir}/python-magic-%{version}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -125,8 +148,21 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/magic.h
 %{_mandir}/man3/*
 
+%files -n python-magic
+%defattr(-, root, root, -)
+%doc python/README LEGAL.NOTICE python/example.py
+%{python_sitearch}/magic.so
+%if 0%{?fedora} >= 9
+%{python_sitearch}/*egg-info
+%endif
 
 %changelog
+* Thu Jan 24 2008 Tomas Smetana <tsmetana@redhat.com> - 4.21-5
+- build a separate python-magic package; thanks to Terje Rosten
+
+* Thu Dec 06 2007 Tomas Smetana <tsmetana@redhat.com> - 4.21-4
+- add PE32/PE32+ magic
+
 * Wed Aug 15 2007 Martin Bacovsky <mbacovsk@redhat.com> - 4.21-3
 - resolves: #172015: no longer reports filename of crashed app when run on core files.
 - resolves: #249578: Weird output from "file -i"
@@ -134,7 +170,8 @@ rm -rf $RPM_BUILD_ROOT
 
 * Wed Jul  4 2007 Martin Bacovsky <mbacovsk@redhat.com> - 4.21-2
 - resolves: #246700: RPM description isn't related to product
-- resolves: #238789: file-devel depends on %{version} but not on %{version}-%{release}
+- resolves: #238789: file-devel depends on %%{version}
+  but not on %%{version}-%%{release}
 - resolves: #235267: for core files, file doesn't display the executable name
 
 * Tue May 29 2007 Martin Bacovsky <mbacovsk@redhat.com> - 4.21-1
