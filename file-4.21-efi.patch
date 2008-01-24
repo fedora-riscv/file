@@ -1,0 +1,68 @@
+diff -up file-4.21/magic/Magdir/msdos.efi file-4.21/magic/Magdir/msdos
+--- file-4.21/magic/Magdir/msdos.efi	2007-12-06 13:45:05.000000000 +0100
++++ file-4.21/magic/Magdir/msdos	2007-12-06 13:48:18.000000000 +0100
+@@ -49,7 +49,8 @@
+ #
+ # many of the compressed formats were extraced from IDARC 1.23 source code
+ #
+-0	string	MZ		MS-DOS executable
++0	string	MZ
++>0x18  leshort <0x40 MS-DOS executable
+ >0 string MZ\0\0\0\0\0\0\0\0\0\0PE\0\0 \b, PE for MS Windows
+ >>&18	leshort&0x2000	>0	(DLL)
+ >>&88	leshort		0	(unknown subsystem)
+@@ -70,27 +71,35 @@
+ >>>(&0.l+(4)) string MSCF \b, WinHKI CAB self-extracting archive
+ 
+ >0x18  leshort >0x3f
+->>(0x3c.l) string PE\0\0 PE 
++>>(0x3c.l) string PE\0\0 PE
++>>>(0x3c.l+25) byte 		1 \b32 executable
++>>>(0x3c.l+25) byte 		2 \b32+ executable
+ # hooray, there's a DOS extender using the PE format, with a valid PE
+ # executable inside (which just prints a message and exits if run in win)
+->>>(8.s*16) string 32STUB for MS-DOS, 32rtm DOS extender
+->>>(8.s*16) string !32STUB for MS Windows
+->>>>(0x3c.l+22)	leshort&0x2000	>0	(DLL)
+->>>>(0x3c.l+92)	leshort		0	(unknown subsystem)
+->>>>(0x3c.l+92)	leshort		1	(native)
+->>>>(0x3c.l+92)	leshort		2	(GUI)
+->>>>(0x3c.l+92)	leshort		3	(console)
+->>>>(0x3c.l+92)	leshort		7	(POSIX)
+->>>>(0x3c.l+4)	leshort		0x0	unknown processor
+->>>>(0x3c.l+4)	leshort		0x14c	Intel 80386
+->>>>(0x3c.l+4)	leshort		0x166	MIPS R4000
+->>>>(0x3c.l+4)	leshort		0x184	Alpha
+->>>>(0x3c.l+4)	leshort		0x268	Motorola 68000
+->>>>(0x3c.l+4)	leshort		0x1f0	PowerPC
+->>>>(0x3c.l+4)	leshort		0x290	PA-RISC
+->>>>(0x3c.l+22)	leshort&0x0100	>0	32-bit
+->>>>(0x3c.l+22)	leshort&0x1000	>0	system file
+->>>>(0x3c.l+232)	lelong	>0	Mono/.Net assembly
++>>>(0x3c.l+92)	leshort		<10
++>>>>(8.s*16) string 32STUB for MS-DOS, 32rtm DOS extender
++>>>>(8.s*16) string !32STUB for MS Windows
++>>>>>(0x3c.l+22)	leshort&0x2000	>0	(DLL)
++>>>>>(0x3c.l+92)	leshort		0	(unknown subsystem)
++>>>>>(0x3c.l+92)	leshort		1	(native)
++>>>>>(0x3c.l+92)	leshort		2	(GUI)
++>>>>>(0x3c.l+92)	leshort		3	(console)
++>>>>>(0x3c.l+92)	leshort		7	(POSIX)
++>>>(0x3c.l+92)	leshort		10	(EFI application)
++>>>(0x3c.l+92)	leshort		11	(EFI boot service driver)
++>>>(0x3c.l+92)	leshort		12	(EFI runtime driver)
++>>>(0x3c.l+92)	leshort		13	(XBOX)
++>>>(0x3c.l+4)	leshort		0x0	unknown processor
++>>>(0x3c.l+4)	leshort		0x14c	Intel 80386
++>>>(0x3c.l+4)	leshort		0x166	MIPS R4000
++>>>(0x3c.l+4)	leshort		0x184	Alpha
++>>>(0x3c.l+4)	leshort		0x268	Motorola 68000
++>>>(0x3c.l+4)	leshort		0x1f0	PowerPC
++>>>(0x3c.l+4)	leshort		0x290	PA-RISC
++>>>(0x3c.l+4)	leshort		0x200	Intel Itanium
++>>>(0x3c.l+22)	leshort&0x0100	>0	32-bit
++>>>(0x3c.l+22)	leshort&0x1000	>0	system file
++>>>(0x3c.l+232)	lelong	>0	Mono/.Net assembly
+ 
+ >>>>(0x3c.l+0xf8)	string		UPX0 \b, UPX compressed
+ >>>>(0x3c.l+0xf8)	search/0x140	PEC2 \b, PECompact2 compressed
