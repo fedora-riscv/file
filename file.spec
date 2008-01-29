@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 4.21
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -26,6 +26,8 @@ patch23: file-4.21-core_from.patch
 patch24: file-4.21-msoffice.patch
 patch25: file-4.21-efi.patch
 patch26: file-4.21-pybuild.patch
+patch26: file-4.21-pybuild.patch
+patch27: file-4.21-hang.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -86,6 +88,7 @@ file(1) command.
 %patch24 -p1 -b .msoffice
 %patch25 -p1 -b .efi
 %patch26 -p1 -b .pybuild
+%patch27 -p1 -b .hang
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -157,6 +160,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Tue Jan 29 2008 Tomas Smetana <tsmetana@redhat.com> - 4.21-5
+- fix #316501 - file hugging cpu
+
 * Thu Jan 24 2008 Tomas Smetana <tsmetana@redhat.com> - 4.21-4
 - build a separate python-magic package; thanks to Terje Rosten
 - add PE32/PE32+ magic

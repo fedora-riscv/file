@@ -1,0 +1,13 @@
+diff -up file-4.21/magic/Magdir/msdos.hang file-4.21/magic/Magdir/msdos
+--- file-4.21/magic/Magdir/msdos.hang	2008-01-28 12:25:35.000000000 +0100
++++ file-4.21/magic/Magdir/msdos	2008-01-29 09:36:53.000000000 +0100
+@@ -18,9 +18,6 @@
+ 100	regex/c =^[\ \t]{0,10}say\ ['"]	     OS/2 REXX batch file text
+ 
+ 
+-100 regex/c =^\\s*call\\s+rxfuncadd.*sysloadfu OS/2 REXX batch file text
+-100 regex/c =^\\s*say\ ['"] OS/2 REXX batch file text
+-
+ 0	leshort		0x14c	MS Windows COFF Intel 80386 object file
+ #>4	ledate		x	stamp %s
+ 0	leshort		0x166	MS Windows COFF MIPS R4000 object file
