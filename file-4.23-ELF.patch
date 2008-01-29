@@ -1,6 +1,7 @@
---- file-4.19/src/readelf.c.ELF	2007-01-09 19:47:26.000000000 +0100
-+++ file-4.19/src/readelf.c	2007-01-09 19:50:35.000000000 +0100
-@@ -45,7 +45,7 @@
+diff -up file-4.23/src/readelf.c.ELF file-4.23/src/readelf.c
+--- file-4.23/src/readelf.c.ELF	2007-12-27 17:30:52.000000000 +0100
++++ file-4.23/src/readelf.c	2008-01-28 13:28:23.000000000 +0100
+@@ -45,7 +45,7 @@ private int dophn_core(struct magic_set 
      off_t, int *);
  #endif
  private int dophn_exec(struct magic_set *, int, int, int, off_t, int, size_t,
@@ -9,7 +10,7 @@
  private int doshn(struct magic_set *, int, int, int, off_t, int, size_t, int *);
  private size_t donote(struct magic_set *, unsigned char *, size_t, size_t, int,
      int, size_t, int *);
-@@ -785,7 +785,7 @@
+@@ -795,7 +795,7 @@ doshn(struct magic_set *ms, int class, i
   */
  private int
  dophn_exec(struct magic_set *ms, int class, int swap, int fd, off_t off,
@@ -18,7 +19,7 @@
  {
  	Elf32_Phdr ph32;
  	Elf64_Phdr ph64;
-@@ -854,6 +854,19 @@
+@@ -864,6 +864,19 @@ dophn_exec(struct magic_set *ms, int cla
  					return -1;
  				align = 4;
  			}
@@ -38,17 +39,17 @@
  			/*
  			 * This is a PT_NOTE section; loop through all the notes
  			 * in the section.
-@@ -960,7 +973,8 @@
- 				    fd, (off_t)getu32(swap, elfhdr.e_phoff),
- 				    getu16(swap, elfhdr.e_phnum), 
- 				    (size_t)getu16(swap, elfhdr.e_phentsize),
--				    fsize, &flags)
-+				    fsize, &flags,
-+                    getu16(swap, elfhdr.e_shnum))
- 				    == -1)
- 					return -1;
- 			}
-@@ -1001,7 +1015,8 @@
+@@ -975,7 +988,8 @@ file_tryelf(struct magic_set *ms, int fd
+ 			    fd, (off_t)getu32(swap, elfhdr.e_phoff),
+ 			    getu16(swap, elfhdr.e_phnum), 
+ 			    (size_t)getu16(swap, elfhdr.e_phentsize),
+-			    fsize, &flags) == -1)
++			    fsize, &flags, getu16(swap, elfhdr.e_shnum))
++				== -1)
+ 				return -1;
+ 			if (doshn(ms, class, swap, fd,
+ 			    (off_t)getu32(swap, elfhdr.e_shoff),
+@@ -1018,7 +1032,8 @@ file_tryelf(struct magic_set *ms, int fd
  				    (off_t)elf_getu64(swap, elfhdr.e_phoff),
  				    getu16(swap, elfhdr.e_phnum), 
  				    (size_t)getu16(swap, elfhdr.e_phentsize),

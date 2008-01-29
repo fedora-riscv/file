@@ -4,8 +4,8 @@
 
 Summary: A utility for determining file types
 Name: file
-Version: 4.21
-Release: 5%{?dist}
+Version: 4.23
+Release: 1%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -13,19 +13,17 @@ URL: http://www.darwinsys.com/file/
 Patch1: file-4.19-debian.patch
 Patch2: file-selinux.patch
 Patch3: file-4.21-magic.patch
-Patch5: file-4.13-fsdump.patch
-Patch6: file-4.13-quick.patch
-Patch8: file-4.15-berkeley.patch
-Patch12: file-4.16-xen.patch
-Patch16: file-4.21-oracle.patch
-Patch17: file-4.17-clamav.patch
-Patch20: file-4.17-bash.patch
-Patch21: file-4.19-ELF.patch
-Patch22: file-4.19-ooffice.patch
-patch23: file-4.21-core_from.patch
-patch24: file-4.21-msoffice.patch
-patch25: file-4.21-efi.patch
-patch26: file-4.21-pybuild.patch
+Patch4: file-4.23-fsdump.patch
+Patch5: file-4.13-quick.patch
+Patch6: file-4.15-berkeley.patch
+Patch7: file-4.16-xen.patch
+Patch8: file-4.21-oracle.patch
+Patch9: file-4.17-clamav.patch
+Patch10: file-4.23-ELF.patch
+Patch11: file-4.19-ooffice.patch
+patch12: file-4.23-msoffice.patch
+patch13: file-4.21-efi.patch
+patch14: file-4.21-pybuild.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -73,19 +71,17 @@ file(1) command.
 %patch1 -p1 -b .debian
 %patch2 -p1 -b .selinux
 %patch3 -p1 -b .magic
-%patch5 -p1 -b .fsdump
-%patch6 -p1 -b .quick
-%patch8 -p1 -b .berkeley
-%patch12 -p1 -b .xen
-%patch16 -p1 -b .oracle
-%patch17 -p1 -b .clamav
-%patch20 -p1 -b .bash
-%patch21 -p1 -b .ELF
-%patch22 -p1 -b .ooffice
-%patch23 -p1 -b .core_from
-%patch24 -p1 -b .msoffice
-%patch25 -p1 -b .efi
-%patch26 -p1 -b .pybuild
+%patch4 -p1 -b .fsdump
+%patch5 -p1 -b .quick
+%patch6 -p1 -b .berkeley
+%patch7 -p1 -b .xen
+%patch8 -p1 -b .oracle
+%patch9 -p1 -b .clamav
+%patch10 -p1 -b .ELF
+%patch11 -p1 -b .ooffice
+%patch12 -p1 -b .msoffice
+%patch13 -p1 -b .efi
+%patch14 -p1 -b .pybuild
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -97,6 +93,7 @@ CFLAGS="%{optflags} -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE" \
 # remove hardcoded library paths from local libtool
 sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
 sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
+export LD_LIBRARY_PATH=%{_builddir}/%{name}-%{version}/src/.libs
 make
 cd python
 CFLAGS="%{optflags}" %{__python} setup.py build
@@ -157,6 +154,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Tue Jan 29 2008 Tomas Smetana <tsmetana@redhat.com> - 4.23-1
+- new upstream version; update patches; drop unused patches
+
 * Thu Jan 24 2008 Tomas Smetana <tsmetana@redhat.com> - 4.21-5
 - build a separate python-magic package; thanks to Terje Rosten
 
