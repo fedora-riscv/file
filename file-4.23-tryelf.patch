@@ -1,0 +1,30 @@
+diff -up file-4.23/src/readelf.c.tryelf file-4.23/src/readelf.c
+--- file-4.23/src/readelf.c.tryelf	2008-01-31 08:05:27.000000000 +0100
++++ file-4.23/src/readelf.c	2008-01-31 08:04:07.000000000 +0100
+@@ -983,7 +983,6 @@ file_tryelf(struct magic_set *ms, int fd
+ 			break;
+ #endif
+ 		case ET_EXEC:
+-		case ET_DYN:
+ 			if (dophn_exec(ms, class, swap,
+ 			    fd, (off_t)getu32(swap, elfhdr.e_phoff),
+ 			    getu16(swap, elfhdr.e_phnum), 
+@@ -991,6 +990,8 @@ file_tryelf(struct magic_set *ms, int fd
+ 			    fsize, &flags, getu16(swap, elfhdr.e_shnum))
+ 				== -1)
+ 				return -1;
++		case ET_DYN:
++		default:
+ 			if (doshn(ms, class, swap, fd,
+ 			    (off_t)getu32(swap, elfhdr.e_shoff),
+ 			    getu16(swap, elfhdr.e_shnum),
+@@ -998,9 +999,6 @@ file_tryelf(struct magic_set *ms, int fd
+ 			    &flags) == -1)
+ 				return -1;
+ 			break;
+-
+-		default:
+-			break;
+ 		}
+ 		return 1;
+ 	}

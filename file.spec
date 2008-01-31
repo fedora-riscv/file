@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 4.23
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -24,6 +24,7 @@ Patch11: file-4.19-ooffice.patch
 patch12: file-4.23-msoffice.patch
 patch13: file-4.21-efi.patch
 patch14: file-4.21-pybuild.patch
+patch15: file-4.23-tryelf.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -82,6 +83,7 @@ file(1) command.
 %patch12 -p1 -b .msoffice
 %patch13 -p1 -b .efi
 %patch14 -p1 -b .pybuild
+%patch15 -p1 -b .tryelf
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -154,6 +156,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Thu Jan 31 2008 Tomas Smetana <tsmetana@redhat.com> - 4.23-2
+- fix #430952 - wrong handling of ELF binaries
+
 * Tue Jan 29 2008 Tomas Smetana <tsmetana@redhat.com> - 4.23-1
 - new upstream version; update patches; drop unused patches
 
