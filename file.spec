@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 4.23
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -25,6 +25,7 @@ patch12: file-4.23-msoffice.patch
 patch13: file-4.21-efi.patch
 patch14: file-4.21-pybuild.patch
 patch15: file-4.23-tryelf.patch
+patch15: file-4.23-ext4.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -156,6 +157,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Fri Feb 01 2008 Tomas Smetana <tsmetana@redhat.com> - 4.23-3
+- fix #430927 - detect ext4 filesystems
+
 * Thu Jan 31 2008 Tomas Smetana <tsmetana@redhat.com> - 4.23-2
 - fix #430952 - wrong handling of ELF binaries
 
