@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 4.23
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -25,7 +25,8 @@ patch12: file-4.23-msoffice.patch
 patch13: file-4.21-efi.patch
 patch14: file-4.21-pybuild.patch
 patch15: file-4.23-tryelf.patch
-patch15: file-4.23-ext4.patch
+patch16: file-4.23-ext4.patch
+patch17: file-4.23-mismatch.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -85,6 +86,9 @@ file(1) command.
 %patch13 -p1 -b .efi
 %patch14 -p1 -b .pybuild
 %patch15 -p1 -b .tryelf
+%patch16 -p1 -b .ext4
+%patch17 -p1 -b .mismatch
+
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -157,6 +161,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Fri Feb 01 2008 Tomas Smetana <tsmetana@redhat.com> - 4.23-4
+- fix mismatching gzip files and text files as animations
+
 * Fri Feb 01 2008 Tomas Smetana <tsmetana@redhat.com> - 4.23-3
 - fix #430927 - detect ext4 filesystems
 

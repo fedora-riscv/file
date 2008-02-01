@@ -1,0 +1,33 @@
+diff -up file-4.23/magic/Magdir/animation.mismatch file-4.23/magic/Magdir/animation
+--- file-4.23/magic/Magdir/animation.mismatch	2007-11-08 01:28:03.000000000 +0100
++++ file-4.23/magic/Magdir/animation	2008-02-01 12:16:13.000000000 +0100
+@@ -570,7 +570,8 @@
+ >>4     byte&0x78       0x18           \b, 3 streams
+ >>4     byte            &0x20          \b, 4 or more streams
+ >>4     byte            &0x40          \b, 8 or more streams
+-0       beshort         0x4DE1         MPEG-4 LO-EP audio stream
++# Matches text files
++#0       beshort         0x4DE1         MPEG-4 LO-EP audio stream
+ 
+ # FLI animation format
+ 4	leshort		0xAF11			FLI file
+@@ -580,12 +581,13 @@
+ >12	leshort		x			depth=%d,
+ >16	leshort		x			ticks/frame=%d
+ # FLC animation format
+-4	leshort		0xAF12			FLC file
+->6	leshort		x			- %d frames
+->8	leshort		x			width=%d pixels,
+->10	leshort		x			height=%d pixels,
+->12	leshort		x			depth=%d,
+->16	leshort		x			ticks/frame=%d
++4	leshort		0xAF12			
++>0	string		!\037\213	FLC file
++>>6	leshort		x			- %d frames
++>>8	leshort		x			width=%d pixels,
++>>10	leshort		x			height=%d pixels,
++>>12	leshort		x			depth=%d,
++>>16	leshort		x			ticks/frame=%d
+ 
+ # DL animation format
+ # XXX - collision with most `mips' magic
