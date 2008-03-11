@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 4.23
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -161,6 +161,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Tue Mar 11 2008 Tomas Smetana <tsmetana@redhat.com> - 4.23-5
+- fix EFI detection patch
+
 * Fri Feb 01 2008 Tomas Smetana <tsmetana@redhat.com> - 4.23-4
 - fix mismatching gzip files and text files as animations
 

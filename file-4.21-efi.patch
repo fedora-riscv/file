@@ -1,6 +1,6 @@
 diff -up file-4.21/magic/Magdir/msdos.efi file-4.21/magic/Magdir/msdos
---- file-4.21/magic/Magdir/msdos.efi	2007-12-06 13:45:05.000000000 +0100
-+++ file-4.21/magic/Magdir/msdos	2007-12-06 13:48:18.000000000 +0100
+--- file-4.21/magic/Magdir/msdos.efi	2008-03-11 08:49:22.000000000 +0100
++++ file-4.21/magic/Magdir/msdos	2008-03-11 08:50:05.000000000 +0100
 @@ -49,7 +49,8 @@
  #
  # many of the compressed formats were extraced from IDARC 1.23 source code
@@ -66,3 +66,12 @@ diff -up file-4.21/magic/Magdir/msdos.efi file-4.21/magic/Magdir/msdos
  
  >>>>(0x3c.l+0xf8)	string		UPX0 \b, UPX compressed
  >>>>(0x3c.l+0xf8)	search/0x140	PEC2 \b, PECompact2 compressed
+@@ -119,6 +128,8 @@
+ >>>>&(0x3c.l+0xf8)	search/0x100	SharedD \b, Microsoft Installer self-extracting archive
+ >>>>0x30		string		Inno \b, InnoSetup self-extracting archive
+ 
++>>(0x3c.l) string !PE\0\0 MS-DOS executable
++
+ >>(0x3c.l)		string		NE \b, NE
+ >>>(0x3c.l+0x36)	byte		0 (unknown OS)
+ >>>(0x3c.l+0x36)	byte		1 for OS/2 1.x
