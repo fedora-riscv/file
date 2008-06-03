@@ -5,28 +5,17 @@
 Summary: A utility for determining file types
 Name: file
 Version: 4.24
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 URL: http://www.darwinsys.com/file/
-Patch1: file-4.19-debian.patch
-Patch2: file-4.24-selinux.patch
-Patch3: file-4.21-magic.patch
-Patch4: file-4.24-fsdump.patch
-Patch5: file-4.24-quick.patch
-Patch6: file-4.24-berkeley.patch
-Patch7: file-4.16-xen.patch
-Patch8: file-4.21-oracle.patch
-Patch9: file-4.17-clamav.patch
-Patch10: file-4.24-ELF.patch
-Patch11: file-4.19-ooffice.patch
-patch12: file-4.23-msoffice.patch
-patch13: file-4.24-efi.patch
-patch14: file-4.21-pybuild.patch
-patch15: file-4.23-tryelf.patch
-patch16: file-4.23-ext4.patch
-patch17: file-4.24-flc.patch
+Patch1: file-4.24-selinux.patch
+Patch2: file-4.21-oracle.patch
+Patch3: file-4.24-ELF.patch
+patch4: file-4.24-efi.patch
+patch5: file-4.21-pybuild.patch
+patch6: file-4.24-flc.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -70,26 +59,14 @@ libmagic API. The libmagic library is also used by the familiar
 file(1) command.
 
 %prep
-# Don't use -b -- this may lead to poblems when compiling magic file
+# Don't use -b -- it will lead to poblems when compiling magic file
 %setup -q
-#%patch1 -p1 -b .debian
+%patch1 -p1
 %patch2 -p1
-#%patch3 -p1 -b .magic
+%patch3 -p1
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
-%patch7 -p1
-%patch8 -p1
-#%patch9 -p1 -b .clamav
-%patch10 -p1
-#%patch11 -p1 -b .ooffice
-#%patch12 -p1 -b .msoffice
-%patch13 -p1
-%patch14 -p1
-#%patch15 -p1 -b .tryelf
-#%patch16 -p1 -b .ext4
-%patch17 -p1
-
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -116,9 +93,10 @@ mkdir -p ${RPM_BUILD_ROOT}%{_datadir}/misc
 make DESTDIR=${RPM_BUILD_ROOT} install
 rm -f ${RPM_BUILD_ROOT}%{_libdir}/*.la
 
+cat magic/Magdir/* > ${RPM_BUILD_ROOT}%{_datadir}/file/magic
 ln -s file/magic ${RPM_BUILD_ROOT}%{_datadir}/magic
-ln -s file/magic.mime ${RPM_BUILD_ROOT}%{_datadir}/magic.mime
-ln -s ../magic ${RPM_BUILD_ROOT}%{_datadir}/misc/magic 
+#ln -s file/magic.mime ${RPM_BUILD_ROOT}%{_datadir}/magic.mime
+ln -s ../magic ${RPM_BUILD_ROOT}%{_datadir}/misc/magic
 
 cd python
 %{__python} setup.py install -O1 --skip-build --root ${RPM_BUILD_ROOT}
@@ -158,10 +136,14 @@ rm -rf $RPM_BUILD_ROOT
 %doc python/README COPYING python/example.py
 %{python_sitearch}/magic.so
 %if 0%{?fedora} >= 9
-%{python_sitearch}/*egg-info
+#%{python_sitearch}/*egg-info
 %endif
 
 %changelog
+* Tue Jun 03 2008 Tomas Smetana <tsmetana@redhat.com>
+- drop patches that do nothing in recent build system
+- create the text magic file during installation
+
 * Tue Jun 03 2008 Tomas Smetana <tsmetana@redhat.com> - 4.24-2
 - rebuild because of egg-info
 
