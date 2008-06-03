@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 4.24
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -158,10 +158,13 @@ rm -rf $RPM_BUILD_ROOT
 %doc python/README COPYING python/example.py
 %{python_sitearch}/magic.so
 %if 0%{?fedora} >= 9
-#%{python_sitearch}/*egg-info
+%{python_sitearch}/*egg-info
 %endif
 
 %changelog
+* Tue Jun 03 2008 Tomas Smetana <tsmetana@redhat.com> - 4.24-2
+- rebuild because of egg-info
+
 * Tue Jun 03 2008 Tomas Smetana <tsmetana@redhat.com> - 4.24-1
 - new upstream version
 
