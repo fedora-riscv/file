@@ -4,29 +4,29 @@
 
 Summary: A utility for determining file types
 Name: file
-Version: 4.23
-Release: 5%{?dist}
+Version: 4.24
+Release: 1%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 URL: http://www.darwinsys.com/file/
 Patch1: file-4.19-debian.patch
-Patch2: file-selinux.patch
+Patch2: file-4.24-selinux.patch
 Patch3: file-4.21-magic.patch
-Patch4: file-4.23-fsdump.patch
-Patch5: file-4.13-quick.patch
-Patch6: file-4.15-berkeley.patch
+Patch4: file-4.24-fsdump.patch
+Patch5: file-4.24-quick.patch
+Patch6: file-4.24-berkeley.patch
 Patch7: file-4.16-xen.patch
 Patch8: file-4.21-oracle.patch
 Patch9: file-4.17-clamav.patch
-Patch10: file-4.23-ELF.patch
+Patch10: file-4.24-ELF.patch
 Patch11: file-4.19-ooffice.patch
 patch12: file-4.23-msoffice.patch
-patch13: file-4.21-efi.patch
+patch13: file-4.24-efi.patch
 patch14: file-4.21-pybuild.patch
 patch15: file-4.23-tryelf.patch
 patch16: file-4.23-ext4.patch
-patch17: file-4.23-mismatch.patch
+patch17: file-4.24-flc.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -70,24 +70,25 @@ libmagic API. The libmagic library is also used by the familiar
 file(1) command.
 
 %prep
+# Don't use -b -- this may lead to poblems when compiling magic file
 %setup -q
-%patch1 -p1 -b .debian
-%patch2 -p1 -b .selinux
-%patch3 -p1 -b .magic
-%patch4 -p1 -b .fsdump
-%patch5 -p1 -b .quick
-%patch6 -p1 -b .berkeley
-%patch7 -p1 -b .xen
-%patch8 -p1 -b .oracle
-%patch9 -p1 -b .clamav
-%patch10 -p1 -b .ELF
-%patch11 -p1 -b .ooffice
-%patch12 -p1 -b .msoffice
-%patch13 -p1 -b .efi
-%patch14 -p1 -b .pybuild
-%patch15 -p1 -b .tryelf
-%patch16 -p1 -b .ext4
-%patch17 -p1 -b .mismatch
+#%patch1 -p1 -b .debian
+%patch2 -p1
+#%patch3 -p1 -b .magic
+%patch4 -p1
+%patch5 -p1
+%patch6 -p1
+%patch7 -p1
+%patch8 -p1
+#%patch9 -p1 -b .clamav
+%patch10 -p1
+#%patch11 -p1 -b .ooffice
+#%patch12 -p1 -b .msoffice
+%patch13 -p1
+%patch14 -p1
+#%patch15 -p1 -b .tryelf
+#%patch16 -p1 -b .ext4
+%patch17 -p1
 
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
@@ -133,7 +134,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%doc LEGAL.NOTICE README
+%doc COPYING ChangeLog README
 %{_bindir}/*
 %{_mandir}/man1/*
 
@@ -154,13 +155,16 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n python-magic
 %defattr(-, root, root, -)
-%doc python/README LEGAL.NOTICE python/example.py
+%doc python/README COPYING python/example.py
 %{python_sitearch}/magic.so
 %if 0%{?fedora} >= 9
-%{python_sitearch}/*egg-info
+#%{python_sitearch}/*egg-info
 %endif
 
 %changelog
+* Tue Jun 03 2008 Tomas Smetana <tsmetana@redhat.com> - 4.24-1
+- new upstream version
+
 * Tue Mar 11 2008 Tomas Smetana <tsmetana@redhat.com> - 4.23-5
 - fix EFI detection patch
 

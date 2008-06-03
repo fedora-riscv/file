@@ -1,0 +1,43 @@
+diff -up file-4.24/src/elfclass.h.ELF file-4.24/src/elfclass.h
+--- file-4.24/src/elfclass.h.ELF	2008-05-07 11:25:23.000000000 +0200
++++ file-4.24/src/elfclass.h	2008-05-07 11:32:11.000000000 +0200
+@@ -49,7 +49,8 @@
+ 		    (off_t)elf_getu(swap, elfhdr.e_phoff),
+ 		    elf_getu16(swap, elfhdr.e_phnum), 
+ 		    (size_t)elf_getu16(swap, elfhdr.e_phentsize),
+-		    fsize, &flags) == -1)
++		    fsize, &flags, elf_getu16(swap, elfhdr.e_shnum))
++		    == -1)
+ 			return -1;
+ 		/*FALLTHROUGH*/
+ 	case ET_REL:
+diff -up file-4.24/src/readelf.c.ELF file-4.24/src/readelf.c
+--- file-4.24/src/readelf.c.ELF	2008-05-07 11:25:33.000000000 +0200
++++ file-4.24/src/readelf.c	2008-05-07 11:34:38.000000000 +0200
+@@ -46,7 +46,7 @@ private int dophn_core(struct magic_set 
+     off_t, int *);
+ #endif
+ private int dophn_exec(struct magic_set *, int, int, int, off_t, int, size_t,
+-    off_t, int *);
++    off_t, int *, int);
+ private int doshn(struct magic_set *, int, int, int, off_t, int, size_t, int *);
+ private size_t donote(struct magic_set *, unsigned char *, size_t, size_t, int,
+     int, size_t, int *);
+@@ -838,7 +838,7 @@ doshn(struct magic_set *ms, int class, i
+  */
+ private int
+ dophn_exec(struct magic_set *ms, int class, int swap, int fd, off_t off,
+-    int num, size_t size, off_t fsize, int *flags)
++    int num, size_t size, off_t fsize, int *flags, int sh_num)
+ {
+ 	Elf32_Phdr ph32;
+ 	Elf64_Phdr ph64;
+@@ -907,6 +907,8 @@ dophn_exec(struct magic_set *ms, int cla
+ 					return -1;
+ 				align = 4;
+ 			}
++			if (sh_num)
++				break;
+ 			/*
+ 			 * This is a PT_NOTE section; loop through all the notes
+ 			 * in the section.

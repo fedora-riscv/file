@@ -1,0 +1,16 @@
+diff -up file-4.24/magic/Makefile.in.fsdump file-4.24/magic/Makefile.in
+--- file-4.24/magic/Makefile.in.fsdump	2008-03-22 22:41:06.000000000 +0100
++++ file-4.24/magic/Makefile.in	2008-05-06 13:44:45.000000000 +0200
+@@ -211,11 +211,11 @@ $(MAGIC_FRAGMENT_DIR)/diamond \
+ $(MAGIC_FRAGMENT_DIR)/diff \
+ $(MAGIC_FRAGMENT_DIR)/digital \
+ $(MAGIC_FRAGMENT_DIR)/dolby \
+-$(MAGIC_FRAGMENT_DIR)/dump \
+ $(MAGIC_FRAGMENT_DIR)/dyadic \
+ $(MAGIC_FRAGMENT_DIR)/editors \
+ $(MAGIC_FRAGMENT_DIR)/efi \
+ $(MAGIC_FRAGMENT_DIR)/elf \
++$(MAGIC_FRAGMENT_DIR)/dump \
+ $(MAGIC_FRAGMENT_DIR)/encore \
+ $(MAGIC_FRAGMENT_DIR)/epoc \
+ $(MAGIC_FRAGMENT_DIR)/erlang \
