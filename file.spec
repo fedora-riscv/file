@@ -11,7 +11,7 @@ Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 URL: http://www.darwinsys.com/file/
 Patch1: file-4.24-selinux.patch
-Patch2: file-4.21-oracle.patch
+Patch2: file-4.24-oracle.patch
 Patch3: file-4.24-ELF.patch
 patch4: file-4.24-efi.patch
 patch5: file-4.21-pybuild.patch
@@ -136,11 +136,11 @@ rm -rf $RPM_BUILD_ROOT
 %doc python/README COPYING python/example.py
 %{python_sitearch}/magic.so
 %if 0%{?fedora} >= 9
-#%{python_sitearch}/*egg-info
+%{python_sitearch}/*egg-info
 %endif
 
 %changelog
-* Tue Jun 03 2008 Tomas Smetana <tsmetana@redhat.com>
+* Wed Jun 04 2008 Tomas Smetana <tsmetana@redhat.com> - 4.24-3
 - drop patches that do nothing in recent build system
 - create the text magic file during installation
 
