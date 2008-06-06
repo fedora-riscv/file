@@ -6,7 +6,7 @@ diff -up file-4.24/magic/Magdir/linux.orig file-4.24/magic/Magdir/linux
  >(0x614.l+0x600) string	>\0		, UUID: %s
  
 +# LVM snapshot
-+# from Jason Farrel
++# from Jason Farrell
 +0    string  SnAp        LVM Snapshot (CopyOnWrite store)
 +>4   lelong    !0        - valid,
 +>4   lelong    0         - invalid,
