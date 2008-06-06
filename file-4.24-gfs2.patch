@@ -1,0 +1,13 @@
+diff -up file-4.24/magic/Magdir/filesystems.orig file-4.24/magic/Magdir/filesystems
+--- file-4.24/magic/Magdir/filesystems.orig	2008-06-04 08:16:57.000000000 +0200
++++ file-4.24/magic/Magdir/filesystems	2008-06-04 08:19:34.000000000 +0200
+@@ -1302,3 +1302,9 @@
+ # really le32 operation,destination,payloadsize (but quite predictable)
+ # 01 00 00 00 00 00 00 c0 00 02 00 00
+ 0	string		\1\0\0\0\0\0\0\300\0\2\0\0	Marvell Libertas firmware
++
++# From Eric Sandeen
++# GFS2
++0x10000         belong          0x01161970      GFS2 Filesystem
++>0x10024        belong          x               (blocksize %d,
++>0x10060        string          >\0             lockproto %s)

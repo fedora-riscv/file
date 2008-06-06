@@ -5,17 +5,18 @@
 Summary: A utility for determining file types
 Name: file
 Version: 4.24
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 URL: http://www.darwinsys.com/file/
-Patch1: file-4.24-selinux.patch
+Patch1: file-4.24-lvm.patch
 Patch2: file-4.24-oracle.patch
 Patch3: file-4.24-ELF.patch
 patch4: file-4.24-efi.patch
 patch5: file-4.21-pybuild.patch
 patch6: file-4.24-flc.patch
+patch7: file-4.24-gfs2.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -67,6 +68,7 @@ file(1) command.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -136,10 +138,14 @@ rm -rf $RPM_BUILD_ROOT
 %doc python/README COPYING python/example.py
 %{python_sitearch}/magic.so
 %if 0%{?fedora} >= 9
-%{python_sitearch}/*egg-info
+#%{python_sitearch}/*egg-info
 %endif
 
 %changelog
+* Fri Jun 06 2008 Tomas Smetana <tsmetana@redhat.com> - 4.24-4
+- add GFS2 filesystem magic; thanks to Eric Sandeen
+- add LVM snapshots magic (#449755); thanks to Jason Farrell
+
 * Wed Jun 04 2008 Tomas Smetana <tsmetana@redhat.com> - 4.24-3
 - drop patches that do nothing in recent build system
 - create the text magic file during installation
