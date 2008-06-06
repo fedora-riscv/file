@@ -138,7 +138,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc python/README COPYING python/example.py
 %{python_sitearch}/magic.so
 %if 0%{?fedora} >= 9
-#%{python_sitearch}/*egg-info
+%{python_sitearch}/*egg-info
 %endif
 
 %changelog
