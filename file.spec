@@ -4,19 +4,13 @@
 
 Summary: A utility for determining file types
 Name: file
-Version: 4.24
-Release: 4%{?dist}
+Version: 4.25
+Release: 1%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 URL: http://www.darwinsys.com/file/
-Patch1: file-4.24-lvm.patch
-Patch2: file-4.24-oracle.patch
-Patch3: file-4.24-ELF.patch
-patch4: file-4.24-efi.patch
-patch5: file-4.21-pybuild.patch
-patch6: file-4.24-flc.patch
-patch7: file-4.24-gfs2.patch
+patch0: file-4.21-pybuild.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -62,13 +56,7 @@ file(1) command.
 %prep
 # Don't use -b -- it will lead to poblems when compiling magic file
 %setup -q
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
+%patch0 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -142,6 +130,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Mon Jul 21 2008 Tomas Smetana <tsmetana@redhat.com> - 4.25-1
+- new upstream version; drop upstreamed patches
+
 * Fri Jun 06 2008 Tomas Smetana <tsmetana@redhat.com> - 4.24-4
 - add GFS2 filesystem magic; thanks to Eric Sandeen
 - add LVM snapshots magic (#449755); thanks to Jason Farrell
