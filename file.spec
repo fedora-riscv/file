@@ -5,12 +5,13 @@
 Summary: A utility for determining file types
 Name: file
 Version: 4.26
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 URL: http://www.darwinsys.com/file/
 patch0: file-4.21-pybuild.patch
+patch1: file-4.26-devdrv.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -57,6 +58,8 @@ file(1) command.
 # Don't use -b -- it will lead to poblems when compiling magic file
 %setup -q
 %patch0 -p1
+#fixes #463809
+%patch1 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -130,6 +133,11 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Tue Oct 07 2008 Daniel Novotny <dnovotny@redhat.com> 4.26-2
+- fix #463809: rpmbuild rpmfcClassify: Assertion fails on some binary files
+  (false positive test on "DOS device driver" crashed file(1)
+   and rpmbuild(8) failed)  
+
 * Mon Sep 15 2008 Daniel Novotny <dnovotny@redhat.com> 4.26-1
 - new upstream version: fixes #462064
 
