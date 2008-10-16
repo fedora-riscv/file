@@ -1,0 +1,46 @@
+diff -up file-4.26/src/funcs.c.mime file-4.26/src/funcs.c
+--- file-4.26/src/funcs.c.mime	2008-10-14 13:07:44.000000000 +0200
++++ file-4.26/src/funcs.c	2008-10-16 11:47:01.000000000 +0200
+@@ -152,6 +152,20 @@ file_badread(struct magic_set *ms)
+ 	file_error(ms, errno, "error reading");
+ }
+ 
++private int mime_encoding(struct magic_set * ms, const unsigned char * buf, size_t size)
++{
++size_t dummy;
++
++if( file_looks_utf8(buf, size, NULL, &dummy) == 1 )
++{
++        if(file_printf(ms, "7bit") == -1)
++                return -1;
++} else if(file_printf(ms, "binary") == -1)
++                return -1;
++                
++return 1;                  
++}
++
+ #ifndef COMPILE_ONLY
+ protected int
+ file_buffer(struct magic_set *ms, int fd, const char *inname, const void *buf,
+@@ -187,6 +201,8 @@ file_buffer(struct magic_set *ms, int fd
+ 		}
+ 	}
+ #endif
++        if (ms->flags & MAGIC_MIME_ENCODING && !(ms->flags & MAGIC_MIME_TYPE)) 
++                return mime_encoding(ms, ubuf, nb);
+ 
+ 	/* try compression stuff */
+ 	if ((ms->flags & MAGIC_NO_CHECK_COMPRESS) != 0 ||
+@@ -206,9 +222,9 @@ file_buffer(struct magic_set *ms, int fd
+ 				"data") == -1)
+ 				return -1;
+ 			m = 1;
+-		    }
+-		}
+-	    }
++		    } 
++		} 
++	    } 
+ 	}
+ #ifdef BUILTIN_ELF
+ 	if ((ms->flags & MAGIC_NO_CHECK_ELF) == 0 && m == 1 &&

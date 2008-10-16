@@ -5,13 +5,14 @@
 Summary: A utility for determining file types
 Name: file
 Version: 4.26
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 URL: http://www.darwinsys.com/file/
-patch0: file-4.21-pybuild.patch
-patch1: file-4.26-devdrv.patch
+Patch0: file-4.21-pybuild.patch
+Patch1: file-4.26-devdrv.patch
+Patch2: file-4.26-mime-encoding.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -60,6 +61,8 @@ file(1) command.
 %patch0 -p1
 #fixes #463809
 %patch1 -p1
+#fixes #465994
+%patch2 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -133,6 +136,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Thu Oct 16 2008 Daniel Novotny <dnovotny@redhat.com> 4.26-3
+- fix #465994 file --mime-encoding seems broken
+
 * Tue Oct 07 2008 Daniel Novotny <dnovotny@redhat.com> 4.26-2
 - fix #463809: rpmbuild rpmfcClassify: Assertion fails on some binary files
   (false positive test on "DOS device driver" crashed file(1)
