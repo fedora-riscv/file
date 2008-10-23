@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 4.21
-Release: 5%{?dist}
+Release: 6%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -26,8 +26,9 @@ patch23: file-4.21-core_from.patch
 patch24: file-4.21-msoffice.patch
 patch25: file-4.21-efi.patch
 patch26: file-4.21-pybuild.patch
-patch26: file-4.21-pybuild.patch
+#patch26: file-4.21-pybuild.patch
 patch27: file-4.21-hang.patch
+patch28: file-4.21-typo.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -89,6 +90,7 @@ file(1) command.
 %patch25 -p1 -b .efi
 %patch26 -p1 -b .pybuild
 %patch27 -p1 -b .hang
+%patch28 -p1 -b .typo
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -160,6 +162,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Thu Oct 23 2008 Daniel Novotny <dnovotny@redhat.com> 4.21-6
+- fix #468059 -  Typo errors in man page of file utility
+
 * Tue Jan 29 2008 Tomas Smetana <tsmetana@redhat.com> - 4.21-5
 - fix #316501 - file hugging cpu
 

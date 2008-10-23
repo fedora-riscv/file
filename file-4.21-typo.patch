@@ -1,0 +1,15 @@
+diff -up file-4.21/doc/file.man.typo file-4.21/doc/file.man
+--- file-4.21/doc/file.man.typo	2008-10-23 11:10:57.000000000 +0200
++++ file-4.21/doc/file.man	2008-10-23 11:08:44.000000000 +0200
+@@ -252,8 +252,9 @@ Specify an alternate list of files conta
+ This can be a single file, or a colon-separated list of files.
+ If a compiled magic file is found alongside, it will be used instead.
+ With the 
+-.Fl i or 
+-.Fl "mime"
++.Fl i 
++or 
++.Fl -mime
+ option, the program adds
+ .Dq .mime
+ to each file name.
