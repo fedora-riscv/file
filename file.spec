@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 4.23
-Release: 5%{?dist}
+Release: 6%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -27,6 +27,7 @@ patch14: file-4.21-pybuild.patch
 patch15: file-4.23-tryelf.patch
 patch16: file-4.23-ext4.patch
 patch17: file-4.23-mismatch.patch
+patch18: file-4.23-typo.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -88,6 +89,7 @@ file(1) command.
 %patch15 -p1 -b .tryelf
 %patch16 -p1 -b .ext4
 %patch17 -p1 -b .mismatch
+%patch18 -p1 -b .typo
 
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
@@ -161,6 +163,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Thu Oct 23 2008 Daniel Novotny <dnovotny@redhat.com> - 4.23-6
+- fix typo in man page
+
 * Tue Mar 11 2008 Tomas Smetana <tsmetana@redhat.com> - 4.23-5
 - fix EFI detection patch
 

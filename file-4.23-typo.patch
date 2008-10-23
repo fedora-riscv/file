@@ -1,0 +1,12 @@
+diff -up file-4.23/doc/file.man.typo file-4.23/doc/file.man
+--- file-4.23/doc/file.man.typo	2008-10-23 11:48:23.000000000 +0200
++++ file-4.23/doc/file.man	2008-10-23 11:48:40.000000000 +0200
+@@ -259,7 +259,7 @@ If a compiled magic file is found alongs
+ With the
+ .Fl i
+ or 
+-.Fl "mime"
++.Fl -mime
+ option, the program adds
+ .Dq .mime
+ to each file name.
