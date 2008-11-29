@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 4.26
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -136,6 +136,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Sat Nov 29 2008 Ignacio Vazquez-Abrams <ivazqueznet+rpm@gmail.com> - 4.26-4
+- Rebuild for Python 2.6
+
 * Thu Oct 16 2008 Daniel Novotny <dnovotny@redhat.com> 4.26-3
 - fix #465994 file --mime-encoding seems broken
 
