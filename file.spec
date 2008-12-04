@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 4.26
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -13,6 +13,7 @@ URL: http://www.darwinsys.com/file/
 Patch0: file-4.21-pybuild.patch
 Patch1: file-4.26-devdrv.patch
 Patch2: file-4.26-mime-encoding.patch
+Patch3: file-4.26-perl5.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -63,6 +64,8 @@ file(1) command.
 %patch1 -p1
 #fixes #465994
 %patch2 -p1
+#fixes #470811
+%patch3 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -136,6 +139,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Thu Dec 04 2008 Daniel Novotny <dnovotny@redhat.com> - 4.26-5
+- fix #470811 - Spurious perl auto-requires
+
 * Sat Nov 29 2008 Ignacio Vazquez-Abrams <ivazqueznet+rpm@gmail.com> - 4.26-4
 - Rebuild for Python 2.6
 
