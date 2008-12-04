@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 4.26
-Release: 5%{?dist}
+Release: 6%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -139,6 +139,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Thu Dec 04 2008 Ignacio Vazquez-Abrams <ivazqueznet+rpm@gmail.com> - 4.26-6
+- Rebuild for Python 2.6
+
 * Thu Dec 04 2008 Daniel Novotny <dnovotny@redhat.com> - 4.26-5
 - fix #470811 - Spurious perl auto-requires
 
