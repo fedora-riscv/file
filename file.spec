@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 4.26
-Release: 6%{?dist}
+Release: 7%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -14,6 +14,7 @@ Patch0: file-4.21-pybuild.patch
 Patch1: file-4.26-devdrv.patch
 Patch2: file-4.26-mime-encoding.patch
 Patch3: file-4.26-perl5.patch
+Patch4: file-4.26-graphviz-latex.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -66,6 +67,8 @@ file(1) command.
 %patch2 -p1
 #fixes #470811
 %patch3 -p1
+#fixes #474156
+%patch4 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -139,6 +142,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Mon Dec 15 2008 Daniel Novotny <dnovotny@redhat.com> 4.26-7
+- fix the LaTex issue in bz#474156
+
 * Thu Dec 04 2008 Ignacio Vazquez-Abrams <ivazqueznet+rpm@gmail.com> - 4.26-6
 - Rebuild for Python 2.6
 

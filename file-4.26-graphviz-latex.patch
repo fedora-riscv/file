@@ -1,0 +1,13 @@
+diff -up file-4.26/magic/Magdir/graphviz.latex file-4.26/magic/Magdir/graphviz
+--- file-4.26/magic/Magdir/graphviz.latex	2008-12-15 16:55:28.000000000 +0100
++++ file-4.26/magic/Magdir/graphviz	2008-12-15 17:10:07.000000000 +0100
+@@ -1,7 +1,7 @@
+ 
+ #------------------------------------------------------------------------------
+ # graphviz:  file(1) magic for http://www.graphviz.org/
+-0	regex/100	[\r\n\t\ ]*graph[\r\n\t\ ]*.*\\{	graphviz graph text
++0	regex/100	[\r\n\t\ ]*graph[\r\n\t\ ]+.*\\{	graphviz graph text
+ !:mime	text/vnd.graphviz
+-0	regex/100	[\r\n\t\ ]*digraph[\r\n\t\ ]*.*\\{	graphviz digraph text
++0	regex/100	[\r\n\t\ ]*digraph[\r\n\t\ ]+.*\\{	graphviz digraph text
+ !:mime	text/vnd.graphviz
