@@ -1,0 +1,12 @@
+diff -up file-4.23/magic/Magdir/images.jpeg2000 file-4.23/magic/Magdir/images
+--- file-4.23/magic/Magdir/images.jpeg2000	2009-01-12 17:24:40.000000000 +0100
++++ file-4.23/magic/Magdir/images	2009-01-12 17:26:00.000000000 +0100
+@@ -535,3 +535,8 @@
+ # Xara (for a while: Corel Xara) is a graphic package, see
+ # http://www.xara.com/ for Windows and as GPL application for
+ 0	string	XARA\243\243	Xara graphics file
++
++#JPEG 2000 Code Stream Bitmap
++# From Petr Splichal <psplicha@redhat.com>
++0	string	\xFF\x4F\xFF\x51\x00	JPEG-2000 Code Stream Bitmap data
++

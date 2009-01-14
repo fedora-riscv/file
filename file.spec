@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 4.23
-Release: 6%{?dist}
+Release: 7%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -28,6 +28,7 @@ patch15: file-4.23-tryelf.patch
 patch16: file-4.23-ext4.patch
 patch17: file-4.23-mismatch.patch
 patch18: file-4.23-typo.patch
+patch19: file-4.23-jpeg2000.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -90,6 +91,7 @@ file(1) command.
 %patch16 -p1 -b .ext4
 %patch17 -p1 -b .mismatch
 %patch18 -p1 -b .typo
+%patch19 -p1 -b .jpeg2000
 
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
@@ -163,6 +165,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Wed Jan 14 2009 Daniel Novotny <dnovotny@redhat.com> - 4.23-7
+- fix #476655 detect JPEG-2000 Code Stream Bitmap
+
 * Thu Oct 23 2008 Daniel Novotny <dnovotny@redhat.com> - 4.23-6
 - fix typo in man page
 
