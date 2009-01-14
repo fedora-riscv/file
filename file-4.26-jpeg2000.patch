@@ -1,0 +1,12 @@
+diff -up file-4.26/magic/Magdir/images.jpeg2000 file-4.26/magic/Magdir/images
+--- file-4.26/magic/Magdir/images.jpeg2000	2009-01-12 14:37:52.000000000 +0100
++++ file-4.26/magic/Magdir/images	2009-01-12 14:43:50.000000000 +0100
+@@ -600,3 +600,8 @@
+ # Wavelet Scalar Quantization format used in gray-scale fingerprint images
+ # From Tano M Fotang <mfotang@quanteq.com>
+ 0	string	\xff\xa0\xff\xa8\x00	Wavelet Scalar Quantization image data
++
++# JPEG 2000 Code Stream Bitmap
++# From Petr Splichal <psplicha@redhat.com>
++0	string	\xFF\x4F\xFF\x51\x00	JPEG-2000 Code Stream Bitmap data
++
