@@ -4,19 +4,14 @@
 
 Summary: A utility for determining file types
 Name: file
-Version: 4.26
-Release: 9%{?dist}
+Version: 5.00
+Release: 1%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 URL: http://www.darwinsys.com/file/
 Patch0: file-4.21-pybuild.patch
-Patch1: file-4.26-devdrv.patch
-Patch2: file-4.26-mime-encoding.patch
-Patch3: file-4.26-perl5.patch
-Patch4: file-4.26-graphviz-latex.patch
-Patch5: file-4.26-btrfs.patch
-Patch6: file-4.26-jpeg2000.patch
+Patch1: file-5.00-devdrv.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -65,16 +60,6 @@ file(1) command.
 %patch0 -p1
 #fixes #463809
 %patch1 -p1
-#fixes #465994
-%patch2 -p1
-#fixes #470811
-%patch3 -p1
-#fixes #474156
-%patch4 -p1
-#fixes #479300
-%patch5 -p1
-#fixes #476655
-%patch6 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -148,6 +133,10 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Mon Feb 09 2009 Daniel Novotny <dnovotny@redhat.com> 5.00-1
+- upgrade to 5.00
+- drop upstreamed patches, rebase remaining patch
+
 * Wed Jan 14 2009 Daniel Novotny <dnovotny@redhat.com> 4.26-9
 - fix #476655 detect JPEG-2000 Code Stream Bitmap
 
