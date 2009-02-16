@@ -5,13 +5,14 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.00
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 URL: http://www.darwinsys.com/file/
 Patch0: file-4.21-pybuild.patch
 Patch1: file-5.00-devdrv.patch
+Patch2: file-5.00-non-english-word.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -60,6 +61,8 @@ file(1) command.
 %patch0 -p1
 #fixes #463809
 %patch1 -p1
+#fixes #485141
+%patch2 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -133,6 +136,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Mon Feb 16 2009 Daniel Novotny <dnovotny@redhat.com> 5.00-2
+- fix #485141 -  rpm failed while checking a French Word file
+
 * Mon Feb 09 2009 Daniel Novotny <dnovotny@redhat.com> 5.00-1
 - upgrade to 5.00
 - drop upstreamed patches, rebase remaining patch
