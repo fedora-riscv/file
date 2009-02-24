@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.00
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -139,6 +139,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Tue Feb 24 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 5.00-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_11_Mass_Rebuild
+
 * Mon Feb 23 2009 Daniel Novotny <dnovotny@redhat.com> 5.00-3
 - fix #486105 -  file-5.00-2.fc11 fails to recognise a file 
   (and makes rpmbuild fail)
