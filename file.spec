@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.00
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -14,6 +14,8 @@ Patch0: file-4.21-pybuild.patch
 Patch1: file-5.00-devdrv.patch
 Patch2: file-5.00-non-english-word.patch
 Patch3: file-5.00-thumbs-db.patch
+Patch4: file-5.00-fonts-ttc-pfa.patch
+Patch5: file-5.00-fdleak.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -66,6 +68,10 @@ file(1) command.
 %patch2 -p1
 #fixes #486105
 %patch3 -p1
+#fixes #491594,#491595
+%patch4 -p1
+#fixes #491596
+%patch5 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -139,6 +145,10 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Mon Mar 23 2009 Daniel Novotny <dnovotny@redhat.com> 5.00-5
+- added two font definitions (#491594, #491595)
+  and a fix for file descriptor leak when MAGIC_COMPRESS used (#491596)
+
 * Tue Feb 24 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 5.00-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_11_Mass_Rebuild
 
