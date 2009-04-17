@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.00
-Release: 5%{?dist}
+Release: 6%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -16,6 +16,7 @@ Patch2: file-5.00-non-english-word.patch
 Patch3: file-5.00-thumbs-db.patch
 Patch4: file-5.00-fonts-ttc-pfa.patch
 Patch5: file-5.00-fdleak.patch
+Patch6: file-5.00-mdmp.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -72,6 +73,8 @@ file(1) command.
 %patch4 -p1
 #fixes #491596
 %patch5 -p1
+#fixes #485835
+%patch6 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -145,6 +148,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Fri Apr 17 2009 Daniel Novotny <dnovotny@redhat.com> 5.00-6
+- fix #485835 (MDUMP files)
+
 * Mon Mar 23 2009 Daniel Novotny <dnovotny@redhat.com> 5.00-5
 - added two font definitions (#491594, #491595)
   and a fix for file descriptor leak when MAGIC_COMPRESS used (#491596)
