@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.00
-Release: 6%{?dist}
+Release: 7%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -148,6 +148,10 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Mon Apr 20 2009 Daniel Novotny <dnovotny@redhat.com> 5.00-7
+- fix previous patch:
+  the name of the format is a bit different (MDUMP -> MDMP)
+
 * Fri Apr 17 2009 Daniel Novotny <dnovotny@redhat.com> 5.00-6
 - fix #485835 (MDUMP files)
 

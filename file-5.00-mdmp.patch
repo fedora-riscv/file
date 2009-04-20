@@ -7,4 +7,4 @@ diff -up file-5.00/magic/Magdir/misctools.mdmp file-5.00/magic/Magdir/misctools
  0	search/80	.lo\ -\ a\ libtool\ object\ file	libtool object file
 +
 +# From: Daniel Novotny <dnovotny@redhat.com>
-+0	string	MDMP\x93\xA7	MDUMP crash report data
++0	string	MDMP\x93\xA7	MDMP crash report data
