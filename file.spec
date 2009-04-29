@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 4.26
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -14,6 +14,7 @@ Patch0: file-4.21-pybuild.patch
 Patch1: file-4.26-devdrv.patch
 Patch2: file-4.26-mime-encoding.patch
 Patch3: file-4.26-jpeg2000.patch
+Patch4: file-4.26-erlang.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -64,8 +65,10 @@ file(1) command.
 %patch1 -p1
 #fixes #465994
 %patch2 -p1
-# fixes #476655
+#fixes #476655
 %patch3 -p1
+#fixes #498036
+%patch4 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -139,6 +142,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Wed Apr 29 2009 Daniel Novotny <dnovotny@redhat.com> 4.26-5
+- fix #498036 - Erlang JAM file definition breaks detection of postscript files
+
 * Wed Jan 14 2009 Daniel Novotny <dnovotny@redhat.com> 4.26-4
 - fix #476655 detect JPEG-2000 Code Stream Bitmap
 
