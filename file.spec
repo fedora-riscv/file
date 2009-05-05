@@ -4,20 +4,15 @@
 
 Summary: A utility for determining file types
 Name: file
-Version: 5.00
-Release: 8%{?dist}
+Version: 5.02
+Release: 1%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 URL: http://www.darwinsys.com/file/
 Patch0: file-4.21-pybuild.patch
 Patch1: file-5.00-devdrv.patch
-Patch2: file-5.00-non-english-word.patch
-Patch3: file-5.00-thumbs-db.patch
-Patch4: file-5.00-fonts-ttc-pfa.patch
-Patch5: file-5.00-fdleak.patch
-Patch6: file-5.00-mdmp.patch
-Patch7: file-5.00-erlang.patch
+Patch2: file-5.00-mdmp.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -66,18 +61,8 @@ file(1) command.
 %patch0 -p1
 #fixes #463809
 %patch1 -p1
-#fixes #485141
-%patch2 -p1
-#fixes #486105
-%patch3 -p1
-#fixes #491594,#491595
-%patch4 -p1
-#fixes #491596
-%patch5 -p1
 #fixes #485835
-%patch6 -p1
-#fixes #498036
-%patch7 -p1
+%patch2 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -100,6 +85,7 @@ mkdir -p ${RPM_BUILD_ROOT}%{_bindir}
 mkdir -p ${RPM_BUILD_ROOT}%{_mandir}/man1
 mkdir -p ${RPM_BUILD_ROOT}%{_mandir}/man5
 mkdir -p ${RPM_BUILD_ROOT}%{_datadir}/misc
+mkdir -p ${RPM_BUILD_ROOT}%{_datadir}/file
 
 make DESTDIR=${RPM_BUILD_ROOT} install
 rm -f ${RPM_BUILD_ROOT}%{_libdir}/*.la
@@ -151,6 +137,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Tue May 05 2009 Daniel Novotny <dnovotny@redhat.com> 5.02-1
+- new upstream version; drop upstreamed patches; this fixes #497913
+
 * Wed Apr 29 2009 Daniel Novotny <dnovotny@redhat.com> 5.00-8
 - fix #498036 - Elang JAM file definition breaks detection of postscript-files
 
