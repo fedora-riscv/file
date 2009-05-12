@@ -4,7 +4,7 @@
 
 Summary: A utility for determining file types
 Name: file
-Version: 5.02
+Version: 5.03
 Release: 1%{?dist}
 License: BSD
 Group: Applications/File
@@ -134,6 +134,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Tue May 12 2009 Daniel Novotny <dnovotny@redhat.com> 5.03-1
+- new upstream version
+
 * Wed May 06 2009 Daniel Novotny <dnovotny@redhat.com> 5.02-1
 - new upstream version; drop upstreamed patches; this fixes #497913
 
