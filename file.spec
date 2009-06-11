@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.03
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -87,10 +87,10 @@ mkdir -p ${RPM_BUILD_ROOT}%{_datadir}/file
 make DESTDIR=${RPM_BUILD_ROOT} install
 rm -f ${RPM_BUILD_ROOT}%{_libdir}/*.la
 
-cat magic/Magdir/* > ${RPM_BUILD_ROOT}%{_datadir}/file/magic
-ln -s file/magic ${RPM_BUILD_ROOT}%{_datadir}/magic
+cat magic/Magdir/* > ${RPM_BUILD_ROOT}%{_datadir}/misc/magic
+ln -s misc/magic ${RPM_BUILD_ROOT}%{_datadir}/magic
 #ln -s file/magic.mime ${RPM_BUILD_ROOT}%{_datadir}/magic.mime
-ln -s ../magic ${RPM_BUILD_ROOT}%{_datadir}/misc/magic
+ln -s ../magic ${RPM_BUILD_ROOT}%{_datadir}/file/magic
 
 cd python
 %{__python} setup.py install -O1 --skip-build --root ${RPM_BUILD_ROOT}
@@ -134,6 +134,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Thu Jun 11 2009 Daniel Novotny <dnovotny@redhat.com> 5.03-2
+- fix #500739 - Disorganized magic* file locations in file-libs
+
 * Tue May 12 2009 Daniel Novotny <dnovotny@redhat.com> 5.03-1
 - new upstream version
 
