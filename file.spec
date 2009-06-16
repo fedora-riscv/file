@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.03
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -64,7 +64,7 @@ file(1) command.
 %patch1 -p1
 #fixes #485835
 %patch2 -p1
-#fixes #505758, #505759, #505765
+#fixes #505758, #505759, #505762, #505765
 %patch3 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
@@ -140,6 +140,10 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Tue Jun 16 2009 Daniel Novotny <dnovotny@redhat.com> 5.03-4
+- one more PostScript font magic added (#505762),
+  updated font patch
+
 * Tue Jun 16 2009 Daniel Novotny <dnovotny@redhat.com> 5.03-3
 - added magic for three font issues (PostScript fonts)
   (#505758, #505759, #505765)
