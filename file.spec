@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.03
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -13,6 +13,7 @@ URL: http://www.darwinsys.com/file/
 Patch0: file-4.21-pybuild.patch
 Patch1: file-5.00-devdrv.patch
 Patch2: file-5.00-mdmp.patch
+Patch3: file-5.03-fonts-postscript.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -63,6 +64,8 @@ file(1) command.
 %patch1 -p1
 #fixes #485835
 %patch2 -p1
+#fixes #505758, #505759, #505765
+%patch3 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -137,6 +140,10 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Tue Jun 16 2009 Daniel Novotny <dnovotny@redhat.com> 5.03-3
+- added magic for three font issues (PostScript fonts)
+  (#505758, #505759, #505765)
+
 * Thu May 14 2009 Daniel Novotny <dnovotny@redhat.com> 5.03-2
 - fix #500739 - Disorganized magic* file locations in file-libs
 
