@@ -25,9 +25,6 @@ type of data contained by the file.  File can identify many different
 file types, including ELF binaries, system libraries, RPM packages, and
 different graphics formats.
 
-You should install the file package, since the file command is such a
-useful utility.
-
 %package libs
 Summary: Libraries for applications using libmagic
 Group:   Applications/File
@@ -140,6 +137,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Fri Jul 10 2009 Adam Jackson <ajax@redhat.com> 5.03-4
+- Clean up %%description.
+
 * Tue Jun 16 2009 Daniel Novotny <dnovotny@redhat.com> 5.03-4
 - one more PostScript font magic added (#505762),
   updated font patch
