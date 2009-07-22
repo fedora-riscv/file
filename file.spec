@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.03
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -14,6 +14,7 @@ Patch0: file-4.21-pybuild.patch
 Patch1: file-5.00-devdrv.patch
 Patch2: file-5.00-mdmp.patch
 Patch3: file-5.03-fonts-postscript.patch
+Patch4: file-5.03-xfsdump.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -63,6 +64,8 @@ file(1) command.
 %patch2 -p1
 #fixes #505758, #505759, #505762, #505765
 %patch3 -p1
+#fixes #513079
+%patch4 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -137,6 +140,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Wed Jul 22 2009 Daniel Novotny <dnovotny@redhat.com> 5.03-5
+- #513079 -  RFE: file - recognize xfs metadump images
+
 * Fri Jul 10 2009 Adam Jackson <ajax@redhat.com> 5.03-4
 - Clean up %%description.
 

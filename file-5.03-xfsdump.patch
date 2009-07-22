@@ -1,0 +1,14 @@
+diff -up file-5.03/magic/Magdir/filesystems.xfsdump file-5.03/magic/Magdir/filesystems
+--- file-5.03/magic/Magdir/filesystems.xfsdump	2009-07-22 15:36:01.000000000 +0200
++++ file-5.03/magic/Magdir/filesystems	2009-07-22 15:36:25.000000000 +0200
+@@ -1392,3 +1392,10 @@
+ # dvdisaster's .ecc
+ # From: "Nelson A. de Oliveira" <naoliv@gmail.com>
+ 0	string	*dvdisaster*	dvdisaster error correction file
++
++# xfs metadump image 
++# mb_magic XFSM at 0; superblock magic XFSB at 1 << mb_blocklog
++# but can we do the << ?  For now it's always 512 (0x200) anyway.
++0               string XFSM
++>0x200          string XFSB                     XFS filesystem metadump image
++
