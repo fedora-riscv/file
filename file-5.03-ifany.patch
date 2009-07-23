@@ -1,0 +1,12 @@
+diff -up file-5.03/magic/Magdir/lisp.ifany file-5.03/magic/Magdir/lisp
+--- file-5.03/magic/Magdir/lisp.ifany	2009-07-23 15:46:03.000000000 +0200
++++ file-5.03/magic/Magdir/lisp	2009-07-23 15:46:17.000000000 +0200
+@@ -11,8 +11,6 @@
+ #>2	search/4096	!\r		Lisp/Scheme program text
+ #>2	search/4096	\r		Windows INF file
+ 
+-0	search/4096	(if\ 			Lisp/Scheme program text
+-!:mime	text/x-lisp
+ 0	search/4096	(setq\ 			Lisp/Scheme program text
+ !:mime	text/x-lisp
+ 0	search/4096	(defvar\ 		Lisp/Scheme program text

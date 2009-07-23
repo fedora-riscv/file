@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.03
-Release: 5%{?dist}
+Release: 6%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -15,6 +15,7 @@ Patch1: file-5.00-devdrv.patch
 Patch2: file-5.00-mdmp.patch
 Patch3: file-5.03-fonts-postscript.patch
 Patch4: file-5.03-xfsdump.patch
+Patch5: file-5.03-ifany.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -66,6 +67,8 @@ file(1) command.
 %patch3 -p1
 #fixes #513079
 %patch4 -p1
+#fixes #510429
+%patch5 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -140,6 +143,10 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Thu Jul 23 2009 Daniel Novotny <dnovotny@redhat.com> 5.03-6
+- fix #510429 -  file is confused by string "/* (if any) */" 
+       in C header and claims it "Lisp/Scheme program text"
+
 * Wed Jul 22 2009 Daniel Novotny <dnovotny@redhat.com> 5.03-5
 - #513079 -  RFE: file - recognize xfs metadump images
 
