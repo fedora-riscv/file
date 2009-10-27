@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.03
-Release: 10%{?dist}
+Release: 11%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -18,6 +18,8 @@ Patch4: file-5.03-xfsdump.patch
 Patch5: file-5.03-ifany.patch
 Patch6: file-5.03-multilib.patch
 Patch7: file-5.03-ppcswap.patch
+Patch8: file-5.03-add-python-3.patch
+Patch9: file-5.03-djvu.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -75,6 +77,10 @@ file(1) command.
 %patch6 -p1
 #fixes #530083
 %patch7 -p1
+#fixes #531082
+%patch8 -p1
+#fixes #531127
+%patch9 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -149,6 +155,10 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Tue Oct 27 2009 Daniel Novotny <dnovotny@redhat.com> 5.03-11
+- fix #531082 -  RFE: add detection of Python 3 bytecode
+- fix #531127 -  `file' command does not recognize mime type `image/vnd.djvu'
+
 * Wed Oct 21 2009 Daniel Novotny <dnovotny@redhat.com> 5.03-10
 - fix #530083 -  file -s is not able to detect swap signature on ppc
 
