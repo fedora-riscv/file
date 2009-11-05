@@ -1,0 +1,24 @@
+diff -up file-5.03/magic/Magdir/filesystems.delta file-5.03/magic/Magdir/filesystems
+--- file-5.03/magic/Magdir/filesystems.delta	2009-11-05 16:09:43.000000000 +0100
++++ file-5.03/magic/Magdir/filesystems	2009-11-05 16:11:52.000000000 +0100
+@@ -1399,3 +1399,7 @@
+ 0               string XFSM
+ >0x200          string XFSB                     XFS filesystem metadump image
+ 
++#delta ISO    Daniel Novotny (dnovotny@redhat.com)
++0	string  DISO	Delta ISO data
++>4	belong  x	version %d
++
+diff -up file-5.03/magic/Magdir/rpm.delta file-5.03/magic/Magdir/rpm
+--- file-5.03/magic/Magdir/rpm.delta	2009-11-05 14:59:54.000000000 +0100
++++ file-5.03/magic/Magdir/rpm	2009-11-05 15:02:43.000000000 +0100
+@@ -21,3 +21,9 @@
+ >>8	beshort		11		MIPSel
+ >>8	beshort		12		ARM
+ >>10	string		x		%s
++
++#delta RPM    Daniel Novotny (dnovotny@redhat.com)
++0	string	drpm	Delta RPM
++!:mime  application/x-rpm
++>12	string 	x	%s
++

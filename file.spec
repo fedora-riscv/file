@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.03
-Release: 11%{?dist}
+Release: 12%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -20,6 +20,7 @@ Patch6: file-5.03-multilib.patch
 Patch7: file-5.03-ppcswap.patch
 Patch8: file-5.03-add-python-3.patch
 Patch9: file-5.03-djvu.patch
+Patch10: file-5.03-delta.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -81,6 +82,8 @@ file(1) command.
 %patch8 -p1
 #fixes #531127
 %patch9 -p1
+#fixes #533151
+%patch10 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -155,6 +158,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Thu Nov 05 2009 Daniel Novotny <dnovotny@redhat.com> 5.03-12
+- fix #533151 -  file command doesn't recognize deltaisos or rpm-only deltarpms
+
 * Tue Oct 27 2009 Daniel Novotny <dnovotny@redhat.com> 5.03-11
 - fix #531082 -  RFE: add detection of Python 3 bytecode
 - fix #531127 -  `file' command does not recognize mime type `image/vnd.djvu'
