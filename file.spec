@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.03
-Release: 12%{?dist}
+Release: 13%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -153,11 +153,14 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-, root, root, -)
 %doc python/README COPYING python/example.py
 %{python_sitearch}/magic.so
-%if 0%{?fedora} >= 9
+%if 0%{?fedora} >= 9 || 0%{?rhel} >= 6
 %{python_sitearch}/*egg-info
 %endif
 
 %changelog
+* Fri Nov 13 2009 Daniel Novotny <dnovotny@redhat.com> 5.03-13
+- fix #537324 -  update spec conditional for rhel
+
 * Thu Nov 05 2009 Daniel Novotny <dnovotny@redhat.com> 5.03-12
 - fix #533151 -  file command doesn't recognize deltaisos or rpm-only deltarpms
 
