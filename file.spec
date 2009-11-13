@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.03
-Release: 9%{?dist}
+Release: 10%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -141,11 +141,14 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-, root, root, -)
 %doc python/README COPYING python/example.py
 %{python_sitearch}/magic.so
-%if 0%{?fedora} >= 9
+%if 0%{?fedora} >= 9 || 0%{?rhel} >= 6
 %{python_sitearch}/*egg-info
 %endif
 
 %changelog
+* Fri Nov 13 2009 Daniel Novotny <dnovotny@redhat.com> 5.03-10
+- fix #537324 -  update spec conditional for rhel
+
 * Tue Aug 25 2009 Daniel Novotny <dnovotny@redhat.com> 5.03-9
 - fix #515767 -  multilib: file /usr/share/misc/magic.mgc conflicts
 
