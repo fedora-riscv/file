@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.03
-Release: 13%{?dist}
+Release: 14%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -25,6 +25,7 @@ Patch10: file-5.03-delta.patch
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: zlib-devel
+BuildRequires: automake
 
 %description
 The file command is used to identify a particular file according to the
@@ -158,6 +159,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Tue Nov 24 2009 Daniel Novotny <dnovotny@redhat.com> 5.03-14
+- BuildRequires: automake because of the Makefile.am patch
+
 * Fri Nov 13 2009 Daniel Novotny <dnovotny@redhat.com> 5.03-13
 - fix #537324 -  update spec conditional for rhel
 
