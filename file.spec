@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.03
-Release: 15%{?dist}
+Release: 16%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -25,7 +25,6 @@ Patch10: file-5.03-delta.patch
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: zlib-devel
-BuildRequires: autoconf, automake
 
 %description
 The file command is used to identify a particular file according to the
@@ -159,6 +158,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Mon Nov 30 2009 Daniel Novotny <dnovotny@redhat.com> 5.03-16
+- fixed the patch for multilib (#515767)
+
 * Tue Nov 24 2009 Daniel Novotny <dnovotny@redhat.com> 5.03-15
 - BuildRequires: autoconf, automake
 
