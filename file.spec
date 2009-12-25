@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.03
-Release: 16%{?dist}
+Release: 17%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -119,7 +119,6 @@ ln -s ../magic ${RPM_BUILD_ROOT}%{_datadir}/file/magic
 cd python
 %{__python} setup.py install -O1 --skip-build --root ${RPM_BUILD_ROOT}
 %{__install} -d ${RPM_BUILD_ROOT}%{_datadir}/%{name}
-%{__install} -D example.py ${RPM_BUILD_ROOT}/%{_docdir}/python-magic-%{version}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -158,6 +157,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Fri Dec 25 2009 Robert Scheck <robert@fedoraproject.org> 5.03-17
+- removed broken install of example.py (%%doc is much enough)
+
 * Mon Nov 30 2009 Daniel Novotny <dnovotny@redhat.com> 5.03-16
 - fixed the patch for multilib (#515767)
 
