@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.03
-Release: 17%{?dist}
+Release: 18%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -48,6 +48,15 @@ Requires: %{name} = %{version}-%{release}
 %description devel
 The file-devel package contains the header files and libmagic library
 necessary for developing programs using libmagic.
+
+%package static
+Summary: Static library for file development
+Group:    Applications/File
+Requires: %{name} = %{version}-%{release}
+
+%description static
+The file-static package contains the static version of
+the libmagic library.
 
 %package -n python-magic
 Summary: Python bindings for the libmagic API
@@ -143,10 +152,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(-,root,root,-)
-%{_libdir}/*.a
 %{_libdir}/*.so
 %{_includedir}/magic.h
 %{_mandir}/man3/*
+
+%files static
+%defattr(-,root,root,-)
+%{_libdir}/*.a
 
 %files -n python-magic
 %defattr(-, root, root, -)
@@ -157,6 +169,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Mon Jan 18 2010 Daniel Novotny <dnovotny@redhat.com> 5.03-18
+- static library moved to new "-static" subpackage (#556048)
+
 * Fri Dec 25 2009 Robert Scheck <robert@fedoraproject.org> 5.03-17
 - removed broken install of example.py (%%doc is much enough)
 
