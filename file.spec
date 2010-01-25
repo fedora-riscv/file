@@ -4,8 +4,8 @@
 
 Summary: A utility for determining file types
 Name: file
-Version: 5.03
-Release: 18%{?dist}
+Version: 5.04
+Release: 1%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -13,14 +13,6 @@ URL: http://www.darwinsys.com/file/
 Patch0: file-4.21-pybuild.patch
 Patch1: file-5.00-devdrv.patch
 Patch2: file-5.00-mdmp.patch
-Patch3: file-5.03-fonts-postscript.patch
-Patch4: file-5.03-xfsdump.patch
-Patch5: file-5.03-ifany.patch
-Patch6: file-5.03-multilib.patch
-Patch7: file-5.03-ppcswap.patch
-Patch8: file-5.03-add-python-3.patch
-Patch9: file-5.03-djvu.patch
-Patch10: file-5.03-delta.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -70,6 +62,7 @@ libmagic API. The libmagic library is also used by the familiar
 file(1) command.
 
 %prep
+
 # Don't use -b -- it will lead to poblems when compiling magic file
 %setup -q
 %patch0 -p1
@@ -77,22 +70,6 @@ file(1) command.
 %patch1 -p1
 #fixes #485835
 %patch2 -p1
-#fixes #505758, #505759, #505762, #505765
-%patch3 -p1
-#fixes #513079
-%patch4 -p1
-#fixes #510429
-%patch5 -p1
-#fixes #515767
-%patch6 -p1
-#fixes #530083
-%patch7 -p1
-#fixes #531082
-%patch8 -p1
-#fixes #531127
-%patch9 -p1
-#fixes #533151
-%patch10 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -169,6 +146,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Mon Jan 25 2010 Daniel Novotny <dnovotny@redhat.com> 5.04-1
+- update to new upstream release 5.04
+
 * Mon Jan 18 2010 Daniel Novotny <dnovotny@redhat.com> 5.03-18
 - static library moved to new "-static" subpackage (#556048)
 
