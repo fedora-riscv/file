@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.04
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -13,6 +13,7 @@ URL: http://www.darwinsys.com/file/
 Patch0: file-4.21-pybuild.patch
 Patch1: file-5.00-devdrv.patch
 Patch2: file-5.00-mdmp.patch
+Patch3: file-5.04-ulaw-segfault.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -70,6 +71,8 @@ file(1) command.
 %patch1 -p1
 #fixes #485835
 %patch2 -p1
+#fixes #533245
+%patch3 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -146,6 +149,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Thu Jan 28 2010 Daniel Novotny <dnovotny@redhat.com> 5.04-2
+- fix #533245 -  segfaults on star.ulaw
+
 * Mon Jan 25 2010 Daniel Novotny <dnovotny@redhat.com> 5.04-1
 - update to new upstream release 5.04
 
