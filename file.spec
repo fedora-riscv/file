@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.03
-Release: 12%{?dist}
+Release: 13%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -17,6 +17,7 @@ Patch3: file-5.03-fonts-postscript.patch
 Patch4: file-5.03-xfsdump.patch
 Patch5: file-5.03-ifany.patch
 Patch6: file-5.03-multilib.patch
+Patch7: file-5.03-ruby-modules.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -72,6 +73,8 @@ file(1) command.
 %patch5 -p1
 #fixes #515767
 %patch6 -p1
+#fixes #562840
+%patch7 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -146,6 +149,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Tue Feb 09 2010 Daniel Novotny <dnovotny@redhat.com> 5.03-13
+- fix #562840 -  [PATCH] Add matches for ruby modules
+
 * Mon Nov 30 2009 Daniel Novotny <dnovotny@redhat.com> 5.03-12
 - fix the patch for multilib (#515767) in Makefile.in
 

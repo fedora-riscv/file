@@ -1,0 +1,20 @@
+diff -up file-5.03/magic/Magdir/ruby.modules file-5.03/magic/Magdir/ruby
+--- file-5.03/magic/Magdir/ruby.modules	2010-02-09 16:48:13.000000000 +0100
++++ file-5.03/magic/Magdir/ruby	2010-02-09 16:50:21.000000000 +0100
+@@ -8,3 +8,16 @@
+ 0	search/1/b	#!\ /usr/local/bin/ruby	Ruby script text executable
+ 0	search/1	#!/usr/bin/env\ ruby	Ruby script text executable
+ 0	search/1	#!\ /usr/bin/env\ ruby	Ruby script text executable
++
++
++# What looks like ruby, but does not have a shebang
++# (modules and such)
++# From: Lubomir Rintel <lkundrak@v3.sk>
++0	regex		\^[\ \t]*require[\ \t]'[A-Za-z_\/]+'
++>0	regex		include\ [A-Z]|def\ [a-z]|\ do$
++>>0	regex		\^[\ \t]*end([\ \t]*[;#].*)?$		Ruby script text
++!:mime	text/x-ruby
++0	regex		\^[\ \t]*(class|module)[\ \t][A-Z]
++>0	regex		(modul|includ)e\ [A-Z]|def\ [a-z]
++>>0	regex		\^[\ \t]*end([\ \t]*[;#].*)?$		Ruby module source text
++!:mime	text/x-ruby
