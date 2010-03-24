@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.04
-Release: 5%{?dist}
+Release: 6%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -17,6 +17,7 @@ Patch3: file-5.04-ulaw-segfault.patch
 Patch4: file-5.04-ruby-modules.patch
 Patch5: file-5.04-filesystem.patch
 Patch6: file-5.04-separ.patch
+Patch7: file-5.04-squashfs.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -82,6 +83,8 @@ file(1) command.
 %patch5 -p1
 #fixes #575184
 %patch6 -p1
+#fixes #550212
+%patch7 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -158,6 +161,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Wed Mar 24 2010 Daniel Novotny <dnovotny@redhat.com> 5.04-6
+- fix #550212 - 'file' gives bad meta-data for squashfs-4.0 
+
 * Wed Mar 24 2010 Daniel Novotny <dnovotny@redhat.com> 5.04-5
 - fix #575184 - file command does not print separator 
   when --print0 option is used
