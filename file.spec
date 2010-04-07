@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.04
-Release: 6%{?dist}
+Release: 7%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -18,6 +18,7 @@ Patch4: file-5.04-ruby-modules.patch
 Patch5: file-5.04-filesystem.patch
 Patch6: file-5.04-separ.patch
 Patch7: file-5.04-squashfs.patch
+Patch8: file-5.04-core-trim.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -85,6 +86,8 @@ file(1) command.
 %patch6 -p1
 #fixes #550212
 %patch7 -p1
+#fixes #566305
+%patch8 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -161,6 +164,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Wed Apr 07 2010 Daniel Novotny <dnovotny@redhat.com> 5.04-7
+- fix #566305 - "file" may trim too much of command line from core file
+
 * Wed Mar 24 2010 Daniel Novotny <dnovotny@redhat.com> 5.04-6
 - fix #550212 - 'file' gives bad meta-data for squashfs-4.0 
 
