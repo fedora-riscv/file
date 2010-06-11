@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.04
-Release: 8%{?dist}
+Release: 9%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -20,6 +20,7 @@ Patch6: file-5.04-separ.patch
 Patch7: file-5.04-squashfs.patch
 Patch8: file-5.04-core-trim.patch
 Patch9: file-5.04-retval.patch
+Patch10: file-5.04-html-regression.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -89,8 +90,8 @@ file(1) command.
 %patch7 -p1
 #fixes #566305
 %patch8 -p1
-#fixes #580046
-%patch9 -p1
+#fixes #603040
+%patch10 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -167,6 +168,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Fri Jun 11 2010 Jan Kaluza <jkaluza@redhat.com> 5.04-9
+- removed excessive HTML/SGML "magic patterns" (#603040)
+
 * Wed Apr 14 2010 Daniel Novotny <dnovotny@redhat.com> 5.04-8
 - fix #580046 - the file command returns zero exit code 
                 even in case of unexisting file being tested
