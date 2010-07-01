@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.04
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -16,6 +16,8 @@ Patch2: file-5.00-mdmp.patch
 Patch3: file-5.04-ulaw-segfault.patch
 Patch4: file-5.04-ruby-modules.patch
 Patch5: file-5.04-core-trim.patch
+Patch6: file-5.04-html-regression.patch
+Patch7: file-5.04-zmachine-magic-update.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -79,6 +81,8 @@ file(1) command.
 %patch4 -p1
 #fixes #566305
 %patch5 -p1
+%patch6 -p1
+%patch7 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -155,6 +159,10 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Thu Jul 01 2010 Jan Kaluza <jkaluza@redhat.com> 5.04-5
+- fix #608922 - updated z-machine magic
+- fix #610067 - removed excessive HTML/SGML "magic patterns"
+
 * Thu May 27 2010 Daniel Novotny <dnovotny@redhat.com> 5.04-4
 - fix #566305 - "file" may trim too much of command line from core file
 
