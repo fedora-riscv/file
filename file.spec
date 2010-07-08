@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.04
-Release: 10%{?dist}
+Release: 11%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -36,6 +36,7 @@ different graphics formats.
 %package libs
 Summary: Libraries for applications using libmagic
 Group:   Applications/File
+License: BSD
 
 %description libs
 
@@ -146,6 +147,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files libs
 %defattr(-,root,root,-)
+%doc COPYING ChangeLog README
 %{_libdir}/*so.*
 %{_datadir}/magic*
 %{_mandir}/man5/*
@@ -171,6 +173,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Thu Jul 08 2010 Jan Kaluza <jkaluza@redhat.com> 5.04-11
+- added docs for file-libs
+
 * Tue Jun 29 2010 Jan Kaluza <jkaluza@redhat.com> 5.04-10
 - fix #608922 - updated z-machine magic
 
