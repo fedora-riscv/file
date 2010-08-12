@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.04
-Release: 13%{?dist}
+Release: 14%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -23,6 +23,7 @@ Patch9: file-5.04-retval.patch
 Patch10: file-5.04-html-regression.patch
 Patch11: file-5.04-zmachine-magic-update.patch
 Patch12: file-5.04-core-prpsinfo.patch
+Patch13: file-5.04-python-2.7.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -99,6 +100,8 @@ file(1) command.
 %patch11 -p1
 #fixes #599695
 %patch12 -p1
+#fixes #623602
+%patch13 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -176,6 +179,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Thu Aug 12 2010 Jan Kaluza <jkaluza@redhat.com> - 5.04-14
+- fix #623602 - support for Python 2.7 compiled files
+
 * Wed Jul 21 2010 David Malcolm <dmalcolm@redhat.com> - 5.04-13
 - Rebuilt for https://fedoraproject.org/wiki/Features/Python_2.7/MassRebuild
 
