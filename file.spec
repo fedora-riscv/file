@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.04
-Release: 5%{?dist}
+Release: 6%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -18,6 +18,8 @@ Patch4: file-5.04-ruby-modules.patch
 Patch5: file-5.04-core-trim.patch
 Patch6: file-5.04-html-regression.patch
 Patch7: file-5.04-zmachine-magic-update.patch
+Patch8: file-5.04-core-prpsinfo.patch
+Patch9: file-5.04-webm.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -83,6 +85,8 @@ file(1) command.
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
+%patch8 -p1
+%patch9 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -159,6 +163,11 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Tue Aug 24 2010 Jan Kaluza <jkaluza@redhat.com> - 5.04-6
+- fix #626591 - support for WebM format
+- fix #599695 - try to get "from" attribute for ELF binaries
+  only from core dumps.
+
 * Thu Jul 01 2010 Jan Kaluza <jkaluza@redhat.com> 5.04-5
 - fix #608922 - updated z-machine magic
 - fix #610067 - removed excessive HTML/SGML "magic patterns"
