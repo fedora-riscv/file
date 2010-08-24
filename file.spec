@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.04
-Release: 14%{?dist}
+Release: 15%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -24,6 +24,7 @@ Patch10: file-5.04-html-regression.patch
 Patch11: file-5.04-zmachine-magic-update.patch
 Patch12: file-5.04-core-prpsinfo.patch
 Patch13: file-5.04-python-2.7.patch
+Patch14: file-5.04-webm.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -102,6 +103,8 @@ file(1) command.
 %patch12 -p1
 #fixes #623602
 %patch13 -p1
+#fixes #626591
+%patch14 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -179,6 +182,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Tue Aug 24 2010 Jan Kaluza <jkaulza@redhat.com> - 5.04-15
+- fix #626591 - support for WebM format
+
 * Thu Aug 12 2010 Jan Kaluza <jkaluza@redhat.com> - 5.04-14
 - fix #623602 - support for Python 2.7 compiled files
 
