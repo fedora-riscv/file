@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.04
-Release: 16%{?dist}
+Release: 17%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -26,6 +26,7 @@ Patch12: file-5.04-core-prpsinfo.patch
 Patch13: file-5.04-python-2.7.patch
 Patch14: file-5.04-webm.patch
 Patch15: file-5.04-zip64.patch
+Patch16: file-5.04-string-size.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -108,6 +109,8 @@ file(1) command.
 %patch14 -p1
 #fixes #637785
 %patch15 -p1
+#fixes #656395
+%patch16 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -185,6 +188,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Wed Nov 24 2010 Jan Kaluza <jkaluza@redhat.com> - 5.04-17
+- fix #656395 - "string" magic directive supports longer strings
+
 * Wed Aug 29 2010 Jan Kaluza <jkaluza@redhat.com> - 5.04-16
 - fix #637785 - support for zip64 format
 

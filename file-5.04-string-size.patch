@@ -1,0 +1,19 @@
+diff --git a/src/file.h b/src/file.h
+index c07f2d4..7086092 100644
+--- a/src/file.h
++++ b/src/file.h
+@@ -104,11 +104,11 @@
+ #define MAXMAGIS 8192		/* max entries in any one magic file
+ 				   or directory */
+ #define MAXDESC	64		/* max leng of text description/MIME type */
+-#define MAXstring 32		/* max leng of "string" types */
++#define MAXstring 64		/* max leng of "string" types */
+ 
+ #define MAGICNO		0xF11E041C
+-#define VERSIONNO	7
+-#define FILE_MAGICSIZE	200
++#define VERSIONNO	8
++#define FILE_MAGICSIZE	232
+ 
+ #define	FILE_LOAD	0
+ #define FILE_CHECK	1
