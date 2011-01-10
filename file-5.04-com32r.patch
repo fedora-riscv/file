@@ -1,0 +1,14 @@
+diff -up file-5.04/magic/Magdir/msdos.com32r file-5.04/magic/Magdir/msdos
+--- file-5.04/magic/Magdir/msdos.com32r	2011-01-09 22:31:07.000000000 +0100
++++ file-5.04/magic/Magdir/msdos	2011-01-09 23:26:32.000000000 +0100
+@@ -349,6 +349,10 @@
+ # start with assembler instructions mov eax,21cd4cffh
+ 0	uleshort&0xc0ff	0xc0b8		
+ >1	lelong		0x21cd4cff	COM executable (32-bit COMBOOT)
++# syslinux:doc/comboot.txt
++# A COM32R program must start with the byte sequence B8 FE 4C CD 21 (mov
++# eax,21cd4cfeh) as a magic number.
++0       string	\xb8\xfe\x4c\xcd\x21	COM executable (COM32R)
+ 0	string	\x81\xfc		
+ >4	string	\x77\x02\xcd\x20\xb9	
+ >>36	string	UPX!			FREE-DOS executable (COM), UPX compressed
