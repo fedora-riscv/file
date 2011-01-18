@@ -4,31 +4,14 @@
 
 Summary: A utility for determining file types
 Name: file
-Version: 5.04
-Release: 18%{?dist}
+Version: 5.05
+Release: 1%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 URL: http://www.darwinsys.com/file/
-Patch0: file-4.21-pybuild.patch
-Patch1: file-5.00-devdrv.patch
-Patch2: file-5.00-mdmp.patch
-Patch3: file-5.04-ulaw-segfault.patch
-Patch4: file-5.04-ruby-modules.patch
-Patch5: file-5.04-filesystem.patch
-Patch6: file-5.04-separ.patch
-Patch7: file-5.04-squashfs.patch
-Patch8: file-5.04-core-trim.patch
-Patch9: file-5.04-retval.patch
-Patch10: file-5.04-html-regression.patch
-Patch11: file-5.04-zmachine-magic-update.patch
-Patch12: file-5.04-core-prpsinfo.patch
-Patch13: file-5.04-python-2.7.patch
-Patch14: file-5.04-webm.patch
-Patch15: file-5.04-zip64.patch
-Patch16: file-5.04-string-size.patch
-Patch17: file-5.04-com32r.patch
-Patch18: file-5.04-gfs.patch
+Patch1: file-5.04-zip64.patch
+Patch2: file-5.05-python-magic.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -82,39 +65,10 @@ file(1) command.
 
 # Don't use -b -- it will lead to poblems when compiling magic file
 %setup -q
-%patch0 -p1
-#fixes #463809
-%patch1 -p1
-#fixes #485835
-%patch2 -p1
-#fixes #533245
-%patch3 -p1
-#fixes #562840
-%patch4 -p1
-#fixes #570785
-%patch5 -p1
-#fixes #575184
-%patch6 -p1
-#fixes #550212
-%patch7 -p1
-#fixes #566305
-%patch8 -p1
-#fixes #603040
-%patch10 -p1
-#fixes #608922
-%patch11 -p1
-#fixes #599695
-%patch12 -p1
-#fixes #623602
-%patch13 -p1
-#fixes #626591
-%patch14 -p1
 #fixes #637785
-%patch15 -p1
-#fixes #656395
-%patch16 -p1
-%patch17 -p1
-%patch18 -p1
+%patch1 -p1
+#keeps compatibility with older python-magic versions
+%patch2 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -186,12 +140,18 @@ rm -rf $RPM_BUILD_ROOT
 %files -n python-magic
 %defattr(-, root, root, -)
 %doc python/README COPYING python/example.py
-%{python_sitearch}/magic.so
+%{python_sitelib}/magic.py
+%{python_sitelib}/magic.pyc
+%{python_sitelib}/magic.pyo
 %if 0%{?fedora} >= 9 || 0%{?rhel} >= 6
-%{python_sitearch}/*egg-info
+%{python_sitelib}/*egg-info
 %endif
 
 %changelog
+* Tue Jan 18 2011 Jan Kaluza <jkaluza@redhat.com> - 5.05-1
+- fix #670319 - update to new upstream release 5.05
+- removed useless patches
+
 * Mon Jan 10 2011 Jan Kaluza <jkaluza@redhat.com> - 5.04-18
 - fix #668304 - support for com32r programs
 - distinguish between GFS2 and GFS1 filesystems

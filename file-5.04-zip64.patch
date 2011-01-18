@@ -1,11 +1,12 @@
---- file-5.04/magic/Magdir/archive	2010-09-27 17:52:19.242245630 +0530
-+++ file-5.04/magic/Magdir/archive	2010-09-27 17:52:12.015252938 +0530
-@@ -581,6 +581,8 @@
- !:mime	application/zip
- >>4	byte		0x14		Zip archive data, at least v2.0 to extract
- !:mime	application/zip
-+>>4     byte            0x2d            Zip64 archive data, at least v3.0 to extract
-+!:mime  application/zip
+diff --git a/magic/Magdir/archive b/magic/Magdir/archive
+index c998e5b..4da532a 100644
+--- a/magic/Magdir/archive
++++ b/magic/Magdir/archive
+@@ -688,6 +688,7 @@
+ >>4	byte		0x0b		\b, at least v1.1 to extract
+ >>0x161	string		WINZIP		\b, WinZIP self-extracting
+ >>4	byte		0x14		\b, at least v2.0 to extract
++>>4     byte            0x2d            Zip64, at least v3.0 to extract
  
- # OpenOffice.org / KOffice / StarOffice documents
- # Listed here because they ARE zip files
+ # Zoo archiver
+ 20	lelong		0xfdc4a7dc	Zoo archive data
