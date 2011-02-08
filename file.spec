@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.05
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -148,6 +148,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Tue Feb 08 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 5.05-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild
+
 * Tue Jan 18 2011 Jan Kaluza <jkaluza@redhat.com> - 5.05-1
 - fix #670319 - update to new upstream release 5.05
 - removed useless patches
