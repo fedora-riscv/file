@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.04
-Release: 6%{?dist}
+Release: 7%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -20,6 +20,8 @@ Patch6: file-5.04-html-regression.patch
 Patch7: file-5.04-zmachine-magic-update.patch
 Patch8: file-5.04-core-prpsinfo.patch
 Patch9: file-5.04-webm.patch
+Patch10: file-5.05-latex-improve.patch
+Patch11: file-5.05-rpm-archs.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -87,6 +89,8 @@ file(1) command.
 %patch7 -p1
 %patch8 -p1
 %patch9 -p1
+%patch10 -p1
+%patch11 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -163,6 +167,10 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Thu Feb 10 2011 Jan Kaluza <jkaluza@redhat.com> - 5.04-7
+- fix #676543 - improved TeX and LaTeX recognition
+- fix #676041 - detect all supported RPM architectures
+
 * Tue Aug 24 2010 Jan Kaluza <jkaluza@redhat.com> - 5.04-6
 - fix #626591 - support for WebM format
 - fix #599695 - try to get "from" attribute for ELF binaries
