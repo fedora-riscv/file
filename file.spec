@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.05
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -15,6 +15,7 @@ Patch1: file-5.04-zip64.patch
 Patch2: file-5.05-python-magic.patch
 Patch3: file-5.05-latex-improve.patch
 Patch4: file-5.05-rpm-archs.patch
+Patch5: file-5.05-python-3.2.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -76,6 +77,8 @@ file(1) command.
 %patch3 -p1
 #fixes #676041
 %patch4 -p1
+#fixes #678458
+%patch5 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -155,6 +158,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Tue Mar 01 2011 Jan Kaluza <jkaluza@redhat.com> - 5.05-4
+- fix #678458 - support for Python 3.2 compiled files
+
 * Thu Feb 10 2011 Jan Kaluza <jkaluza@redhat.com> - 5.05-3
 - fix #676543 - improved TeX and LaTeX recognition
 - fix #676041 - detect all supported RPM architectures
