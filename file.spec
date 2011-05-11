@@ -4,18 +4,14 @@
 
 Summary: A utility for determining file types
 Name: file
-Version: 5.05
-Release: 4%{?dist}
+Version: 5.07
+Release: 1%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 URL: http://www.darwinsys.com/file/
-# all patches are accepted by upstream
 Patch1: file-5.04-zip64.patch
-Patch2: file-5.05-python-magic.patch
-Patch3: file-5.05-latex-improve.patch
-Patch4: file-5.05-rpm-archs.patch
-Patch5: file-5.05-python-3.2.patch
+Patch2: file-5.05-rpm-archs.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -71,14 +67,8 @@ file(1) command.
 %setup -q
 #fixes #637785
 %patch1 -p1
-#keeps compatibility with older python-magic versions
-%patch2 -p1
-#fixes #676543
-%patch3 -p1
 #fixes #676041
-%patch4 -p1
-#fixes #678458
-%patch5 -p1
+%patch2 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -158,6 +148,10 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Wed May 11 2011 Jan Kaluza <jkaluza@redhat.com> - 5.07-1
+- update to new upstream version 5.07
+- remove unused patches
+
 * Tue Mar 01 2011 Jan Kaluza <jkaluza@redhat.com> - 5.05-4
 - fix #678458 - support for Python 3.2 compiled files
 
