@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.07
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -15,6 +15,7 @@ Patch2: file-5.05-rpm-archs.patch
 Patch3: file-5.0.7-zip.patch
 Patch4: file-5.0.7-dos.patch
 Patch5: file-dell-bios.patch
+Patch6: file-postscript.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -75,6 +76,7 @@ file(1) command.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -154,6 +156,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Thu Jun 09 2011 Jan Kaluza <jkaluza@redhat.com> - 5.07-4
+- fix #711843 - fix postscript detection
+
 * Thu Jun 09 2011 Jan Kaluza <jkaluza@redhat.com> - 5.07-3
 - fix #709953 - add support for BIOS version detection
 
