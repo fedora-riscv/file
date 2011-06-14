@@ -5,13 +5,13 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.07
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 URL: http://www.darwinsys.com/file/
 Patch1: file-5.04-zip64.patch
-Patch2: file-5.05-rpm-archs.patch
+Patch2: file-5.07-rpm-archs.patch
 Patch3: file-5.0.7-zip.patch
 Patch4: file-5.0.7-dos.patch
 Patch5: file-dell-bios.patch
@@ -156,6 +156,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Tue Jun 14 2011 Jan Kaluza <jkaluza@redhat.com> - 5.07-5
+- fix #712991 - include RPM noarch in /usr/share/magic
+
 * Thu Jun 09 2011 Jan Kaluza <jkaluza@redhat.com> - 5.07-4
 - fix #711843 - fix postscript detection
 
