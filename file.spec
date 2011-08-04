@@ -4,18 +4,12 @@
 
 Summary: A utility for determining file types
 Name: file
-Version: 5.07
-Release: 5%{?dist}
+Version: 5.08
+Release: 1%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 URL: http://www.darwinsys.com/file/
-Patch1: file-5.04-zip64.patch
-Patch2: file-5.07-rpm-archs.patch
-Patch3: file-5.0.7-zip.patch
-Patch4: file-5.0.7-dos.patch
-Patch5: file-dell-bios.patch
-Patch6: file-postscript.patch
 
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -69,14 +63,6 @@ file(1) command.
 
 # Don't use -b -- it will lead to poblems when compiling magic file
 %setup -q
-#fixes #637785
-%patch1 -p1
-#fixes #676041
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -156,6 +142,10 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Thu Aug 04 2011 Jan Kaluza <jkaluza@redhat.com> - 5.08-1
+- fix #728181 - update to file-5.08
+- remove unused patches
+
 * Tue Jun 14 2011 Jan Kaluza <jkaluza@redhat.com> - 5.07-5
 - fix #712991 - include RPM noarch in /usr/share/magic
 
