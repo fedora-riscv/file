@@ -4,7 +4,7 @@
 
 Summary: A utility for determining file types
 Name: file
-Version: 5.08
+Version: 5.09
 Release: 1%{?dist}
 License: BSD
 Group: Applications/File
@@ -142,6 +142,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Thu Sep 29 2011 Jan Kaluza <jkaluza@redhat.com> - 5.09-1
+- fix #739286 - update to file-5.09
+
 * Thu Aug 04 2011 Jan Kaluza <jkaluza@redhat.com> - 5.08-1
 - fix #728181 - update to file-5.08
 - remove unused patches
