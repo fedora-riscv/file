@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.09
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -142,6 +142,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Wed Oct 26 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 5.09-2
+- Rebuilt for glibc bug#747377
+
 * Thu Sep 29 2011 Jan Kaluza <jkaluza@redhat.com> - 5.09-1
 - fix #739286 - update to file-5.09
 
