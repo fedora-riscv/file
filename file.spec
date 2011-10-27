@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.07
-Release: 5%{?dist}
+Release: 6%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -156,6 +156,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Wed Oct 26 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 5.07-6
+- Rebuilt for glibc bug#747377
+
 * Tue Jun 14 2011 Jan Kaluza <jkaluza@redhat.com> - 5.07-5
 - fix #712991 - include RPM noarch in /usr/share/magic
 
