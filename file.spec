@@ -5,12 +5,14 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.10
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 # Upstream says it's up to distributions to add a way to support local-magic.
 Patch0: file-localmagic.patch
+# sent upstream
+Patch1: file-tnef.patch
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -65,6 +67,7 @@ file(1) command.
 # Don't use -b -- it will lead to poblems when compiling magic file!
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -149,6 +152,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Mon Jan 02 2012 Jan Kaluza <jkaluza@redhat.com> - 5.10-2
+- fix #770006 - detect tnef files
+
 * Mon Jan 02 2012 Jan Kaluza <jkaluza@redhat.com> - 5.10-1
 - fix #771030 - update to file-5.10
 
