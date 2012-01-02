@@ -5,12 +5,13 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.09
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
+# Upstream says it's up to distributions to add a way to support local-magic.
+Patch0: file-localmagic.patch
 URL: http://www.darwinsys.com/file/
-
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: zlib-devel
@@ -61,8 +62,9 @@ file(1) command.
 
 %prep
 
-# Don't use -b -- it will lead to poblems when compiling magic file
+# Don't use -b -- it will lead to poblems when compiling magic file!
 %setup -q
+%patch0 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -90,6 +92,10 @@ mkdir -p ${RPM_BUILD_ROOT}%{_datadir}/file
 make DESTDIR=${RPM_BUILD_ROOT} install
 rm -f ${RPM_BUILD_ROOT}%{_libdir}/*.la
 
+# local magic in /etc/magic
+mkdir -p ${RPM_BUILD_ROOT}%{_sysconfdir}
+cp -a ./magic/magic.local ${RPM_BUILD_ROOT}%{_sysconfdir}/magic
+
 cat magic/Magdir/* > ${RPM_BUILD_ROOT}%{_datadir}/misc/magic
 ln -s misc/magic ${RPM_BUILD_ROOT}%{_datadir}/magic
 #ln -s file/magic.mime ${RPM_BUILD_ROOT}%{_datadir}/magic.mime
@@ -111,6 +117,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc COPYING ChangeLog README
 %{_bindir}/*
 %{_mandir}/man1/*
+%config(noreplace) %{_sysconfdir}/magic
 
 %files libs
 %defattr(-,root,root,-)
@@ -142,6 +149,10 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Thu Dec 15 2011 Jan Kaluza <jkaluza@redhat.com> - 5.09-2
+- fix #720321 - added /etc/magic config file to let users define their local
+  magic patterns
+
 * Thu Sep 29 2011 Jan Kaluza <jkaluza@redhat.com> - 5.09-1
 - fix #739286 - update to file-5.09
 
