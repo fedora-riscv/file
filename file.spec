@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.09
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -149,9 +149,12 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
-* Thu Dec 15 2011 Jan Kaluza <jkaluza@redhat.com> - 5.09-2
+* Mon Jan 02 2012 Jan Kaluza <jkaluza@redhat.com> - 5.09-3
 - fix #720321 - added /etc/magic config file to let users define their local
   magic patterns
+
+* Wed Oct 26 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 5.09-2
+- Rebuilt for glibc bug#747377
 
 * Thu Sep 29 2011 Jan Kaluza <jkaluza@redhat.com> - 5.09-1
 - fix #739286 - update to file-5.09
