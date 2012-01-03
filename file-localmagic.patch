@@ -41,6 +41,20 @@ index 39b1703..3dd92d8 100644
  lib_LTLIBRARIES = libmagic.la
  include_HEADERS = magic.h
  AM_CPPFLAGS = -DMAGIC='"$(MAGIC)"'
+diff --git a/src/apprentice.c b/src/apprentice.c
+index b330669..0490642 100644
+--- a/src/apprentice.c
++++ b/src/apprentice.c
+@@ -281,7 +281,7 @@ apprentice_1(struct magic_set *ms, const char *fn, int action,
+ 
+ #ifndef COMPILE_ONLY
+ 	if ((rv = apprentice_map(ms, &magic, &nmagic, fn)) == -1) {
+-		if (ms->flags & MAGIC_CHECK)
++		if (ms->flags & MAGIC_CHECK && strcmp("/etc/magic", fn) != 0)
+ 			file_magwarn(ms, "using regular magic file `%s'", fn);
+ 		rv = apprentice_load(ms, &magic, &nmagic, fn, action);
+ 		if (rv != 0)
+
 -- 
 1.7.7.4
 

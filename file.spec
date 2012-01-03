@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.10
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -152,6 +152,10 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Tue Jan 03 2012 Jan Kaluza <jkaluza@redhat.com> - 5.10-3
+- fix #771292 - do not show 'using regular magic file' warning for /etc/magic,
+  because this file is not supposed to be compiled
+
 * Mon Jan 02 2012 Jan Kaluza <jkaluza@redhat.com> - 5.10-2
 - fix #770006 - detect tnef files
 
