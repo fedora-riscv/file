@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.10
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -13,6 +13,7 @@ Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 Patch0: file-localmagic.patch
 # sent upstream
 Patch1: file-tnef.patch
+Patch2: file-5.10-strength.patch
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -68,6 +69,7 @@ file(1) command.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -152,6 +154,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Tue Jan 10 2012 Jan Kaluza <jkaluza@redhat.com> - 5.10-4
+- fix #772651 - decrease strength of newly added "C source" patterns
+
 * Tue Jan 03 2012 Jan Kaluza <jkaluza@redhat.com> - 5.10-3
 - fix #771292 - do not show 'using regular magic file' warning for /etc/magic,
   because this file is not supposed to be compiled
