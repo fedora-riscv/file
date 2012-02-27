@@ -4,8 +4,8 @@
 
 Summary: A utility for determining file types
 Name: file
-Version: 5.10
-Release: 5%{?dist}
+Version: 5.11
+Release: 1%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -15,6 +15,8 @@ Patch0: file-localmagic.patch
 Patch1: file-tnef.patch
 Patch2: file-5.10-strength.patch
 Patch3: file-5.10-sticky-bit.patch
+Patch4: file-python-func.patch
+Patch5: file-qed-vdi-image.patch
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -72,6 +74,8 @@ file(1) command.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
+%patch5 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -156,6 +160,11 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Mon Feb 27 2012 Jan Kaluza <jkaluza@redhat.com> - 5.11-1
+- fix #796130 - update to file-5.11
+- fix #796209 - recognize VDI images
+- fix #795709 - recognize QED images
+
 * Wed Jan 18 2012 Jan Kaluza <jkaluza@redhat.com> - 5.10-5
 - fix detection of ASCII text files with setuid, setgid, or sticky bits
 
