@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.11
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -21,7 +21,6 @@ Patch6: file-5.11-ia64-swap.patch
 Patch7: file-4.17-rpm-name.patch
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: zlib-devel
 
 %description
@@ -97,7 +96,6 @@ cd python
 CFLAGS="%{optflags}" %{__python} setup.py build
 
 %install
-rm -rf $RPM_BUILD_ROOT
 mkdir -p ${RPM_BUILD_ROOT}%{_bindir}
 mkdir -p ${RPM_BUILD_ROOT}%{_mandir}/man1
 mkdir -p ${RPM_BUILD_ROOT}%{_mandir}/man5
@@ -120,22 +118,17 @@ cd python
 %{__python} setup.py install -O1 --skip-build --root ${RPM_BUILD_ROOT}
 %{__install} -d ${RPM_BUILD_ROOT}%{_datadir}/%{name}
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
 %post libs -p /sbin/ldconfig
 
 %postun libs -p /sbin/ldconfig
 
 %files
-%defattr(-,root,root,-)
 %doc COPYING ChangeLog README
 %{_bindir}/*
 %{_mandir}/man1/*
 %config(noreplace) %{_sysconfdir}/magic
 
 %files libs
-%defattr(-,root,root,-)
 %doc COPYING ChangeLog README
 %{_libdir}/*so.*
 %{_datadir}/magic*
@@ -144,17 +137,14 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/misc/*
 
 %files devel
-%defattr(-,root,root,-)
 %{_libdir}/*.so
 %{_includedir}/magic.h
 %{_mandir}/man3/*
 
 %files static
-%defattr(-,root,root,-)
 %{_libdir}/*.a
 
 %files -n python-magic
-%defattr(-, root, root, -)
 %doc python/README COPYING python/example.py
 %{python_sitelib}/magic.py
 %{python_sitelib}/magic.pyc
@@ -164,6 +154,9 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Thu Jul 19 2012 Jan Kaluza <jkaluza@redhat.com> - 5.11-3
+- removed buildroot, defattr
+
 * Tue Jun 21 2012 Jan Kaluza <jkaluza@redhat.com> - 5.11-2
 - detect names of RPM packages
 - detect swap on ia64 architecture
