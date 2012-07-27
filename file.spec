@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.11
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -154,6 +154,9 @@ cd python
 %endif
 
 %changelog
+* Fri Jul 27 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 5.11-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
+
 * Thu Jul 19 2012 Jan Kaluza <jkaluza@redhat.com> - 5.11-3
 - removed buildroot, defattr
 
