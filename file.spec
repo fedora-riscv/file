@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.11
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -19,6 +19,8 @@ Patch4: file-python-func.patch
 Patch5: file-qed-vdi-image.patch
 Patch6: file-5.11-ia64-swap.patch
 Patch7: file-4.17-rpm-name.patch
+Patch8: file-5.11-magicmgc-home.patch
+Patch9: file-5.11-compress.patch
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
 BuildRequires: zlib-devel
@@ -79,6 +81,8 @@ file(1) command.
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
+%patch8 -p1
+%patch9 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -154,6 +158,10 @@ cd python
 %endif
 
 %changelog
+* Tue Aug 14 2012 Jan Kaluza <jkaluza@redhat.com> - 5.11-5
+- fix #847936 - decompress bzip2 properly when using -z param
+- fix #847937 - read magic patterns also from ~/.magic.mgc
+
 * Fri Jul 27 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 5.11-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
 
