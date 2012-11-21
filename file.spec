@@ -1,11 +1,11 @@
-%{!?python_sitelib: %define python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
-%{!?python_sitearch: %define python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1)")}
-%define __libtoolize :
+%{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
+%{!?python_sitearch: %global python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1)")}
+%global __libtoolize :
 
 Summary: A utility for determining file types
 Name: file
 Version: 5.11
-Release: 5%{?dist}
+Release: 6%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -61,7 +61,7 @@ the libmagic library.
 %package -n python-magic
 Summary: Python bindings for the libmagic API
 Group:   Development/Libraries
-BuildRequires: python-devel
+BuildRequires: python2-devel
 Requires: %{name} = %{version}-%{release}
 
 %description -n python-magic
@@ -158,6 +158,9 @@ cd python
 %endif
 
 %changelog
+* Wed Nov 21 2012 Jan Kaluza <jkaluza@redhat.com> - 5.11-6
+- clean up the spec file
+
 * Tue Aug 14 2012 Jan Kaluza <jkaluza@redhat.com> - 5.11-5
 - fix #847936 - decompress bzip2 properly when using -z param
 - fix #847937 - read magic patterns also from ~/.magic.mgc
