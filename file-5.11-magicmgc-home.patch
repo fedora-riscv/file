@@ -1,8 +1,8 @@
 diff --git a/src/magic.c b/src/magic.c
-index 7eb0441..d8c5835 100644
+index 5403951..2b61080 100644
 --- a/src/magic.c
 +++ b/src/magic.c
-@@ -101,16 +101,20 @@ get_default_magic(void)
+@@ -101,16 +101,21 @@ get_default_magic(void)
  	if ((home = getenv("HOME")) == NULL)
  		return MAGIC;
  
@@ -12,9 +12,9 @@ index 7eb0441..d8c5835 100644
 -	if (stat(hmagicpath, &st) == -1)
 -		goto out;
 -	if (S_ISDIR(st.st_mode)) {
--		free(hmagicpath);
--		if (asprintf(&hmagicpath, "%s/%s", home, hmagic) < 0)
 +	if (stat(hmagicpath, &st) == -1) {
+ 		free(hmagicpath);
+-		if (asprintf(&hmagicpath, "%s/%s", home, hmagic) < 0)
 +		if (asprintf(&hmagicpath, "%s/.magic", home) < 0)
  			return MAGIC;
 -		if (access(hmagicpath, R_OK) == -1)
