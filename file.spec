@@ -3,7 +3,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.14
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -18,6 +18,7 @@ Patch5: file-5.04-man-return-code.patch
 Patch6: file-5.04-generic-msdos.patch
 Patch7: file-5.14-x86boot.patch
 Patch8: file-5.14-perl.patch
+Patch9: file-5.14-elfspace.patch
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
 BuildRequires: zlib-devel
@@ -71,6 +72,7 @@ file(1) command.
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
+%patch9 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -148,6 +150,9 @@ cd python
 %endif
 
 %changelog
+* Mon Mar 25 2013 Jan Kaluza <jkaluza@redhat.com> - 5.14-2
+- fix useless space in ELF output which could break libtool
+
 * Fri Mar 22 2013 Jan Kaluza <jkaluza@redhat.com> - 5.14-1
 - fix #891856 - update to file-5.14
 - fix #909754 - magic number for Python-3.3
