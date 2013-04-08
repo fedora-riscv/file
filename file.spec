@@ -3,7 +3,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.14
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -152,6 +152,10 @@ cd python
 %endif
 
 %changelog
+* Mon Apr 08 2013 Jan Kaluza <jkaluza@redhat.com> - 5.14-4
+- fix #948255 - print white-space in fsmagic, but only when
+  we know there will be some more output
+
 * Fri Mar 29 2013 Jan Kaluza <jkaluza@redhat.com> - 5.14-3
 - fix #928995 - do not print white-space in the end of fsmagic
 
