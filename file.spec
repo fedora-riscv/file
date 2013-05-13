@@ -23,6 +23,7 @@ Patch10: file-5.14-bad-fsmagic-space.patch
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
 BuildRequires: zlib-devel
+BuildRequires: autoconf automake libtool
 
 %description
 The file command is used to identify a particular file according to the
