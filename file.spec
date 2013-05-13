@@ -3,7 +3,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.14
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -81,6 +81,9 @@ touch -r doc/libmagic.man doc/libmagic.man_
 mv doc/libmagic.man_ doc/libmagic.man
 
 %build
+# Fix config.guess to find aarch64 - #925339
+autoreconf -fi
+
 CFLAGS="%{optflags} -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE" \
 %configure --enable-fsect-man5 --disable-rpath
 # remove hardcoded library paths from local libtool
@@ -152,6 +155,9 @@ cd python
 %endif
 
 %changelog
+* Mon May 13 2013 Jan Kaluza <jkaluza@redhat.com> - 5.14-5
+- fix #925339 - support aarch64
+
 * Mon Apr 08 2013 Jan Kaluza <jkaluza@redhat.com> - 5.14-4
 - fix #948255 - print white-space in fsmagic, but only when
   we know there will be some more output
