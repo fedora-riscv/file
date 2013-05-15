@@ -3,7 +3,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.14
-Release: 5%{?dist}
+Release: 6%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -20,6 +20,7 @@ Patch7: file-5.14-x86boot.patch
 Patch8: file-5.14-perl.patch
 Patch9: file-5.14-elfspace.patch
 Patch10: file-5.14-bad-fsmagic-space.patch
+Patch11: file-5.14-no-magic.patch
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
 BuildRequires: zlib-devel
@@ -76,6 +77,7 @@ file(1) command.
 %patch8 -p1
 %patch9 -p1
 %patch10 -p1
+%patch11 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -156,6 +158,10 @@ cd python
 %endif
 
 %changelog
+* Wed May 15 2013 Jan Kaluza <jkaluza@redhat.com> - 5.14-6
+- fix #962678 - do not exit if no magic file is loaded, we can still provide
+  useful info without magic file
+
 * Mon May 13 2013 Jan Kaluza <jkaluza@redhat.com> - 5.14-5
 - fix #925339 - support aarch64
 
