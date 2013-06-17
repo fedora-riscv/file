@@ -3,7 +3,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.14
-Release: 7%{?dist}
+Release: 8%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -117,10 +117,7 @@ ln -s misc/magic ${RPM_BUILD_ROOT}%{_datadir}/magic
 ln -s ../magic ${RPM_BUILD_ROOT}%{_datadir}/file/magic
 
 cd python
-# We could use python_sitelib here, but Fedora does not support noarch
-# subpackages... So just create arch specific package and install
-# files to python_sitearch
-%{__python} setup.py install -O1 --skip-build --root ${RPM_BUILD_ROOT} --install-purelib %{python_sitearch}
+%{__python} setup.py install -O1 --skip-build --root ${RPM_BUILD_ROOT}
 %{__install} -d ${RPM_BUILD_ROOT}%{_datadir}/%{name}
 
 %post libs -p /sbin/ldconfig
@@ -148,17 +145,17 @@ cd python
 
 %files -n python-magic
 %doc python/README COPYING python/example.py
-# We could use python_sitelib here, but Fedora does not support noarch
-# subpackages... So just create arch specific package and install
-# files to python_sitearch
-%{python_sitearch}/magic.py
-%{python_sitearch}/magic.pyc
-%{python_sitearch}/magic.pyo
+%{python_sitelib}/magic.py
+%{python_sitelib}/magic.pyc
+%{python_sitelib}/magic.pyo
 %if 0%{?fedora} >= 9 || 0%{?rhel} >= 6
-%{python_sitearch}/*egg-info
+%{python_sitelib}/*egg-info
 %endif
 
 %changelog
+* Mon Jun 17 2013 Jan Kaluza <jkaluza@redhat.com> - 5.14-8
+- replace sitearch with sitelib
+
 * Mon Jun 17 2013 Jan Kaluza <jkaluza@redhat.com> - 5.14-7
 - build python-magic as noarch
 
