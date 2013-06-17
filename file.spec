@@ -3,7 +3,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.14
-Release: 6%{?dist}
+Release: 7%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -54,6 +54,7 @@ necessary for developing programs using libmagic.
 Summary: Python bindings for the libmagic API
 Group:   Development/Libraries
 BuildRequires: python2-devel
+BuildArch: noarch
 Requires: %{name} = %{version}-%{release}
 
 %description -n python-magic
@@ -158,6 +159,9 @@ cd python
 %endif
 
 %changelog
+* Mon Jun 17 2013 Jan Kaluza <jkaluza@redhat.com> - 5.14-7
+- build python-magic as noarch
+
 * Wed May 15 2013 Jan Kaluza <jkaluza@redhat.com> - 5.14-6
 - fix #962678 - do not exit if no magic file is loaded, we can still provide
   useful info without magic file
