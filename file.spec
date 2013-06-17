@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.11
-Release: 9%{?dist}
+Release: 10%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -25,6 +25,7 @@ Patch10: file-5.11-dump-twice.patch
 Patch11: file-5.04-volume_key.patch
 Patch12: file-5.04-man-return-code.patch
 Patch13: file-5.04-generic-msdos.patch
+Patch14: file-5.14-netpbm.patch
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
 BuildRequires: zlib-devel
@@ -65,6 +66,7 @@ the libmagic library.
 %package -n python-magic
 Summary: Python bindings for the libmagic API
 Group:   Development/Libraries
+BuildArch: noarch
 BuildRequires: python2-devel
 Requires: %{name} = %{version}-%{release}
 
@@ -91,6 +93,7 @@ file(1) command.
 %patch11 -p1
 %patch12 -p1
 %patch13 -p1
+%patch14 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -166,6 +169,10 @@ cd python
 %endif
 
 %changelog
+* Mon Jun 17 2013 Jan Kaluza <jkaluza@redhat.com> - 5.11-10
+- build python-magic as noarch
+- fix netpbm detection
+
 * Mon Mar 11 2013 Jan Kaluza <jkaluza@redhat.com> - 5.11-9
 - fix #919466 - fix memory leak in get_default_magic
 
