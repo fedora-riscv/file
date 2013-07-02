@@ -3,7 +3,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.14
-Release: 8%{?dist}
+Release: 9%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -153,6 +153,9 @@ cd python
 %endif
 
 %changelog
+* Tue Jul 02 2013 Jan Kaluza <jkaluza@redhat.com> - 5.14-9
+- fix #980446 - do not segfault when no magic is loaded
+
 * Mon Jun 17 2013 Jan Kaluza <jkaluza@redhat.com> - 5.14-8
 - replace sitearch with sitelib
 
