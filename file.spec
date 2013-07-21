@@ -1,9 +1,10 @@
 %global __libtoolize :
+%global with_python3 0%{?fedora} || 0%{?rhel} >= 7
 
 Summary: A utility for determining file types
 Name: file
 Version: 5.14
-Release: 10%{?dist}
+Release: 11%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -51,16 +52,30 @@ The file-devel package contains the header files and libmagic library
 necessary for developing programs using libmagic.
 
 %package -n python-magic
-Summary: Python bindings for the libmagic API
+Summary: Python 2 bindings for the libmagic API
 Group:   Development/Libraries
 BuildRequires: python2-devel
 BuildArch: noarch
 Requires: %{name} = %{version}-%{release}
 
 %description -n python-magic
-This package contains the Python bindings to allow access to the
+This package contains the Python 2 bindings to allow access to the
 libmagic API. The libmagic library is also used by the familiar
 file(1) command.
+
+%if %{with_python3}
+%package -n python3-magic
+Summary: Python 3 bindings for the libmagic API
+Group:   Development/Libraries
+BuildRequires: python3-devel
+BuildArch: noarch
+Requires: %{name} = %{version}-%{release}
+
+%description -n python3-magic
+This package contains the Python 3 bindings to allow access to the
+libmagic API. The libmagic library is also used by the familiar
+file(1) command.
+%endif
 
 %prep
 
@@ -84,6 +99,11 @@ iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
 mv doc/libmagic.man_ doc/libmagic.man
 
+%if %{with_python3}
+rm -rf %{py3dir}
+cp -a python %{py3dir}
+%endif
+
 %build
 # Fix config.guess to find aarch64 - #925339
 autoreconf -fi
@@ -97,6 +117,10 @@ export LD_LIBRARY_PATH=%{_builddir}/%{name}-%{version}/src/.libs
 make
 cd python
 CFLAGS="%{optflags}" %{__python} setup.py build
+%if %{with_python3}
+cd %{py3dir}
+CFLAGS="%{optflags}" %{__python3} setup.py build
+%endif
 
 %install
 mkdir -p ${RPM_BUILD_ROOT}%{_bindir}
@@ -118,6 +142,10 @@ ln -s ../magic ${RPM_BUILD_ROOT}%{_datadir}/file/magic
 
 cd python
 %{__python} setup.py install -O1 --skip-build --root ${RPM_BUILD_ROOT}
+%if %{with_python3}
+cd %{py3dir}
+%{__python3} setup.py install -O1 --skip-build --root ${RPM_BUILD_ROOT}
+%endif
 %{__install} -d ${RPM_BUILD_ROOT}%{_datadir}/%{name}
 
 %post libs -p /sbin/ldconfig
@@ -148,11 +176,23 @@ cd python
 %{python_sitelib}/magic.py
 %{python_sitelib}/magic.pyc
 %{python_sitelib}/magic.pyo
-%if 0%{?fedora} >= 9 || 0%{?rhel} >= 6
+%if 0%{?fedora} || 0%{?rhel} >= 6
 %{python_sitelib}/*egg-info
 %endif
 
+%if %{with_python3}
+%files -n python3-magic
+%doc python/README COPYING python/example.py
+%{python3_sitelib}/magic.py
+%{python3_sitelib}/*egg-info
+%{python3_sitelib}/__pycache__/magic*.pyc
+%{python3_sitelib}/__pycache__/magic*.pyo
+%endif
+
 %changelog
+* Thu Aug  8 2013 Ville Skyttä <ville.skytta@iki.fi> - 5.14-11
+- Build python-magic for python3 where applicable.
+
 * Sat Aug 03 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 5.14-10
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
 
