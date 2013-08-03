@@ -3,7 +3,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.14
-Release: 9%{?dist}
+Release: 10%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -153,6 +153,9 @@ cd python
 %endif
 
 %changelog
+* Sat Aug 03 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 5.14-10
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
+
 * Tue Jul 02 2013 Jan Kaluza <jkaluza@redhat.com> - 5.14-9
 - fix #980446 - do not segfault when no magic is loaded
 
