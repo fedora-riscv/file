@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.11
-Release: 10%{?dist}
+Release: 11%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -26,6 +26,7 @@ Patch11: file-5.04-volume_key.patch
 Patch12: file-5.04-man-return-code.patch
 Patch13: file-5.04-generic-msdos.patch
 Patch14: file-5.14-netpbm.patch
+Patch15: file-5.14-journald.patch
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
 BuildRequires: zlib-devel
@@ -94,6 +95,7 @@ file(1) command.
 %patch12 -p1
 %patch13 -p1
 %patch14 -p1
+%patch15 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -169,6 +171,9 @@ cd python
 %endif
 
 %changelog
+* Thu Aug 22 2013 Jan Kaluza <jkaluza@redhat.com> - 5.11-11
+- fix #985072 - add support for journald files
+
 * Mon Jun 17 2013 Jan Kaluza <jkaluza@redhat.com> - 5.11-10
 - build python-magic as noarch
 - fix netpbm detection
