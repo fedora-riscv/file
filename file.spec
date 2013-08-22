@@ -4,7 +4,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.14
-Release: 11%{?dist}
+Release: 12%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -22,6 +22,7 @@ Patch8: file-5.14-perl.patch
 Patch9: file-5.14-elfspace.patch
 Patch10: file-5.14-bad-fsmagic-space.patch
 Patch11: file-5.14-no-magic.patch
+Patch12: file-5.14-journald.patch
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
 BuildRequires: zlib-devel
@@ -94,6 +95,7 @@ file(1) command.
 %patch9 -p1
 %patch10 -p1
 %patch11 -p1
+%patch12 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -190,6 +192,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Thu Aug 22 2013 Jan Kaluza <jkaluza@redhat.com> - 5.14-12
+- fix #985072 - add support for journald files
+
 * Thu Aug  8 2013 Ville Skyttä <ville.skytta@iki.fi> - 5.14-11
 - Build python-magic for python3 where applicable.
 
@@ -258,7 +263,7 @@ cd %{py3dir}
 * Thu Jul 19 2012 Jan Kaluza <jkaluza@redhat.com> - 5.11-3
 - removed buildroot, defattr
 
-* Tue Jun 21 2012 Jan Kaluza <jkaluza@redhat.com> - 5.11-2
+* Thu Jun 21 2012 Jan Kaluza <jkaluza@redhat.com> - 5.11-2
 - detect names of RPM packages
 - detect swap on ia64 architecture
 
@@ -336,7 +341,7 @@ cd %{py3dir}
 * Wed Nov 24 2010 Jan Kaluza <jkaluza@redhat.com> - 5.04-17
 - fix #656395 - "string" magic directive supports longer strings
 
-* Wed Aug 29 2010 Jan Kaluza <jkaluza@redhat.com> - 5.04-16
+* Wed Aug 25 2010 Jan Kaluza <jkaluza@redhat.com> - 5.04-16
 - fix #637785 - support for zip64 format
 
 * Tue Aug 24 2010 Jan Kaluza <jkaluza@redhat.com> - 5.04-15
@@ -348,7 +353,7 @@ cd %{py3dir}
 * Wed Jul 21 2010 David Malcolm <dmalcolm@redhat.com> - 5.04-13
 - Rebuilt for https://fedoraproject.org/wiki/Features/Python_2.7/MassRebuild
 
-* Thu Jul 19 2010 Jan Kaluza <jkaluza@redhat.com> 5.04-12
+* Thu Jul 15 2010 Jan Kaluza <jkaluza@redhat.com> 5.04-12
 - fix #599695 - try to get "from" attribute for ELF binaries
   only from core dumps.
 
@@ -619,7 +624,7 @@ cd %{py3dir}
 * Tue Feb 07 2006 Jesse Keating <jkeating@redhat.com> - 4.16-6.1
 - rebuilt for new gcc4.1 snapshot and glibc changes
 
-* Sun Feb 04 2006 Radek Vokal <rvokal@redhat.com> 4.16-6
+* Sat Feb 04 2006 Radek Vokal <rvokal@redhat.com> 4.16-6
 - xen patch, recognizes Xen saved domain
 
 * Fri Jan 13 2006 Radek Vokal <rvokal@redhat.com> 4.16-5
@@ -649,7 +654,7 @@ cd %{py3dir}
 * Mon Sep 19 2005 Radek Vokal <rvokal@redhat.com> - 4.15-2
 - print xxx-style only once (#168617)
 
-* Thu Aug 09 2005 Radek Vokal <rvokal@redhat.com> - 4.15-1
+* Tue Aug 09 2005 Radek Vokal <rvokal@redhat.com> - 4.15-1
 - upgrade to upstream 
 
 * Tue Aug 09 2005 Radek Vokal <rvokal@redhat.com> - 4.14-4
@@ -835,7 +840,7 @@ cd %{py3dir}
 * Wed Jun 14 2000 Jeff Johnson <jbj@redhat.com>
 - FHS packaging.
 
-* Tue Apr 14 2000 Bernhard Rosenkraenzer <bero@redhat.com>
+* Fri Apr 14 2000 Bernhard Rosenkraenzer <bero@redhat.com>
 - 3.30
 
 * Wed Feb 16 2000 Cristian Gafton <gafton@redhat.com>
