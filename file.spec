@@ -4,7 +4,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.14
-Release: 12%{?dist}
+Release: 13%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -23,6 +23,7 @@ Patch9: file-5.14-elfspace.patch
 Patch10: file-5.14-bad-fsmagic-space.patch
 Patch11: file-5.14-no-magic.patch
 Patch12: file-5.14-journald.patch
+Patch13: file-5.14-magic_load.patch
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
 BuildRequires: zlib-devel
@@ -96,6 +97,7 @@ file(1) command.
 %patch10 -p1
 %patch11 -p1
 %patch12 -p1
+%patch13 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -192,6 +194,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Mon Sep 09 2013 Jan Kaluza <jkaluza@redhat.com> - 5.14-13
+- fix #1001689 - fix segfault when calling magic_load twice
+
 * Thu Aug 22 2013 Jan Kaluza <jkaluza@redhat.com> - 5.14-12
 - fix #985072 - add support for journald files
 
