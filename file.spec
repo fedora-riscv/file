@@ -4,7 +4,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.14
-Release: 13%{?dist}
+Release: 14%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -194,6 +194,10 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Wed Jan 15 2014 Jan Kaluza <jkaluza@redhat.com> - 5.14-14
+- fix #1051598 - reverse the order of shebang vs. package keyword detection
+  in Perl by increasing strength of all Perl patterns
+
 * Mon Sep 09 2013 Jan Kaluza <jkaluza@redhat.com> - 5.14-13
 - fix #1001689 - fix segfault when calling magic_load twice
 
