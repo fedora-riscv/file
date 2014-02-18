@@ -4,7 +4,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.14
-Release: 14%{?dist}
+Release: 15%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -24,6 +24,7 @@ Patch10: file-5.14-bad-fsmagic-space.patch
 Patch11: file-5.14-no-magic.patch
 Patch12: file-5.14-journald.patch
 Patch13: file-5.14-magic_load.patch
+Patch14: file-5.14-CVE-2014-1943.patch
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
 BuildRequires: zlib-devel
@@ -98,6 +99,7 @@ file(1) command.
 %patch11 -p1
 %patch12 -p1
 %patch13 -p1
+%patch14 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -194,6 +196,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Tue Feb 18 2014 Jan Kaluza <jkaluza@redhat.com> - 5.14-15
+- fix #1065837 - fix for CVE-2014-1943
+
 * Wed Jan 15 2014 Jan Kaluza <jkaluza@redhat.com> - 5.14-14
 - fix #1051598 - reverse the order of shebang vs. package keyword detection
   in Perl by increasing strength of all Perl patterns
