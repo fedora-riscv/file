@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.11
-Release: 11%{?dist}
+Release: 12%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -27,6 +27,7 @@ Patch12: file-5.04-man-return-code.patch
 Patch13: file-5.04-generic-msdos.patch
 Patch14: file-5.14-netpbm.patch
 Patch15: file-5.14-journald.patch
+Patch16: file-5.11-CVE-2014-1943.patch
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
 BuildRequires: zlib-devel
@@ -96,6 +97,7 @@ file(1) command.
 %patch13 -p1
 %patch14 -p1
 %patch15 -p1
+%patch16 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -171,6 +173,9 @@ cd python
 %endif
 
 %changelog
+* Tue Feb 18 2014 Jan Kaluza <jkaluza@redhat.com> - 5.11-12
+- fix #1065837 - fix for CVE-2014-1943
+
 * Thu Aug 22 2013 Jan Kaluza <jkaluza@redhat.com> - 5.11-11
 - fix #985072 - add support for journald files
 
