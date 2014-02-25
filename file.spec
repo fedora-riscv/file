@@ -4,7 +4,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.14
-Release: 15%{?dist}
+Release: 16%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -196,6 +196,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Tue Feb 25 2014 Jan Kaluza <jkaluza@redhat.com> - 5.14-16
+- fix potential memory leak introduced in previous commit
+
 * Tue Feb 18 2014 Jan Kaluza <jkaluza@redhat.com> - 5.14-15
 - fix #1065837 - fix for CVE-2014-1943
 
