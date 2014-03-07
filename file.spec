@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.11
-Release: 12%{?dist}
+Release: 13%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -28,6 +28,7 @@ Patch13: file-5.04-generic-msdos.patch
 Patch14: file-5.14-netpbm.patch
 Patch15: file-5.14-journald.patch
 Patch16: file-5.11-CVE-2014-1943.patch
+Patch17: file-5.11-CVE-2014-2270.patch
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
 BuildRequires: zlib-devel
@@ -98,6 +99,7 @@ file(1) command.
 %patch14 -p1
 %patch15 -p1
 %patch16 -p1
+%patch17 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -173,6 +175,9 @@ cd python
 %endif
 
 %changelog
+* Fri Mar 07 2014 Jan Kaluza <jkaluza@redhat.com> - 5.11-13
+- fix #1073555 - fix for CVE-2014-2270
+
 * Tue Feb 18 2014 Jan Kaluza <jkaluza@redhat.com> - 5.11-12
 - fix #1065837 - fix for CVE-2014-1943
 
