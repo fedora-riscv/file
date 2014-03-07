@@ -4,7 +4,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.14
-Release: 16%{?dist}
+Release: 17%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -25,6 +25,7 @@ Patch11: file-5.14-no-magic.patch
 Patch12: file-5.14-journald.patch
 Patch13: file-5.14-magic_load.patch
 Patch14: file-5.14-CVE-2014-1943.patch
+Patch15: file-5.14-CVE-2014-2270.patch
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
 BuildRequires: zlib-devel
@@ -100,6 +101,7 @@ file(1) command.
 %patch12 -p1
 %patch13 -p1
 %patch14 -p1
+%patch15 -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -196,6 +198,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Fri Mar 07 2014 Jan Kaluza <jkaluza@redhat.com> - 5.14-17
+- fix #1073555 - fix for CVE-2014-2270
+
 * Tue Feb 25 2014 Jan Kaluza <jkaluza@redhat.com> - 5.14-16
 - fix potential memory leak introduced in previous commit
 
