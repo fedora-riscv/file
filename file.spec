@@ -4,7 +4,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.14
-Release: 18%{?dist}
+Release: 19%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -200,6 +200,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Mon Mar 24 2014 Jan Kaluza <jkaluza@redhat.com> - 5.14-19
+- fix redefinition of OFFSET_OOB in CVE-2014-2270 patch
+
 * Mon Mar 24 2014 Jan Kaluza <jkaluza@redhat.com> - 5.14-18
 - fix #1079847 - fix for CVE-2013-7345
 
