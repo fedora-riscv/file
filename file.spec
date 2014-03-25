@@ -4,7 +4,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.14
-Release: 19%{?dist}
+Release: 20%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -200,6 +200,10 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Tue Mar 25 2014 Jan Kaluza <jkaluza@redhat.com> - 5.14-20
+- fix #1079847 - fix potential regression in Perl detection caused
+  by original patch for CVE-2013-7345
+
 * Mon Mar 24 2014 Jan Kaluza <jkaluza@redhat.com> - 5.14-19
 - fix redefinition of OFFSET_OOB in CVE-2014-2270 patch
 
