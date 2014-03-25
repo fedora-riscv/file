@@ -4,7 +4,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.14
-Release: 17%{?dist}
+Release: 18%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -103,6 +103,10 @@ file(1) command.
 %patch14 -p1
 %patch15 -p1
 
+# Patches can generate *.orig files, which can't stay in the magic dir,
+# otherwise there will be problems with compiling magic file!
+rm -fv magic/Magdir/*.orig
+
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
 mv doc/libmagic.man_ doc/libmagic.man
@@ -198,6 +202,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Tue Mar 25 2014 Jan Kaluza <jkaluza@redhat.com> - 5.14-18
+- fix #1080450 - remove *.orig files before compiling magic/Magdir
+
 * Fri Mar 07 2014 Jan Kaluza <jkaluza@redhat.com> - 5.14-17
 - fix #1073555 - fix for CVE-2014-2270
 
