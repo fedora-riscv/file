@@ -4,7 +4,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.14
-Release: 18%{?dist}
+Release: 20%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -26,6 +26,7 @@ Patch12: file-5.14-journald.patch
 Patch13: file-5.14-magic_load.patch
 Patch14: file-5.14-CVE-2014-1943.patch
 Patch15: file-5.14-CVE-2014-2270.patch
+Patch16: file-5.14-CVE-2013-7345.patch
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
 BuildRequires: zlib-devel
@@ -102,6 +103,7 @@ file(1) command.
 %patch13 -p1
 %patch14 -p1
 %patch15 -p1
+%patch16 -p1
 
 # Patches can generate *.orig files, which can't stay in the magic dir,
 # otherwise there will be problems with compiling magic file!
@@ -202,7 +204,15 @@ cd %{py3dir}
 %endif
 
 %changelog
-* Tue Mar 25 2014 Jan Kaluza <jkaluza@redhat.com> - 5.14-18
+* Tue Mar 25 2014 Jan Kaluza <jkaluza@redhat.com> - 5.14-20
+- fix #1079847 - fix potential regression in Perl detection caused
+  by original patch for CVE-2013-7345
+
+* Mon Mar 24 2014 Jan Kaluza <jkaluza@redhat.com> - 5.14-19
+- fix redefinition of OFFSET_OOB in CVE-2014-2270 patch
+
+* Mon Mar 24 2014 Jan Kaluza <jkaluza@redhat.com> - 5.14-18
+- fix #1079847 - fix for CVE-2013-7345
 - fix #1080450 - remove *.orig files before compiling magic/Magdir
 
 * Fri Mar 07 2014 Jan Kaluza <jkaluza@redhat.com> - 5.14-17
