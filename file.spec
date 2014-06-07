@@ -4,7 +4,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.14
-Release: 21%{?dist}
+Release: 22%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -204,6 +204,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 5.14-22
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
+
 * Tue May 27 2014 Kalev Lember <kalevlember@gmail.com> - 5.14-21
 - Rebuilt for https://fedoraproject.org/wiki/Changes/Python_3.4
 
