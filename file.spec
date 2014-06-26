@@ -3,8 +3,8 @@
 
 Summary: A utility for determining file types
 Name: file
-Version: 5.14
-Release: 22%{?dist}
+Version: 5.19
+Release: 1%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -12,21 +12,12 @@ Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 Patch0: file-localmagic.patch
 # sent upstream - should be included in next upstream release
 Patch1: file-5.10-strength.patch
-Patch2: file-5.10-sticky-bit.patch
 Patch3: file-4.17-rpm-name.patch
 Patch4: file-5.04-volume_key.patch
 Patch5: file-5.04-man-return-code.patch
 Patch6: file-5.04-generic-msdos.patch
 Patch7: file-5.14-x86boot.patch
 Patch8: file-5.14-perl.patch
-Patch9: file-5.14-elfspace.patch
-Patch10: file-5.14-bad-fsmagic-space.patch
-Patch11: file-5.14-no-magic.patch
-Patch12: file-5.14-journald.patch
-Patch13: file-5.14-magic_load.patch
-Patch14: file-5.14-CVE-2014-1943.patch
-Patch15: file-5.14-CVE-2014-2270.patch
-Patch16: file-5.14-CVE-2013-7345.patch
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
 BuildRequires: zlib-devel
@@ -89,21 +80,12 @@ file(1) command.
 
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
-%patch9 -p1
-%patch10 -p1
-%patch11 -p1
-%patch12 -p1
-%patch13 -p1
-%patch14 -p1
-%patch15 -p1
-%patch16 -p1
 
 # Patches can generate *.orig files, which can't stay in the magic dir,
 # otherwise there will be problems with compiling magic file!
@@ -204,6 +186,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Wed Jun 25 2014 Jan Kaluza <jkaluza@redhat.com> - 5.19-1
+- fix #1011789 - update to version 5.19
+
 * Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 5.14-22
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
 
