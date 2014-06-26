@@ -10,7 +10,7 @@ Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 # Upstream says it's up to distributions to add a way to support local-magic.
 Patch0: file-localmagic.patch
-# sent upstream - should be included in next upstream release
+# sent upstream - should be included in next upstream release.
 Patch1: file-5.10-strength.patch
 Patch3: file-4.17-rpm-name.patch
 Patch4: file-5.04-volume_key.patch
