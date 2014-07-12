@@ -4,7 +4,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.19
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -149,13 +149,17 @@ cd %{py3dir}
 %postun libs -p /sbin/ldconfig
 
 %files
-%doc COPYING ChangeLog README
+%{!?_licensedir:%global license %%doc}
+%license COPYING
+%doc ChangeLog README
 %{_bindir}/*
 %{_mandir}/man1/*
 %config(noreplace) %{_sysconfdir}/magic
 
 %files libs
-%doc COPYING ChangeLog README
+%{!?_licensedir:%global license %%doc}
+%license COPYING
+%doc ChangeLog README
 %{_libdir}/*so.*
 %{_datadir}/magic*
 %{_mandir}/man5/*
@@ -168,7 +172,9 @@ cd %{py3dir}
 %{_mandir}/man3/*
 
 %files -n python-magic
-%doc python/README COPYING python/example.py
+%{!?_licensedir:%global license %%doc}
+%license COPYING
+%doc python/README python/example.py
 %{python_sitelib}/magic.py
 %{python_sitelib}/magic.pyc
 %{python_sitelib}/magic.pyo
@@ -178,7 +184,9 @@ cd %{py3dir}
 
 %if %{with_python3}
 %files -n python3-magic
-%doc python/README COPYING python/example.py
+%{!?_licensedir:%global license %%doc}
+%license COPYING
+%doc python/README python/example.py
 %{python3_sitelib}/magic.py
 %{python3_sitelib}/*egg-info
 %{python3_sitelib}/__pycache__/magic*.pyc
@@ -186,6 +194,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Sat Jul 12 2014 Tom Callaway <spot@fedoraproject.org> - 5.19-2
+- fix license handling
+
 * Wed Jun 25 2014 Jan Kaluza <jkaluza@redhat.com> - 5.19-1
 - fix #1011789 - update to version 5.19
 
