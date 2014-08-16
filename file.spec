@@ -4,7 +4,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.19
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -194,6 +194,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Sat Aug 16 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 5.19-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
+
 * Sat Jul 12 2014 Tom Callaway <spot@fedoraproject.org> - 5.19-2
 - fix license handling
 
