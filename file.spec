@@ -4,7 +4,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.19
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -18,6 +18,7 @@ Patch5: file-5.04-man-return-code.patch
 Patch6: file-5.04-generic-msdos.patch
 Patch7: file-5.14-x86boot.patch
 Patch8: file-5.14-perl.patch
+Patch9: file-5.19-CVE-2014-3587.patch
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
 BuildRequires: zlib-devel
@@ -86,6 +87,7 @@ file(1) command.
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
+%patch9 -p1
 
 # Patches can generate *.orig files, which can't stay in the magic dir,
 # otherwise there will be problems with compiling magic file!
@@ -194,6 +196,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Fri Aug 22 2014 Jan Kaluza <jkaluza@redhat.com> - 5.19-4
+- fix #1132787 - CVE-2014-3587
+
 * Sat Aug 16 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 5.19-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
 
