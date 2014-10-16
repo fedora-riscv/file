@@ -3,8 +3,8 @@
 
 Summary: A utility for determining file types
 Name: file
-Version: 5.19
-Release: 6%{?dist}
+Version: 5.20
+Release: 1%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -18,11 +18,6 @@ Patch5: file-5.04-man-return-code.patch
 Patch6: file-5.04-generic-msdos.patch
 Patch7: file-5.14-x86boot.patch
 Patch8: file-5.14-perl.patch
-Patch9: file-5.19-CVE-2014-3587.patch
-Patch10: file-5.19-pascal.patch
-Patch11: file-5.19-locale-archive.patch
-Patch12: file-5.19-msooxml.patch
-Patch13: file-5.19-python-3.4.patch
 Patch14: file-5.19-cafebabe.patch
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -92,11 +87,6 @@ file(1) command.
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
-%patch9 -p1
-%patch10 -p1
-%patch11 -p1
-%patch12 -p1
-%patch13 -p1
 %patch14 -p1
 
 # Patches can generate *.orig files, which can't stay in the magic dir,
@@ -206,6 +196,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Thu Oct 16 2014 Jan Kaluza <jkaluza@redhat.com> - 5.20-1
+- update to new version 5.20
+
 * Wed Sep 03 2014 Jan Kaluza <jkaluza@redhat.com> - 5.19-6
 - fix #1134580 - detect Mach-O universal binary
 
