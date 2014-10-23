@@ -4,7 +4,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.19
-Release: 6%{?dist}
+Release: 7%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -24,6 +24,7 @@ Patch11: file-5.19-locale-archive.patch
 Patch12: file-5.19-msooxml.patch
 Patch13: file-5.19-python-3.4.patch
 Patch14: file-5.19-cafebabe.patch
+Patch15: file-5.20-CVE-2014-3710.patch
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
 BuildRequires: zlib-devel
@@ -98,6 +99,7 @@ file(1) command.
 %patch12 -p1
 %patch13 -p1
 %patch14 -p1
+%patch15 -p1
 
 # Patches can generate *.orig files, which can't stay in the magic dir,
 # otherwise there will be problems with compiling magic file!
@@ -206,6 +208,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Thu Oct 23 2014 Jan Kaluza <jkaluza@redhat.com> - 5.19-7
+- fix #1155464 - fix for CVE-2014-3710
+
 * Wed Sep 03 2014 Jan Kaluza <jkaluza@redhat.com> - 5.19-6
 - fix #1134580 - detect Mach-O universal binary
 
