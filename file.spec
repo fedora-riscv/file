@@ -3,8 +3,8 @@
 
 Summary: A utility for determining file types
 Name: file
-Version: 5.20
-Release: 2%{?dist}
+Version: 5.22
+Release: 1%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -19,7 +19,6 @@ Patch6: file-5.04-generic-msdos.patch
 Patch7: file-5.14-x86boot.patch
 Patch8: file-5.14-perl.patch
 Patch14: file-5.19-cafebabe.patch
-Patch15: file-5.20-CVE-2014-3710.patch
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
 BuildRequires: zlib-devel
@@ -89,7 +88,6 @@ file(1) command.
 %patch7 -p1
 %patch8 -p1
 %patch14 -p1
-%patch15 -p1
 
 # Patches can generate *.orig files, which can't stay in the magic dir,
 # otherwise there will be problems with compiling magic file!
@@ -198,6 +196,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Wed Feb 04 2015 Jan Kaluza <jkaluza@redhat.com> - 5.22-1
+- update to new version 5.22
+
 * Thu Oct 23 2014 Jan Kaluza <jkaluza@redhat.com> - 5.20-2
 - fix CVE-2014-3710 (#1155464)
 
