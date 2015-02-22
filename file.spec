@@ -4,7 +4,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.22
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -200,6 +200,10 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Sat Feb 21 2015 Till Maas <opensource@till.name> - 5.22-3
+- Rebuilt for Fedora 23 Change
+  https://fedoraproject.org/wiki/Changes/Harden_all_packages_with_position-independent_code
+
 * Mon Feb 16 2015 Jan Kaluza <jkaluza@redhat.com> - 5.22-2
 - remove weak zlib pattern
 
