@@ -4,7 +4,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.22
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -200,6 +200,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Wed Jun 17 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 5.22-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
+
 * Sat Feb 21 2015 Till Maas <opensource@till.name> - 5.22-3
 - Rebuilt for Fedora 23 Change
   https://fedoraproject.org/wiki/Changes/Harden_all_packages_with_position-independent_code
