@@ -3,8 +3,8 @@
 
 Summary: A utility for determining file types
 Name: file
-Version: 5.22
-Release: 5%{?dist}
+Version: 5.24
+Release: 1%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -21,7 +21,7 @@ Patch8: file-5.14-perl.patch
 Patch14: file-5.19-cafebabe.patch
 Patch15: file-5.22-awk-perl.patch
 Patch16: file-5.22-zlib.patch
-Patch17: file-5.22-jpeg.patch
+Patch17: file-5.24-varied.patch
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
 BuildRequires: zlib-devel
@@ -202,6 +202,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Thu Jul 16 2015 Jan Kaluza <jkaluza@redhat.com> - 5.24-1
+- update to new version 5.24
+
 * Mon Jun 22 2015 Jan Kaluza <jkaluza@redhat.com> - 5.22-5
 - fix #1201630 - fix recursion in JPEG magic pattern
 
