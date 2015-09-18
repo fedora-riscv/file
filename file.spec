@@ -3,7 +3,7 @@
 
 Summary: A utility for determining file types
 Name: file
-Version: 5.24
+Version: 5.25
 Release: 1%{?dist}
 License: BSD
 Group: Applications/File
@@ -20,7 +20,6 @@ Patch7: file-5.14-x86boot.patch
 Patch8: file-5.14-perl.patch
 Patch14: file-5.19-cafebabe.patch
 Patch15: file-5.22-awk-perl.patch
-Patch16: file-5.22-zlib.patch
 Patch17: file-5.24-varied.patch
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -92,7 +91,6 @@ file(1) command.
 %patch8 -p1
 %patch14 -p1
 %patch15 -p1
-%patch16 -p1
 %patch17 -p1
 
 # Patches can generate *.orig files, which can't stay in the magic dir,
@@ -202,6 +200,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Fri Sep 18 2015 Jan Kaluza <jkaluza@redhat.com> - 5.25-1
+- update to new version 5.25
+
 * Thu Jul 16 2015 Jan Kaluza <jkaluza@redhat.com> - 5.24-1
 - update to new version 5.24
 
