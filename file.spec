@@ -1,6 +1,7 @@
 %global __libtoolize :
 %global with_python3 0%{?fedora} || 0%{?rhel} >= 7
 
+
 Summary: A utility for determining file types
 Name: file
 Version: 5.25
