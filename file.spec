@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.25
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -196,11 +196,13 @@ cd %{py3dir}
 %doc python/README python/example.py
 %{python3_sitelib}/magic.py
 %{python3_sitelib}/*egg-info
-%{python3_sitelib}/__pycache__/magic*.pyc
-%{python3_sitelib}/__pycache__/magic*.pyo
+%{python3_sitelib}/__pycache__/*
 %endif
 
 %changelog
+* Thu Nov 05 2015 Robert Kuska <rkuska@redhat.com> - 5.25-2
+- Rebuilt for Python3.5 rebuild
+
 * Fri Sep 18 2015 Jan Kaluza <jkaluza@redhat.com> - 5.25-1
 - update to new version 5.25
 
