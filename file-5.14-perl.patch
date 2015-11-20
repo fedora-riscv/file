@@ -30,7 +30,7 @@ index 127a373..7cf6434 100644
 +!:strength + 30
  0	search/1024	eval\ '(exit\ $?0)'\ &&\ eval\ 'exec	Perl script text
  !:mime	text/x-perl
-+!:strength + 30
++!:strength + 1
  0	search/1024	#!/usr/bin/env\ perl	Perl script text executable
  !:mime	text/x-perl
 +!:strength + 30
@@ -48,14 +48,14 @@ index 127a373..7cf6434 100644
  >0	regex		\^package[\ \t]+[0-9A-Za-z_:]+\ *;	Perl5 module source text
 -!:strength + 10
 +!:mime  text/x-perl
-+!:strength + 45
++!:strength + 10
  # not 'p', check other lines
  0	search/1024	!p
  >0	regex		\^package[\ \t]+[0-9A-Za-z_:]+\ *;
  >>0	regex		\^1\ *;|\^(use|sub|my)\ .*[(;{=]	Perl5 module source text
 -!:strength + 10
 +!:mime  text/x-perl
-+!:strength + 45
++!:strength + 40
  
  # Perl POD documents
  # From: Tom Hukins <tom@eborcom.com>

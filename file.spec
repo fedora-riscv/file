@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.25
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -200,6 +200,10 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Fri Nov 20 2015 Jan kaluza <jkaluza@redhat.com> - 5.25-3
+- fix #1279401 - change the order of Perl patterns to try "Perl script"
+  patterns before "Perl Module"
+
 * Thu Nov 05 2015 Robert Kuska <rkuska@redhat.com> - 5.25-2
 - Rebuilt for Python3.5 rebuild
 
