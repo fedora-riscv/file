@@ -4,7 +4,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.22
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -23,6 +23,7 @@ Patch15: file-5.22-awk-perl.patch
 Patch16: file-5.22-zlib.patch
 Patch17: file-5.22-symlink.patch
 Patch18: file-5.22-jpeg.patch
+Patch19: file-trunk-msx-binary.patch
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
 BuildRequires: zlib-devel
@@ -96,6 +97,7 @@ file(1) command.
 %patch16 -p1
 %patch17 -p1
 %patch18 -p1
+%patch19 -p1
 
 # Patches can generate *.orig files, which can't stay in the magic dir,
 # otherwise there will be problems with compiling magic file!
@@ -204,6 +206,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Wed Jan 06 2016 Jan Kaluza <jkaluza@redhat.com> - 5.22-5
+- fix #1291903 - fix misdetection of some text files as MSX binary files
+
 * Mon Jun 22 2015 Jan Kaluza <jkaluza@redhat.com> - 5.22-4
 - fix #1201630 - fix recursion in JPEG magic pattern
 
