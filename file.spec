@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.25
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -22,6 +22,7 @@ Patch8: file-5.14-perl.patch
 Patch14: file-5.19-cafebabe.patch
 Patch15: file-5.22-awk-perl.patch
 Patch17: file-5.24-varied.patch
+Patch18: file-trunk-msx-binary.patch
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
 BuildRequires: zlib-devel
@@ -93,6 +94,7 @@ file(1) command.
 %patch14 -p1
 %patch15 -p1
 %patch17 -p1
+%patch18 -p1
 
 # Patches can generate *.orig files, which can't stay in the magic dir,
 # otherwise there will be problems with compiling magic file!
@@ -200,6 +202,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Wed Jan 06 2016 Jan Kaluza <jkaluza@redhat.com> - 5.25-4
+- fix #1291903 - fix misdetection of some text files as MSX binary files
+
 * Fri Nov 20 2015 Jan kaluza <jkaluza@redhat.com> - 5.25-3
 - fix #1279401 - change the order of Perl patterns to try "Perl script"
   patterns before "Perl Module"
