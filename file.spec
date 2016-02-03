@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.25
-Release: 5%{?dist}
+Release: 6%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -204,6 +204,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Wed Feb 03 2016 Fedora Release Engineering <releng@fedoraproject.org> - 5.25-6
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
+
 * Thu Jan 28 2016 Jan Kaluza <jkaluza@redhat.com> - 5.25-5
 - fix #1302297 - fix misdetection of some Perl scripts as Minix filesystem
 
