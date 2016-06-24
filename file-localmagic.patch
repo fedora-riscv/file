@@ -1,23 +1,19 @@
 From f25107f625e88726e8ae9d4963573b5a0dda8f4c Mon Sep 17 00:00:00 2001
 From: Jan Kaluza <hanzz.k@gmail.com>
 Date: Thu, 15 Dec 2011 16:15:41 +0100
-Subject: [PATCH] localmagic
+Subject: [PATCH] file-localmagic.patch
 
+Upstream says it's up to distributions to add a way to support local-magic.
+
+Signed-off-by: Kamil Dudka <kdudka@redhat.com>
 ---
- src/Makefile.am |    2 +-
- src/Makefile.in |    2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ magic/magic.local | 3 +++
+ src/Makefile.am   | 2 +-
+ src/Makefile.in   | 2 +-
+ src/apprentice.c  | 2 +-
+ 4 files changed, 6 insertions(+), 3 deletions(-)
+ create mode 100644 magic/magic.local
 
-diff --git a/src/Makefile.am b/src/Makefile.am
-index cba64ac..5e48dff 100644
---- a/src/Makefile.am
-+++ b/src/Makefile.am
-@@ -1,4 +1,4 @@
--MAGIC = $(pkgdatadir)/magic
-+MAGIC = /etc/magic:$(pkgdatadir)/magic
- lib_LTLIBRARIES = libmagic.la
- include_HEADERS = magic.h
- 
 diff --git a/magic/magic.local b/magic/magic.local
 new file mode 100644
 index 0000000..283a863
@@ -27,25 +23,34 @@ index 0000000..283a863
 +# Magic local data for file(1) command.
 +# Insert here your local magic data. Format is described in magic(5).
 +
+diff --git a/src/Makefile.am b/src/Makefile.am
+index 155aec4..0f22539 100644
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -1,4 +1,4 @@
+-MAGIC = $(pkgdatadir)/magic
++MAGIC = /etc/magic:$(pkgdatadir)/magic
+ lib_LTLIBRARIES = libmagic.la
+ nodist_include_HEADERS = magic.h
  
 diff --git a/src/Makefile.in b/src/Makefile.in
-index 39b1703..3dd92d8 100644
+index b6eeb20..78dce55 100644
 --- a/src/Makefile.in
 +++ b/src/Makefile.in
-@@ -240,7 +240,7 @@ target_alias = @target_alias@
+@@ -337,7 +337,7 @@ target_alias = @target_alias@
  top_build_prefix = @top_build_prefix@
  top_builddir = @top_builddir@
  top_srcdir = @top_srcdir@
 -MAGIC = $(pkgdatadir)/magic
 +MAGIC = /etc/magic:$(pkgdatadir)/magic
  lib_LTLIBRARIES = libmagic.la
- include_HEADERS = magic.h
+ nodist_include_HEADERS = magic.h
  AM_CPPFLAGS = -DMAGIC='"$(MAGIC)"'
 diff --git a/src/apprentice.c b/src/apprentice.c
-index cd45bdc..83a2a37 100644
+index e395854..ecc1214 100644
 --- a/src/apprentice.c
 +++ b/src/apprentice.c
-@@ -419,7 +419,7 @@ apprentice_1(struct magic_set *ms, const char *fn, int action)
+@@ -452,7 +452,7 @@ apprentice_1(struct magic_set *ms, const char *fn, int action)
  #ifndef COMPILE_ONLY
  	map = apprentice_map(ms, fn);
  	if (map == NULL) {
@@ -54,7 +59,6 @@ index cd45bdc..83a2a37 100644
  			file_magwarn(ms, "using regular magic file `%s'", fn);
  		map = apprentice_load(ms, fn, action);
  		if (map == NULL)
-
 -- 
-1.7.7.4
+2.5.5
 

@@ -4,14 +4,16 @@
 
 Summary: A utility for determining file types
 Name: file
-Version: 5.25
-Release: 6%{?dist}
+Version: 5.28
+Release: 1%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
+
 # Upstream says it's up to distributions to add a way to support local-magic.
 Patch0: file-localmagic.patch
-# sent upstream - should be included in next upstream release.
+
+# sent upstream
 Patch1: file-5.10-strength.patch
 Patch3: file-4.17-rpm-name.patch
 Patch4: file-5.04-volume_key.patch
@@ -22,8 +24,7 @@ Patch8: file-5.14-perl.patch
 Patch14: file-5.19-cafebabe.patch
 Patch15: file-5.22-awk-perl.patch
 Patch17: file-5.24-varied.patch
-Patch18: file-trunk-msx-binary.patch
-Patch19: file-5.25-minix.patch
+
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
 BuildRequires: zlib-devel
@@ -95,8 +96,6 @@ file(1) command.
 %patch14 -p1
 %patch15 -p1
 %patch17 -p1
-%patch18 -p1
-%patch19 -p1
 
 # Patches can generate *.orig files, which can't stay in the magic dir,
 # otherwise there will be problems with compiling magic file!
@@ -204,6 +203,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Fri Jun 24 2016 Kamil Dudka <kdudka@redhat.com> - 5.28-1
+- update to new version 5.28
+
 * Wed Feb 03 2016 Fedora Release Engineering <releng@fedoraproject.org> - 5.25-6
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
 

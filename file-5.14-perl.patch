@@ -1,3 +1,13 @@
+From 75c845d20018fbfd9689c922b3e1d430da592a92 Mon Sep 17 00:00:00 2001
+From: Jan Kaluza <jkaluza@redhat.com>
+Date: Fri, 22 Mar 2013 10:38:25 +0100
+Subject: [PATCH] file-5.14-perl.patch
+
+Signed-off-by: Kamil Dudka <kdudka@redhat.com>
+---
+ magic/Magdir/perl | 16 +++++++++++++++-
+ 1 file changed, 15 insertions(+), 1 deletion(-)
+
 diff --git a/magic/Magdir/perl b/magic/Magdir/perl
 index 127a373..7cf6434 100644
 --- a/magic/Magdir/perl
@@ -31,13 +41,13 @@ index 127a373..7cf6434 100644
  0	search/1024	eval\ '(exit\ $?0)'\ &&\ eval\ 'exec	Perl script text
  !:mime	text/x-perl
 +!:strength + 1
- 0	search/1024	#!/usr/bin/env\ perl	Perl script text executable
+ 0	string	#!/usr/bin/env\ perl	Perl script text executable
  !:mime	text/x-perl
 +!:strength + 30
- 0	search/1024	#!\ /usr/bin/env\ perl	Perl script text executable
+ 0	string	#!\ /usr/bin/env\ perl	Perl script text executable
  !:mime	text/x-perl
 +!:strength + 30
- 0	search/1024	#!
+ 0	string	#!
  >0	regex	\^#!.*/bin/perl([[:space:]].*)*$	Perl script text executable
  !:mime	text/x-perl
 +!:strength + 30
@@ -46,9 +56,8 @@ index 127a373..7cf6434 100644
  # check the first line
  0	search/1024	package
  >0	regex		\^package[\ \t]+[0-9A-Za-z_:]+\ *;	Perl5 module source text
--!:strength + 10
 +!:mime  text/x-perl
-+!:strength + 10
+ !:strength + 10
  # not 'p', check other lines
  0	search/1024	!p
  >0	regex		\^package[\ \t]+[0-9A-Za-z_:]+\ *;
@@ -59,3 +68,6 @@ index 127a373..7cf6434 100644
  
  # Perl POD documents
  # From: Tom Hukins <tom@eborcom.com>
+-- 
+2.5.5
+
