@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.28
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -24,6 +24,9 @@ Patch8: file-5.14-perl.patch
 Patch14: file-5.19-cafebabe.patch
 Patch15: file-5.22-awk-perl.patch
 Patch17: file-5.24-varied.patch
+
+# https://github.com/file/file/pull/8
+Patch100: file-5.28-compress-sigsegv.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -96,6 +99,8 @@ file(1) command.
 %patch14 -p1
 %patch15 -p1
 %patch17 -p1
+
+%patch100 -p1
 
 # Patches can generate *.orig files, which can't stay in the magic dir,
 # otherwise there will be problems with compiling magic file!
@@ -203,6 +208,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Mon Jun 27 2016 Igor Gnatenko <i.gnatenko.brain@gmail.com> - 5.28-2
+- Fix crash during uncompression of zlib (RHBZ #1350252)
+
 * Fri Jun 24 2016 Kamil Dudka <kdudka@redhat.com> - 5.28-1
 - update to new version 5.28
 
