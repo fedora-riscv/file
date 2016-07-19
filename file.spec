@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.28
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -208,6 +208,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Tue Jul 19 2016 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 5.28-3
+- https://fedoraproject.org/wiki/Changes/Automatic_Provides_for_Python_RPM_Packages
+
 * Mon Jun 27 2016 Igor Gnatenko <i.gnatenko.brain@gmail.com> - 5.28-2
 - Fix crash during uncompression of zlib (RHBZ #1350252)
 
