@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.28
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -27,6 +27,9 @@ Patch17: file-5.24-varied.patch
 
 # https://github.com/file/file/pull/8
 Patch100: file-5.28-compress-sigsegv.patch
+
+# avoid double encoding with Python 3 (#1367144)
+Patch101: file-5.28-py3-double-enc.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -101,6 +104,7 @@ file(1) command.
 %patch17 -p1
 
 %patch100 -p1
+%patch101 -p1
 
 # Patches can generate *.orig files, which can't stay in the magic dir,
 # otherwise there will be problems with compiling magic file!
@@ -208,6 +212,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Wed Aug 17 2016 Kamil Dudka <kdudka@redhat.com> - 5.28-4
+- avoid double encoding with Python 3 (#1367144)
+
 * Tue Jul 19 2016 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 5.28-3
 - https://fedoraproject.org/wiki/Changes/Automatic_Provides_for_Python_RPM_Packages
 
