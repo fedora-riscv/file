@@ -12,7 +12,7 @@ diff --git a/doc/file.man b/doc/file.man
 index fff7730..3a524f5 100644
 --- a/doc/file.man
 +++ b/doc/file.man
-@@ -583,6 +583,11 @@ program, and are not covered by the above license.
+@@ -586,6 +586,11 @@ program, and are not covered by the above license.
  .Sh RETURN CODE
  .Nm
  returns 0 on success, and non-zero on error.

@@ -50,9 +50,9 @@ diff --git a/src/apprentice.c b/src/apprentice.c
 index e395854..ecc1214 100644
 --- a/src/apprentice.c
 +++ b/src/apprentice.c
-@@ -452,7 +452,7 @@ apprentice_1(struct magic_set *ms, const char *fn, int action)
- #ifndef COMPILE_ONLY
- 	map = apprentice_map(ms, fn);
+@@ -454,7 +454,7 @@ apprentice_1(struct magic_set *ms, const char *fn, int action)
+ 	if (map == (struct magic_map *)-1)
+ 		return -1;
  	if (map == NULL) {
 -		if (ms->flags & MAGIC_CHECK)
 +		if (ms->flags & MAGIC_CHECK && strcmp("/etc/magic", fn) != 0)

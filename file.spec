@@ -4,8 +4,8 @@
 
 Summary: A utility for determining file types
 Name: file
-Version: 5.28
-Release: 4%{?dist}
+Version: 5.29
+Release: 1%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -24,12 +24,6 @@ Patch8: file-5.14-perl.patch
 Patch14: file-5.19-cafebabe.patch
 Patch15: file-5.22-awk-perl.patch
 Patch17: file-5.24-varied.patch
-
-# https://github.com/file/file/pull/8
-Patch100: file-5.28-compress-sigsegv.patch
-
-# avoid double encoding with Python 3 (#1367144)
-Patch101: file-5.28-py3-double-enc.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -102,9 +96,6 @@ file(1) command.
 %patch14 -p1
 %patch15 -p1
 %patch17 -p1
-
-%patch100 -p1
-%patch101 -p1
 
 # Patches can generate *.orig files, which can't stay in the magic dir,
 # otherwise there will be problems with compiling magic file!
@@ -212,6 +203,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Tue Oct 25 2016 Kamil Dudka <kdudka@redhat.com> - 5.29-1
+- update to new version 5.29
+
 * Wed Aug 17 2016 Kamil Dudka <kdudka@redhat.com> - 5.28-4
 - avoid double encoding with Python 3 (#1367144)
 
