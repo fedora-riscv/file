@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.29
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -203,6 +203,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Tue Dec 13 2016 Charalampos Stratakis <cstratak@redhat.com> - 5.29-2
+- Rebuild for Python 3.6
+
 * Tue Oct 25 2016 Kamil Dudka <kdudka@redhat.com> - 5.29-1
 - update to new version 5.29
 
