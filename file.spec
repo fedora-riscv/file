@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.29
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -24,6 +24,9 @@ Patch8: file-5.14-perl.patch
 Patch14: file-5.19-cafebabe.patch
 Patch15: file-5.22-awk-perl.patch
 Patch17: file-5.24-varied.patch
+
+# picked from upstream
+Patch102: file-5.29-short-sector.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -96,6 +99,8 @@ file(1) command.
 %patch14 -p1
 %patch15 -p1
 %patch17 -p1
+
+%patch102 -p1
 
 # Patches can generate *.orig files, which can't stay in the magic dir,
 # otherwise there will be problems with compiling magic file!
@@ -203,6 +208,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Wed Feb 08 2017 Kamil Dudka <kdudka@redhat.com> - 5.29-3
+- fix assertion failure on certain files (thanks to Christoph Biedl)
+
 * Tue Dec 13 2016 Charalampos Stratakis <cstratak@redhat.com> - 5.29-2
 - Rebuild for Python 3.6
 
