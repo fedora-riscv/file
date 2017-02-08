@@ -125,7 +125,7 @@ CFLAGS="%{optflags} -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE" \
 sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
 sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
 export LD_LIBRARY_PATH=%{_builddir}/%{name}-%{version}/src/.libs
-make
+make %{?_smp_mflags} V=1
 cd python
 CFLAGS="%{optflags}" %{__python} setup.py build
 %if %{with_python3}
@@ -209,6 +209,7 @@ cd %{py3dir}
 
 %changelog
 * Wed Feb 08 2017 Kamil Dudka <kdudka@redhat.com> - 5.29-3
+- build in parallel and in verbose mode
 - fix assertion failure on certain files (thanks to Christoph Biedl)
 
 * Tue Dec 13 2016 Charalampos Stratakis <cstratak@redhat.com> - 5.29-2
