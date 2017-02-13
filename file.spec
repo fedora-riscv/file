@@ -81,21 +81,7 @@ file(1) command.
 %endif
 
 %prep
-
-# Don't use -b -- it will lead to poblems when compiling magic file!
-%setup -q
-
-%patch0 -p1
-%patch1 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
-%patch8 -p1
-%patch14 -p1
-%patch15 -p1
-%patch17 -p1
+%autosetup -p1
 
 # Patches can generate *.orig files, which can't stay in the magic dir,
 # otherwise there will be problems with compiling magic file!
@@ -204,6 +190,7 @@ cd %{py3dir}
 
 %changelog
 * Mon Feb 13 2017 Kamil Dudka <kdudka@redhat.com> - 5.30-1
+- apply patches automatically to ease maintenance
 - update to new version 5.30
 
 * Wed Feb 08 2017 Kamil Dudka <kdudka@redhat.com> - 5.29-3
