@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.30
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -24,6 +24,9 @@ Patch8: file-5.14-perl.patch
 Patch14: file-5.19-cafebabe.patch
 Patch15: file-5.22-awk-perl.patch
 Patch17: file-5.24-varied.patch
+
+# picked from upstream
+Patch18: file-5.30-fix-debug-info-reversed-logic.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -189,6 +192,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Tue Feb 14 2017 Kamil Dudka <kdudka@redhat.com> - 5.30-2
+- fix debug info reversed logic
+
 * Mon Feb 13 2017 Kamil Dudka <kdudka@redhat.com> - 5.30-1
 - apply patches automatically to ease maintenance
 - update to new version 5.30
