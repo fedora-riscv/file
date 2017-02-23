@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.30
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -17,7 +17,6 @@ Patch0: file-localmagic.patch
 Patch3: file-4.17-rpm-name.patch
 Patch4: file-5.04-volume_key.patch
 Patch5: file-5.04-man-return-code.patch
-Patch6: file-5.04-generic-msdos.patch
 Patch7: file-5.14-x86boot.patch
 Patch14: file-5.19-cafebabe.patch
 Patch15: file-5.22-awk-perl.patch
@@ -192,6 +191,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Thu Feb 23 2017 Kamil Dudka <kdudka@redhat.com> - 5.30-5
+- drop undocumented non-upstream file-5.04-generic-msdos.patch
+
 * Thu Feb 23 2017 Kamil Dudka <kdudka@redhat.com> - 5.30-4
 - increase strength of perl modules to exceed C sources (#772651)
 - drop non-upstream file-5.14-perl.patch (#1051598)
