@@ -26,6 +26,7 @@ Patch17: file-5.24-varied.patch
 # picked from upstream
 Patch18: file-5.30-fix-debug-info-reversed-logic.patch
 Patch19: file-5.30-keep-not-stripped-last.patch
+Patch20: file-5.30-bump-perl-to-exceed-c.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -192,6 +193,7 @@ cd %{py3dir}
 
 %changelog
 * Thu Feb 23 2017 Kamil Dudka <kdudka@redhat.com> - 5.30-4
+- increase strength of perl modules to exceed C sources (#772651)
 - drop non-upstream file-5.14-perl.patch (#1051598)
 - drop undocumented non-upstream file-5.10-strength.patch (#772651)
 
