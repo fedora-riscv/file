@@ -13,11 +13,10 @@ Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 # Upstream says it's up to distributions to add a way to support local-magic.
 Patch0: file-localmagic.patch
 
-# sent upstream
+# not yet upstream
 Patch3: file-4.17-rpm-name.patch
 Patch4: file-5.04-volume_key.patch
 Patch5: file-5.04-man-return-code.patch
-Patch17: file-5.24-varied.patch
 
 # picked from upstream
 Patch18: file-5.30-fix-debug-info-reversed-logic.patch
@@ -189,6 +188,7 @@ cd %{py3dir}
 
 %changelog
 * Thu Feb 23 2017 Kamil Dudka <kdudka@redhat.com> - 5.30-5
+- drop undocumented non-upstream file-5.24-varied.patch
 - drop undocumented non-upstream file-5.22-awk-perl.patch
 - drop non-upstream file-5.19-cafebabe.patch no longer needed (#1134580)
 - drop undocumented non-upstream file-5.14-x86boot.patch
