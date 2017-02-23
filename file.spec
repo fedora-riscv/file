@@ -1,4 +1,4 @@
-%global with_python3 0%{?fedora} || 0%{?rhel} >= 7
+%global with_python3 0%{?fedora} || 0%{?rhel} > 7
 
 Summary: A utility for determining file types
 Name: file
@@ -54,6 +54,9 @@ necessary for developing programs using libmagic.
 Summary: Python 2 bindings for the libmagic API
 Group:   Development/Libraries
 BuildRequires: python2-devel
+%if 0%{?rhel} && 0%{?rhel} <= 7
+BuildRequires: python-setuptools
+%endif
 BuildArch: noarch
 Requires: %{name} = %{version}-%{release}
 
@@ -186,6 +189,7 @@ cd %{py3dir}
 
 %changelog
 * Thu Feb 23 2017 Kamil Dudka <kdudka@redhat.com> - 5.30-5
+- make the package build on EPEL-6 and EPEL-7
 - drup undocumented override of the __libtoolize RPM macro
 - drop undocumented non-upstream file-5.24-varied.patch
 - drop undocumented non-upstream file-5.22-awk-perl.patch
