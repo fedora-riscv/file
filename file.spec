@@ -17,7 +17,6 @@ Patch0: file-localmagic.patch
 Patch3: file-4.17-rpm-name.patch
 Patch4: file-5.04-volume_key.patch
 Patch5: file-5.04-man-return-code.patch
-Patch15: file-5.22-awk-perl.patch
 Patch17: file-5.24-varied.patch
 
 # picked from upstream
@@ -190,6 +189,7 @@ cd %{py3dir}
 
 %changelog
 * Thu Feb 23 2017 Kamil Dudka <kdudka@redhat.com> - 5.30-5
+- drop undocumented non-upstream file-5.22-awk-perl.patch
 - drop non-upstream file-5.19-cafebabe.patch no longer needed (#1134580)
 - drop undocumented non-upstream file-5.14-x86boot.patch
 - drop undocumented non-upstream file-5.04-generic-msdos.patch
