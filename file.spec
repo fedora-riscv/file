@@ -1,6 +1,4 @@
-%global __libtoolize :
 %global with_python3 0%{?fedora} || 0%{?rhel} >= 7
-
 
 Summary: A utility for determining file types
 Name: file
@@ -188,6 +186,7 @@ cd %{py3dir}
 
 %changelog
 * Thu Feb 23 2017 Kamil Dudka <kdudka@redhat.com> - 5.30-5
+- drup undocumented override of the __libtoolize RPM macro
 - drop undocumented non-upstream file-5.24-varied.patch
 - drop undocumented non-upstream file-5.22-awk-perl.patch
 - drop non-upstream file-5.19-cafebabe.patch no longer needed (#1134580)
