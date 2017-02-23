@@ -19,7 +19,6 @@ Patch4: file-5.04-volume_key.patch
 Patch5: file-5.04-man-return-code.patch
 Patch6: file-5.04-generic-msdos.patch
 Patch7: file-5.14-x86boot.patch
-Patch8: file-5.14-perl.patch
 Patch14: file-5.19-cafebabe.patch
 Patch15: file-5.22-awk-perl.patch
 Patch17: file-5.24-varied.patch
@@ -193,6 +192,7 @@ cd %{py3dir}
 
 %changelog
 * Thu Feb 23 2017 Kamil Dudka <kdudka@redhat.com> - 5.30-4
+- drop non-upstream file-5.14-perl.patch (#1051598)
 - drop undocumented non-upstream file-5.10-strength.patch (#772651)
 
 * Tue Feb 14 2017 Kamil Dudka <kdudka@redhat.com> - 5.30-3
