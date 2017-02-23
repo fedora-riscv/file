@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.30
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -14,7 +14,6 @@ Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 Patch0: file-localmagic.patch
 
 # sent upstream
-Patch1: file-5.10-strength.patch
 Patch3: file-4.17-rpm-name.patch
 Patch4: file-5.04-volume_key.patch
 Patch5: file-5.04-man-return-code.patch
@@ -193,6 +192,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Thu Feb 23 2017 Kamil Dudka <kdudka@redhat.com> - 5.30-4
+- drop undocumented non-upstream file-5.10-strength.patch (#772651)
+
 * Tue Feb 14 2017 Kamil Dudka <kdudka@redhat.com> - 5.30-3
 - restore compatibility with certain RPM scripts
 
