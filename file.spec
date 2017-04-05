@@ -189,7 +189,7 @@ cd %{py3dir}
 %endif
 
 %changelog
-* Tue Apr 05 2017 Kamil Dudka <kdudka@redhat.com> - 5.30-6
+* Wed Apr 05 2017 Kamil Dudka <kdudka@redhat.com> - 5.30-6
 - fix utf-8 conversion in Python 2 bindings (#1433364)
 
 * Thu Feb 23 2017 Kamil Dudka <kdudka@redhat.com> - 5.30-5
