@@ -3,7 +3,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.30
-Release: 5%{?dist}
+Release: 6%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -20,6 +20,7 @@ Patch5: file-5.04-man-return-code.patch
 Patch18: file-5.30-fix-debug-info-reversed-logic.patch
 Patch19: file-5.30-keep-not-stripped-last.patch
 Patch20: file-5.30-bump-perl-to-exceed-c.patch
+Patch21: file-5.30-python-utf8.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -188,9 +189,12 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Tue Apr 05 2017 Kamil Dudka <kdudka@redhat.com> - 5.30-6
+- fix utf-8 conversion in Python 2 bindings (#1433364)
+
 * Thu Feb 23 2017 Kamil Dudka <kdudka@redhat.com> - 5.30-5
 - make the package build on EPEL-6 and EPEL-7
-- drup undocumented override of the __libtoolize RPM macro
+- drop undocumented override of the __libtoolize RPM macro
 - drop undocumented non-upstream file-5.24-varied.patch
 - drop undocumented non-upstream file-5.22-awk-perl.patch
 - drop non-upstream file-5.19-cafebabe.patch no longer needed (#1134580)
