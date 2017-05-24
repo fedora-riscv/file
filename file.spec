@@ -2,8 +2,8 @@
 
 Summary: A utility for determining file types
 Name: file
-Version: 5.30
-Release: 6%{?dist}
+Version: 5.31
+Release: 1%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -17,10 +17,7 @@ Patch4: file-5.04-volume_key.patch
 Patch5: file-5.04-man-return-code.patch
 
 # picked from upstream
-Patch18: file-5.30-fix-debug-info-reversed-logic.patch
-Patch19: file-5.30-keep-not-stripped-last.patch
-Patch20: file-5.30-bump-perl-to-exceed-c.patch
-Patch21: file-5.30-python-utf8.patch
+
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -82,10 +79,6 @@ file(1) command.
 
 %prep
 %autosetup -p1
-
-# Patches can generate *.orig files, which can't stay in the magic dir,
-# otherwise there will be problems with compiling magic file!
-rm -fv magic/Magdir/*.orig
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
@@ -189,6 +182,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Wed May 24 2017 Kamil Dudka <kdudka@redhat.com> - 5.31-1
+- update to new version 5.31
+
 * Wed Apr 05 2017 Kamil Dudka <kdudka@redhat.com> - 5.30-6
 - fix utf-8 conversion in Python 2 bindings (#1433364)
 
