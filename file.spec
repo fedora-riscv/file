@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.29
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -28,6 +28,7 @@ Patch17: file-5.24-varied.patch
 # picked from upstream
 Patch102: file-5.29-short-sector.patch
 Patch103: file-5.30-python-utf8.patch
+Patch104: file-5.31-mo-file-recognition.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -210,6 +211,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Tue Jul 25 2017 Marek Cermak <macermak@redhat.com> - 5.29-5
+- fixed recognition of gnu message catalog (.mo) files (#1226215)
+
 * Wed Apr 05 2017 Kamil Dudka <kdudka@redhat.com> - 5.29-4
 - fix utf-8 conversion in Python 2 bindings (#1433364)
 
