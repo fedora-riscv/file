@@ -3,7 +3,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.31
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -17,7 +17,7 @@ Patch4: file-5.04-volume_key.patch
 Patch5: file-5.04-man-return-code.patch
 
 # picked from upstream
-
+Patch6: file-5.31-mo-file-recognition.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -182,6 +182,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Tue Jul 25 2017 Marek Cermak <macermak@redhat.com> - 5.31-2
+- fixed recognition of gnu message catalog (.mo) files (#1226215)
+
 * Wed May 24 2017 Kamil Dudka <kdudka@redhat.com> - 5.31-1
 - update to new version 5.31
 
