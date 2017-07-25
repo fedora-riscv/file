@@ -3,7 +3,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.30
-Release: 6%{?dist}
+Release: 7%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -21,6 +21,7 @@ Patch18: file-5.30-fix-debug-info-reversed-logic.patch
 Patch19: file-5.30-keep-not-stripped-last.patch
 Patch20: file-5.30-bump-perl-to-exceed-c.patch
 Patch21: file-5.30-python-utf8.patch
+Patch22: file-5.31-mo-file-recognition.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -189,6 +190,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Tue Jul 25 2017 Marek Cermak <macermak@redhat.com> - 5.30-7
+- fixed recognition of gnu message catalog (.mo) files (#1226215)
+
 * Wed Apr 05 2017 Kamil Dudka <kdudka@redhat.com> - 5.30-6
 - fix utf-8 conversion in Python 2 bindings (#1433364)
 
