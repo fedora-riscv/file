@@ -3,7 +3,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.31
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -182,6 +182,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Wed Jul 26 2017 Fedora Release Engineering <releng@fedoraproject.org> - 5.31-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
+
 * Tue Jul 25 2017 Marek Cermak <macermak@redhat.com> - 5.31-2
 - fixed recognition of gnu message catalog (.mo) files (#1226215)
 
