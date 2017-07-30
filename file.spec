@@ -3,7 +3,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.31
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -182,6 +182,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Sun Jul 30 2017 Florian Weimer <fweimer@redhat.com> - 5.31-4
+- Rebuild with binutils fix for ppc64le (#1475636)
+
 * Wed Jul 26 2017 Fedora Release Engineering <releng@fedoraproject.org> - 5.31-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
 
