@@ -8,22 +8,25 @@ Subject: [PATCH] Strength decreased in magic file magic/Magdir/dump for new-fs
 https://bugzilla.redhat.com/show_bug.cgi?id=1226215
 
 Upstream commit: https://github.com/file/file/commit/2e5e9e16a4847b2e60cabc70e6b9bd7d633cb68a
+
+Signed-off-by: Marek Cermak <macermak@redhat.com>
 ---
- magic/Magdir/dump | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ magic/Magdir/dump | 2 ++
+ 1 file changed, 2 insertions(+)
 
 diff --git a/magic/Magdir/dump b/magic/Magdir/dump
-index 64742b7a..c5711661 100644
+index 1a20ace..d55c3ed 100644
 --- a/magic/Magdir/dump
 +++ b/magic/Magdir/dump
+@@ -69,6 +69,8 @@
  >0	use	old-dump-be
  
- 24	lelong	60012		new-fs dump file (little endian),
+ 24	lelong	60012		new-fs dump file (little endian), 
 +# to correctly recognize '*.mo' GNU message catalog (little endian)
 +!:strength - 15
  >0	use	\^new-dump-be
  
- 24	lelong	60011		old-fs dump file (little endian),
+ 24	lelong	60011		old-fs dump file (little endian), 
 -- 
 2.13.3
 
