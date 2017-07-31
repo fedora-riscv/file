@@ -3,7 +3,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.31
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -182,6 +182,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Mon Jul 31 2017 Marek Cermak <macermak@redhat.com> - 5.31-5
+- fixed patch for recognition of gnu message catalog (.mo) files (#1226215)
+
 * Sun Jul 30 2017 Florian Weimer <fweimer@redhat.com> - 5.31-4
 - Rebuild with binutils fix for ppc64le (#1475636)
 
