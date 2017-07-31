@@ -3,7 +3,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.30
-Release: 7%{?dist}
+Release: 8%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -190,6 +190,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Mon Jul 31 2017 Marek Cermak <macermak@redhat.com> - 5.30-8
+- fixed patch for recognition of gnu message catalog (.mo) files (#1226215) 
+
 * Tue Jul 25 2017 Marek Cermak <macermak@redhat.com> - 5.30-7
 - fixed recognition of gnu message catalog (.mo) files (#1226215)
 
