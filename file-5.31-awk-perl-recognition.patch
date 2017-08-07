@@ -1,0 +1,98 @@
+From 898f5d27b66b5d5592cb56fa9da5b776628ea6ca Mon Sep 17 00:00:00 2001
+From: Christos Zoulas <christos@zoulas.com>
+Date: Wed, 31 May 2017 15:48:50 +0000
+Subject: [PATCH] Fix \s vs \w confusion.
+
+Upstream commit: https://github.com/file/file/commit/898f5d27b66b5d5592cb56fa9da5b776628ea6ca
+
+Fixes awk/perl script recognition 
+
+Signed-off-by: Marek Cermak <macermak@redhat.com>
+---
+ magic/Magdir/commands |  4 ++--
+ magic/Magdir/images   | 14 +++++++-------
+ magic/Magdir/python   |  4 ++--
+ 3 files changed, 11 insertions(+), 11 deletions(-)
+
+diff --git a/magic/Magdir/commands b/magic/Magdir/commands
+index 1a46efd8..f4326a9e 100644
+--- a/magic/Magdir/commands
++++ b/magic/Magdir/commands
+@@ -56,7 +56,7 @@
+ !:mime	text/x-awk
+ 0	string/wt	#!\ /usr/bin/awk	awk script text executable
+ !:mime	text/x-awk
+-0	regex/4096	=^[A-Za-z0-9_]{0,100}BEGIN[A-Za-z0-9_]{0,100}[{]	awk or perl script text
++0	regex/4096	=^[\040\t\f\r\n]{0,100}BEGIN[\040\t\f\r\n]{0,100}[{]	awk or perl script text
+ 
+ # AT&T Bell Labs' Plan 9 shell
+ 0	string/wt	#!\ /bin/rc	Plan 9 rc shell script text executable
+diff --git a/magic/Magdir/images b/magic/Magdir/images
+index ce68e00d..d14c1de1 100644
+--- a/magic/Magdir/images
++++ b/magic/Magdir/images
+@@ -175,42 +175,42 @@
+ >>>&0	regex		=[0-9]{1,50}			\b %s
+ 
+ 0	search/1	P1
+->0	regex/4		P1[A-Za-z0-9_]
++>0	regex/4		P1[\040\t\f\r\n]
+ >>0	use		netpbm
+ >>>0	string		x	\b, bitmap
+ !:strength + 45
+ !:mime	image/x-portable-bitmap
+ 
+ 0	search/1	P2
+->0	regex/4		P2[A-Za-z0-9_]
++>0	regex/4		P2[\040\t\f\r\n]
+ >>0	use		netpbm
+ >>>0	string		x	\b, greymap
+ !:strength + 45
+ !:mime	image/x-portable-greymap
+ 
+ 0	search/1	P3
+->0	regex/4		P3[A-Za-z0-9_]
++>0	regex/4		P3[\040\t\f\r\n]
+ >>0	use		netpbm
+ >>>0	string		x	\b, pixmap
+ !:strength + 45
+ !:mime	image/x-portable-pixmap
+ 
+ 0	string		P4
+->0	regex/4		P4[A-Za-z0-9_]
++>0	regex/4		P4[\040\t\f\r\n]
+ >>0	use		netpbm
+ >>>0	string		x	\b, rawbits, bitmap
+ !:strength + 45
+ !:mime	image/x-portable-bitmap
+ 
+ 0	string		P5
+->0	regex/4		P5[A-Za-z0-9_]
++>0	regex/4		P5[\040\t\f\r\n]
+ >>0	use		netpbm
+ >>>0	string		x	\b, rawbits, greymap
+ !:strength + 45
+ !:mime	image/x-portable-greymap
+ 
+ 0	string		P6
+->0	regex/4		P6[A-Za-z0-9_]
++>0	regex/4		P6[\040\t\f\r\n]
+ >>0	use		netpbm
+ >>>0	string		x	\b, rawbits, pixmap
+ !:strength + 45
+diff --git a/magic/Magdir/python b/magic/Magdir/python
+index 81d1cc39..d6c2220a 100644
+--- a/magic/Magdir/python
++++ b/magic/Magdir/python
+@@ -64,7 +64,7 @@
+ # except: or finally:
+ # block
+ 0	search/4096	try:
+->&0	regex	\^[A-Za-z0-9_]*except.*:	Python script text executable
++>&0	regex	\^[\040\t\f\r\n]*except.*:	Python script text executable
+ !:strength + 15
+ !:mime text/x-python
+ >&0	search/4096	finally:	Python script text executable
+-- 
+2.13.3
+

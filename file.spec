@@ -3,7 +3,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.31
-Release: 6%{?dist}
+Release: 7%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -18,6 +18,7 @@ Patch5: file-5.04-man-return-code.patch
 
 # picked from upstream
 Patch6: file-5.31-mo-file-recognition.patch
+Patch7: file-5.31-awk-perl-recognition.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -182,6 +183,10 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Fri Aug 4 2017 Marek Cermak <macermak@redhat.com> - 5.31-7
+- Changes in commands and images magic files
+- Fixes awk/perl script recognition
+
 * Wed Aug 02 2017 Fedora Release Engineering <releng@fedoraproject.org> - 5.31-6
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Binutils_Mass_Rebuild
 
