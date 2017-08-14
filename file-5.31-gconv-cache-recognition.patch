@@ -1,0 +1,49 @@
+From 2093d2fde94ae6dd094196a455bf4f70d7e84747 Mon Sep 17 00:00:00 2001
+From: Christos Zoulas <christos@zoulas.com>
+Date: Thu, 10 Aug 2017 11:01:38 +0000
+Subject: [PATCH] Add gconv magic (Marek Cermak)
+
+Recognition of iconv/gconv module configuration cache
+
+https://bugzilla.redhat.com/show_bug.cgi?id=1342428
+
+Upstream commit: https://github.com/file/file/commit/2093d2fde94ae6dd094196a455bf4f70d7e84747
+
+Signed-off-by: Marek Cermak <macermak@redhat.com>
+---
+ magic/Magdir/gconv | 10 ++++++++++
+ magic/Makefile.am  |  3 ++-
+ 2 files changed, 12 insertions(+), 1 deletion(-)
+ create mode 100644 magic/Magdir/gconv
+
+diff --git a/magic/Magdir/gconv b/magic/Magdir/gconv
+new file mode 100644
+index 00000000..eec5ddcd
+--- /dev/null
++++ b/magic/Magdir/gconv
+@@ -0,0 +1,10 @@
++
++#------------------------------------------------------------------------------
++# $File: gconv
++# gconv: file(1) magic for iconv/gconv module configuration cache
++#
++# Magic number defined in glibc/iconv/iconvconfig.h as GCONVCACHE_MAGIC
++#
++# From: Marek Cermak <macermak@redhat.com>
++#
++0		lelong		0x20010324 	gconv module configuration cache data
+diff --git a/magic/Makefile.am b/magic/Makefile.am
+index 25b8c3d4..5259a478 100644
+--- a/magic/Makefile.am
++++ b/magic/Makefile.am
+@@ -99,6 +99,7 @@ $(MAGIC_FRAGMENT_DIR)/fsav \
+ $(MAGIC_FRAGMENT_DIR)/fusecompress \
+ $(MAGIC_FRAGMENT_DIR)/games \
+ $(MAGIC_FRAGMENT_DIR)/gcc \
++$(MAGIC_FRAGMENT_DIR)/gconv \
+ $(MAGIC_FRAGMENT_DIR)/geo \
+ $(MAGIC_FRAGMENT_DIR)/geos \
+ $(MAGIC_FRAGMENT_DIR)/gimp \
+-- 
+2.13.3
+
