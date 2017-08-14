@@ -3,7 +3,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.30
-Release: 8%{?dist}
+Release: 9%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -22,6 +22,7 @@ Patch19: file-5.30-keep-not-stripped-last.patch
 Patch20: file-5.30-bump-perl-to-exceed-c.patch
 Patch21: file-5.30-python-utf8.patch
 Patch22: file-5.31-mo-file-recognition.patch
+Patch23: file-5.31-gconv-cache-recognition.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -190,6 +191,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Mon Aug 14 2017 Marek Cermak <macermak@redhat.com> - 5.30-9
+- New magic entry for iconv/gconv module configuration cache (#1342428)
+
 * Mon Jul 31 2017 Marek Cermak <macermak@redhat.com> - 5.30-8
 - fixed patch for recognition of gnu message catalog (.mo) files (#1226215) 
 
