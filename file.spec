@@ -5,7 +5,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.29
-Release: 7%{?dist}
+Release: 8%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -29,6 +29,7 @@ Patch17: file-5.24-varied.patch
 Patch102: file-5.29-short-sector.patch
 Patch103: file-5.30-python-utf8.patch
 Patch104: file-5.31-mo-file-recognition.patch
+Patch105: file-5.31-gconv-cache-recognition.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -105,6 +106,7 @@ file(1) command.
 %patch102 -p1
 %patch103 -p1
 %patch104 -p1
+%patch105 -p1
 
 # Patches can generate *.orig files, which can't stay in the magic dir,
 # otherwise there will be problems with compiling magic file!
@@ -212,6 +214,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Mon Aug 14 2017 Marek Cermak <macermak@redhat.com> - 5.29-8
+- New magic entry for iconv/gconv module configuration cache (#1342428)
+
 * Mon Jul 31 2017 Marek Cermak <macermak@redhat.com> - 5.29-7
 - fixed patch for recognition of gnu message catalog (.mo) files (#1226215) 
 
