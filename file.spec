@@ -3,7 +3,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.30
-Release: 9%{?dist}
+Release: 10%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -23,6 +23,7 @@ Patch20: file-5.30-bump-perl-to-exceed-c.patch
 Patch21: file-5.30-python-utf8.patch
 Patch22: file-5.31-mo-file-recognition.patch
 Patch23: file-5.31-gconv-cache-recognition.patch
+Patch24: file-5.31-ruby-recognition.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -191,6 +192,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Fri Aug 18 2017 Marek Cermak <macermak@redhat.com> - 5.30-10
+- Ruby script recognition and classification (#1050897)
+
 * Mon Aug 14 2017 Marek Cermak <macermak@redhat.com> - 5.30-9
 - New magic entry for iconv/gconv module configuration cache (#1342428)
 
