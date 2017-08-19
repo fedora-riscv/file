@@ -52,7 +52,6 @@ The file-devel package contains the header files and libmagic library
 necessary for developing programs using libmagic.
 
 %package -n python2-magic
-%{?python_provide:%python_provide python2-magic}
 Summary: Python 2 bindings for the libmagic API
 Group:   Development/Libraries
 BuildRequires: python2-devel
@@ -61,6 +60,7 @@ BuildRequires: python-setuptools
 %endif
 BuildArch: noarch
 Requires: %{name} = %{version}-%{release}
+%{?python_provide:%python_provide python2-magic}
 
 %description -n python2-magic
 This package contains the Python 2 bindings to allow access to the
