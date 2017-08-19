@@ -3,7 +3,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.31
-Release: 9%{?dist}
+Release: 10%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -51,7 +51,8 @@ Requires: %{name} = %{version}-%{release}
 The file-devel package contains the header files and libmagic library
 necessary for developing programs using libmagic.
 
-%package -n python-magic
+%package -n python2-magic
+%{?python_provide:%python_provide python2-magic}
 Summary: Python 2 bindings for the libmagic API
 Group:   Development/Libraries
 BuildRequires: python2-devel
@@ -61,7 +62,7 @@ BuildRequires: python-setuptools
 BuildArch: noarch
 Requires: %{name} = %{version}-%{release}
 
-%description -n python-magic
+%description -n python2-magic
 This package contains the Python 2 bindings to allow access to the
 libmagic API. The libmagic library is also used by the familiar
 file(1) command.
@@ -163,7 +164,7 @@ cd %{py3dir}
 %{_includedir}/magic.h
 %{_mandir}/man3/*
 
-%files -n python-magic
+%files -n python2-magic
 %{!?_licensedir:%global license %%doc}
 %license COPYING
 %doc python/README python/example.py
@@ -185,6 +186,10 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Sat Aug 19 2017 Zbigniew Jędrzejewski-Szmek <zbyszek@in.waw.pl> - 5.31-10
+- Python 2 binary package renamed to python2-file
+  See https://fedoraproject.org/wiki/FinalizingFedoraSwitchtoPython3
+
 * Fri Aug 18 2017 Marek Cermak <macermak@redhat.com> - 5.31-9
 - Ruby script recognition and classification (#1050897)
 
