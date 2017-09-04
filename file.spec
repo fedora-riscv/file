@@ -2,8 +2,8 @@
 
 Summary: A utility for determining file types
 Name: file
-Version: 5.31
-Release: 10%{?dist}
+Version: 5.32
+Release: 1%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -17,10 +17,6 @@ Patch4: file-5.04-volume_key.patch
 Patch5: file-5.04-man-return-code.patch
 
 # picked from upstream
-Patch6: file-5.31-mo-file-recognition.patch
-Patch7: file-5.31-awk-perl-recognition.patch
-Patch8: file-5.31-gconv-cache-recognition.patch
-Patch9: file-5.31-ruby-recognition.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -186,6 +182,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Mon Sep 04 2017 Kamil Dudka <kdudka@redhat.com> - 5.32-1
+- update to new version 5.32
+
 * Sat Aug 19 2017 Zbigniew Jędrzejewski-Szmek <zbyszek@in.waw.pl> - 5.31-10
 - Python 2 binary package renamed to python2-file
   See https://fedoraproject.org/wiki/FinalizingFedoraSwitchtoPython3
