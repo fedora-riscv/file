@@ -3,7 +3,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.31
-Release: 9%{?dist}
+Release: 10%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -21,6 +21,9 @@ Patch6: file-5.31-mo-file-recognition.patch
 Patch7: file-5.31-awk-perl-recognition.patch
 Patch8: file-5.31-gconv-cache-recognition.patch
 Patch9: file-5.31-ruby-recognition.patch
+
+# fix a possible stack based buffer overflow (CVE-2017-1000249)
+Patch10: file-5.31-CVE-2017-1000249.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -185,6 +188,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Fri Sep 08 2017 Kamil Dudka <kdudka@redhat.com> - 5.31-10
+- fix a possible stack based buffer overflow (CVE-2017-1000249)
+
 * Fri Aug 18 2017 Marek Cermak <macermak@redhat.com> - 5.31-9
 - Ruby script recognition and classification (#1050897)
 
