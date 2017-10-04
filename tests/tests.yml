@@ -1,0 +1,15 @@
+---
+# This first play always runs on the local staging system
+- hosts: localhost
+  roles:
+  - role: standard-test-beakerlib
+    tags:
+    - classic
+    - container
+    - atomic
+    tests:
+    - Support-local-additions-to-magic-files
+    - command-line-options
+    required_packages:
+    - file          # file package required for both tests
+    - bzip2         # bunzip2 command required for cmd-line-options test
