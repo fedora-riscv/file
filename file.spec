@@ -3,7 +3,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.32
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -133,9 +133,7 @@ cd %{py3dir}
 %endif
 %{__install} -d ${RPM_BUILD_ROOT}%{_datadir}/%{name}
 
-%post libs -p /sbin/ldconfig
-
-%postun libs -p /sbin/ldconfig
+%ldconfig_scriptlets libs
 
 %files
 %{!?_licensedir:%global license %%doc}
@@ -182,6 +180,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Sat Feb 03 2018 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 5.32-2
+- Switch to %%ldconfig_scriptlets
+
 * Mon Sep 04 2017 Kamil Dudka <kdudka@redhat.com> - 5.32-1
 - update to new version 5.32
 
