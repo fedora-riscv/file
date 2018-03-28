@@ -1,9 +1,21 @@
-%global with_python3 0%{?fedora} || 0%{?rhel} > 7
+# python3 is not available on RHEL <= 7
+%if 0%{?fedora} || 0%{?rhel} > 7
+%bcond_without python3
+%else
+%bcond_with python3
+%endif
+
+# python2 is not available on RHEL > 7 and not needed on Fedora > 29
+%if 0%{?rhel} > 7 || 0%{?fedora} > 29
+%bcond_with python2
+%else
+%bcond_without python2
+%endif
 
 Summary: A utility for determining file types
 Name: file
 Version: 5.32
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -47,6 +59,7 @@ Requires: %{name} = %{version}-%{release}
 The file-devel package contains the header files and libmagic library
 necessary for developing programs using libmagic.
 
+%if %{with python2}
 %package -n python2-magic
 Summary: Python 2 bindings for the libmagic API
 Group:   Development/Libraries
@@ -62,8 +75,9 @@ Requires: %{name} = %{version}-%{release}
 This package contains the Python 2 bindings to allow access to the
 libmagic API. The libmagic library is also used by the familiar
 file(1) command.
+%endif
 
-%if %{with_python3}
+%if %{with python3}
 %package -n python3-magic
 Summary: Python 3 bindings for the libmagic API
 Group:   Development/Libraries
@@ -84,7 +98,7 @@ iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
 touch -r doc/libmagic.man doc/libmagic.man_
 mv doc/libmagic.man_ doc/libmagic.man
 
-%if %{with_python3}
+%if %{with python3}
 rm -rf %{py3dir}
 cp -a python %{py3dir}
 %endif
@@ -100,9 +114,11 @@ sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
 sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
 export LD_LIBRARY_PATH=%{_builddir}/%{name}-%{version}/src/.libs
 make %{?_smp_mflags} V=1
+%if %{with python2}
 cd python
 CFLAGS="%{optflags}" %{__python} setup.py build
-%if %{with_python3}
+%endif
+%if %{with python3}
 cd %{py3dir}
 CFLAGS="%{optflags}" %{__python3} setup.py build
 %endif
@@ -125,9 +141,11 @@ cat magic/Magdir/* > ${RPM_BUILD_ROOT}%{_datadir}/misc/magic
 ln -s misc/magic ${RPM_BUILD_ROOT}%{_datadir}/magic
 ln -s ../magic ${RPM_BUILD_ROOT}%{_datadir}/file/magic
 
+%if %{with python2}
 cd python
 %{__python} setup.py install -O1 --skip-build --root ${RPM_BUILD_ROOT}
-%if %{with_python3}
+%endif
+%if %{with python3}
 cd %{py3dir}
 %{__python3} setup.py install -O1 --skip-build --root ${RPM_BUILD_ROOT}
 %endif
@@ -158,6 +176,7 @@ cd %{py3dir}
 %{_includedir}/magic.h
 %{_mandir}/man3/*
 
+%if %{with python2}
 %files -n python2-magic
 %{!?_licensedir:%global license %%doc}
 %license COPYING
@@ -168,8 +187,9 @@ cd %{py3dir}
 %if 0%{?fedora} || 0%{?rhel} >= 6
 %{python_sitelib}/*egg-info
 %endif
+%endif
 
-%if %{with_python3}
+%if %{with python3}
 %files -n python3-magic
 %{!?_licensedir:%global license %%doc}
 %license COPYING
@@ -180,6 +200,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Wed Mar 28 2018 Kamil Dudka <kdudka@redhat.com> - 5.32-4
+- make the python2-magic subpackage optional
+
 * Wed Feb 07 2018 Fedora Release Engineering <releng@fedoraproject.org> - 5.32-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
 
