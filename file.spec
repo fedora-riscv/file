@@ -14,8 +14,8 @@
 
 Summary: A utility for determining file types
 Name: file
-Version: 5.32
-Release: 4%{?dist}
+Version: 5.33
+Release: 1%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -26,7 +26,6 @@ Patch0: file-localmagic.patch
 # not yet upstream
 Patch3: file-4.17-rpm-name.patch
 Patch4: file-5.04-volume_key.patch
-Patch5: file-5.04-man-return-code.patch
 
 # picked from upstream
 
@@ -200,6 +199,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Mon Apr 16 2018 Kamil Dudka <kdudka@redhat.com> - 5.33-1
+- update to new version 5.33
+
 * Wed Mar 28 2018 Kamil Dudka <kdudka@redhat.com> - 5.32-4
 - make the python2-magic subpackage optional
 
