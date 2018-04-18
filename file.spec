@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.33
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -28,6 +28,7 @@ Patch3: file-4.17-rpm-name.patch
 Patch4: file-5.04-volume_key.patch
 
 # picked from upstream
+Patch1: file-5.33-gif.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -199,6 +200,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Wed Apr 18 2018 Kamil Dudka <kdudka@redhat.com> - 5.33-2
+- increase strength of GIF to beat MBR (#1515180)
+
 * Mon Apr 16 2018 Kamil Dudka <kdudka@redhat.com> - 5.33-1
 - update to new version 5.33
 
