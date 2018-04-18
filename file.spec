@@ -3,7 +3,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.31
-Release: 10%{?dist}
+Release: 11%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -24,6 +24,9 @@ Patch9: file-5.31-ruby-recognition.patch
 
 # fix a possible stack based buffer overflow (CVE-2017-1000249)
 Patch10: file-5.31-CVE-2017-1000249.patch
+
+# increase strength of GIF to beat MBR (#1515180)
+Patch11: file-5.33-gif.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -188,6 +191,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Wed Apr 18 2018 Kamil Dudka <kdudka@redhat.com> - 5.31-11
+- increase strength of GIF to beat MBR (#1515180)
+
 * Fri Sep 08 2017 Kamil Dudka <kdudka@redhat.com> - 5.31-10
 - fix a possible stack based buffer overflow (CVE-2017-1000249)
 
