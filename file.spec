@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.33
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -116,7 +116,7 @@ export LD_LIBRARY_PATH=%{_builddir}/%{name}-%{version}/src/.libs
 make %{?_smp_mflags} V=1
 %if %{with python2}
 cd python
-CFLAGS="%{optflags}" %{__python} setup.py build
+CFLAGS="%{optflags}" %{__python2} setup.py build
 %endif
 %if %{with python3}
 cd %{py3dir}
@@ -143,7 +143,7 @@ ln -s ../magic ${RPM_BUILD_ROOT}%{_datadir}/file/magic
 
 %if %{with python2}
 cd python
-%{__python} setup.py install -O1 --skip-build --root ${RPM_BUILD_ROOT}
+%{__python2} setup.py install -O1 --skip-build --root ${RPM_BUILD_ROOT}
 %endif
 %if %{with python3}
 cd %{py3dir}
@@ -181,11 +181,11 @@ cd %{py3dir}
 %{!?_licensedir:%global license %%doc}
 %license COPYING
 %doc python/README python/example.py
-%{python_sitelib}/magic.py
-%{python_sitelib}/magic.pyc
-%{python_sitelib}/magic.pyo
+%{python2_sitelib}/magic.py
+%{python2_sitelib}/magic.pyc
+%{python2_sitelib}/magic.pyo
 %if 0%{?fedora} || 0%{?rhel} >= 6
-%{python_sitelib}/*egg-info
+%{python2_sitelib}/*egg-info
 %endif
 %endif
 
@@ -200,6 +200,10 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Mon Apr 30 2018 Miro Hrončok <mhroncok@redhat.com> - 5.33-3
+- Update Python macros to new packaging standards
+  (See https://fedoraproject.org/wiki/Changes/Avoid_usr_bin_python_in_RPM_Build)
+
 * Wed Apr 18 2018 Kamil Dudka <kdudka@redhat.com> - 5.33-2
 - increase strength of GIF to beat MBR (#1515180)
 
