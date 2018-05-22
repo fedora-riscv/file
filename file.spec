@@ -24,11 +24,11 @@ Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 Patch0: file-localmagic.patch
 
 # not yet upstream
-Patch3: file-4.17-rpm-name.patch
-Patch4: file-5.04-volume_key.patch
+Patch1: file-4.17-rpm-name.patch
+Patch2: file-5.04-volume_key.patch
 
 # picked from upstream
-Patch1: file-5.33-gif.patch
+Patch3: file-5.33-gif.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
