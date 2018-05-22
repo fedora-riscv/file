@@ -31,6 +31,9 @@ Patch2: file-5.04-volume_key.patch
 Patch3: file-5.33-gif.patch
 Patch4: file-5.33-seccomp.patch
 
+# do not classify shared libraries as pie executables (#1581343)
+Patch5: file-5.33-pie-executable-revert.patch
+
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
 BuildRequires: zlib-devel
@@ -202,6 +205,7 @@ cd %{py3dir}
 
 %changelog
 * Tue May 22 2018 Kamil Dudka <kdudka@redhat.com> - 5.33-4
+- do not classify shared libraries as pie executables (#1581343)
 - seccomp: fix build failure due to missing syscalls
 
 * Mon Apr 30 2018 Miro Hrončok <mhroncok@redhat.com> - 5.33-3
