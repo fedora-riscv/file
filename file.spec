@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.33
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -29,6 +29,7 @@ Patch2: file-5.04-volume_key.patch
 
 # picked from upstream
 Patch3: file-5.33-gif.patch
+Patch4: file-5.33-seccomp.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -200,6 +201,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Tue May 22 2018 Kamil Dudka <kdudka@redhat.com> - 5.33-4
+- seccomp: fix build failure due to missing syscalls
+
 * Mon Apr 30 2018 Miro Hrončok <mhroncok@redhat.com> - 5.33-3
 - Update Python macros to new packaging standards
   (See https://fedoraproject.org/wiki/Changes/Avoid_usr_bin_python_in_RPM_Build)
