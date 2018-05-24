@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.33
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -204,6 +204,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Thu May 24 2018 Kamil Dudka <kdudka@redhat.com> - 5.33-5
+- do not classify shared libraries as pie executables in MIME output (#1581343)
+
 * Tue May 22 2018 Kamil Dudka <kdudka@redhat.com> - 5.33-4
 - do not classify shared libraries as pie executables (#1581343)
 - seccomp: fix build failure due to missing syscalls
