@@ -60,6 +60,13 @@ Requires: %{name} = %{version}-%{release}
 The file-devel package contains the header files and libmagic library
 necessary for developing programs using libmagic.
 
+%package static
+Summary: Static library for file development
+Requires: file-devel = %{version}-%{release}
+
+%description static
+The file-static package contains the static version of the libmagic library.
+
 %if %{with python2}
 %package -n python2-magic
 Summary: Python 2 bindings for the libmagic API
@@ -107,7 +114,7 @@ cp -a python %{py3dir}
 autoreconf -fi
 
 CFLAGS="%{optflags} -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE" \
-%configure --enable-fsect-man5 --disable-rpath
+%configure --enable-fsect-man5 --disable-rpath --enable-static
 # remove hardcoded library paths from local libtool
 sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
 sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
@@ -175,6 +182,9 @@ cd %{py3dir}
 %{_includedir}/magic.h
 %{_mandir}/man3/*
 
+%files static
+%{_libdir}/libmagic.a
+
 %if %{with python2}
 %files -n python2-magic
 %{!?_licensedir:%global license %%doc}
@@ -200,6 +210,7 @@ cd %{py3dir}
 
 %changelog
 * Mon May 28 2018 Kamil Dudka <kdudka@redhat.com> - 5.33-6
+- reintroduce file-static subpackage (#1575661)
 - drop obsolete Group tag
 
 * Thu May 24 2018 Kamil Dudka <kdudka@redhat.com> - 5.33-5
