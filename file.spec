@@ -54,7 +54,7 @@ Libraries for applications using libmagic.
 
 %package devel
 Summary:  Libraries and header files for file development
-Requires: %{name} = %{version}-%{release}
+Requires: file-libs%{?_isa} = %{version}-%{release}
 
 %description devel
 The file-devel package contains the header files and libmagic library
@@ -210,6 +210,7 @@ cd %{py3dir}
 
 %changelog
 * Mon May 28 2018 Kamil Dudka <kdudka@redhat.com> - 5.33-6
+- make file-devel depend on file-libs, instead of file
 - reintroduce file-static subpackage (#1575661)
 - drop obsolete Group tag
 
