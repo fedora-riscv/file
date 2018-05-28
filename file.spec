@@ -75,7 +75,7 @@ BuildRequires: python2-devel
 BuildRequires: python-setuptools
 %endif
 BuildArch: noarch
-Requires: %{name} = %{version}-%{release}
+Requires: file-libs%{?_isa} = %{version}-%{release}
 %{?python_provide:%python_provide python2-magic}
 
 %description -n python2-magic
@@ -89,7 +89,7 @@ file(1) command.
 Summary: Python 3 bindings for the libmagic API
 BuildRequires: python3-devel
 BuildArch: noarch
-Requires: %{name} = %{version}-%{release}
+Requires: file-libs%{?_isa} = %{version}-%{release}
 
 %description -n python3-magic
 This package contains the Python 3 bindings to allow access to the
@@ -210,6 +210,7 @@ cd %{py3dir}
 
 %changelog
 * Mon May 28 2018 Kamil Dudka <kdudka@redhat.com> - 5.33-6
+- make python{2,3}-magic depend on file-libs, instead of file
 - make file-devel depend on file-libs, instead of file
 - reintroduce file-static subpackage (#1575661)
 - drop obsolete Group tag
