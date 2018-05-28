@@ -15,9 +15,8 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.33
-Release: 5%{?dist}
+Release: 6%{?dist}
 License: BSD
-Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
 # Upstream says it's up to distributions to add a way to support local-magic.
@@ -47,7 +46,6 @@ different graphics formats.
 
 %package libs
 Summary: Libraries for applications using libmagic
-Group:   Applications/File
 License: BSD
 
 %description libs
@@ -56,7 +54,6 @@ Libraries for applications using libmagic.
 
 %package devel
 Summary:  Libraries and header files for file development
-Group:    Applications/File
 Requires: %{name} = %{version}-%{release}
 
 %description devel
@@ -66,7 +63,6 @@ necessary for developing programs using libmagic.
 %if %{with python2}
 %package -n python2-magic
 Summary: Python 2 bindings for the libmagic API
-Group:   Development/Libraries
 BuildRequires: python2-devel
 %if 0%{?rhel} && 0%{?rhel} <= 7
 BuildRequires: python-setuptools
@@ -84,7 +80,6 @@ file(1) command.
 %if %{with python3}
 %package -n python3-magic
 Summary: Python 3 bindings for the libmagic API
-Group:   Development/Libraries
 BuildRequires: python3-devel
 BuildArch: noarch
 Requires: %{name} = %{version}-%{release}
@@ -204,6 +199,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Mon May 28 2018 Kamil Dudka <kdudka@redhat.com> - 5.33-6
+- drop obsolete Group tag
+
 * Thu May 24 2018 Kamil Dudka <kdudka@redhat.com> - 5.33-5
 - do not classify shared libraries as pie executables in MIME output (#1581343)
 
