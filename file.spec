@@ -3,7 +3,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.31
-Release: 11%{?dist}
+Release: 12%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -27,6 +27,9 @@ Patch10: file-5.31-CVE-2017-1000249.patch
 
 # increase strength of GIF to beat MBR (#1515180)
 Patch11: file-5.33-gif.patch
+
+# fix out-of-bounds read via a crafted ELF file (CVE-2018-10360)
+Patch12: file-5.33-CVE-2018-10360.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -191,6 +194,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Wed Jun 13 2018 Kamil Dudka <kdudka@redhat.com> - 5.31-12
+- fix out-of-bounds read via a crafted ELF file (CVE-2018-10360)
+
 * Wed Apr 18 2018 Kamil Dudka <kdudka@redhat.com> - 5.31-11
 - increase strength of GIF to beat MBR (#1515180)
 
