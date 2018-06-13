@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.33
-Release: 5%{?dist}
+Release: 6%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -33,6 +33,9 @@ Patch4: file-5.33-seccomp.patch
 
 # do not classify shared libraries as pie executables (#1581343)
 Patch5: file-5.33-pie-executable-revert.patch
+
+# fix out-of-bounds read via a crafted ELF file (CVE-2018-10360)
+Patch6: file-5.33-CVE-2018-10360.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -204,6 +207,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Wed Jun 13 2018 Kamil Dudka <kdudka@redhat.com> - 5.33-6
+- fix out-of-bounds read via a crafted ELF file (CVE-2018-10360)
+
 * Thu May 24 2018 Kamil Dudka <kdudka@redhat.com> - 5.33-5
 - do not classify shared libraries as pie executables in MIME output (#1581343)
 
