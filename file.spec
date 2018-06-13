@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.33
-Release: 6%{?dist}
+Release: 7%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -32,6 +32,9 @@ Patch4: file-5.33-seccomp.patch
 
 # do not classify shared libraries as pie executables (#1581343)
 Patch5: file-5.33-pie-executable-revert.patch
+
+# fix out-of-bounds read via a crafted ELF file (CVE-2018-10360)
+Patch6: file-5.33-CVE-2018-10360.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -209,6 +212,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Wed Jun 13 2018 Kamil Dudka <kdudka@redhat.com> - 5.33-7
+- fix out-of-bounds read via a crafted ELF file (CVE-2018-10360)
+
 * Mon May 28 2018 Kamil Dudka <kdudka@redhat.com> - 5.33-6
 - make file-devel depend on file-libs, instead of file
 - reintroduce file-static subpackage (#1575661)
