@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.33
-Release: 7%{?dist}
+Release: 8%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -212,6 +212,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Sun Jun 17 2018 Miro Hrončok <mhroncok@redhat.com> - 5.33-8
+- Rebuilt for Python 3.7
+
 * Wed Jun 13 2018 Kamil Dudka <kdudka@redhat.com> - 5.33-7
 - fix out-of-bounds read via a crafted ELF file (CVE-2018-10360)
 
