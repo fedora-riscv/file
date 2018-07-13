@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.33
-Release: 8%{?dist}
+Release: 9%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -212,6 +212,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Fri Jul 13 2018 Fedora Release Engineering <releng@fedoraproject.org> - 5.33-9
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
+
 * Sun Jun 17 2018 Miro Hrončok <mhroncok@redhat.com> - 5.33-8
 - Rebuilt for Python 3.7
 
