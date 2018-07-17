@@ -39,6 +39,9 @@ Patch6: file-5.33-CVE-2018-10360.patch
 # support longer version strings for clamav database (#1539107)
 Patch7: file-5.33-clamav.patch
 
+# show details about ppc swap partition (#1224668)
+Patch8: file-5.33-ppc-swap.patch
+
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
 BuildRequires: zlib-devel
@@ -216,6 +219,7 @@ cd %{py3dir}
 
 %changelog
 * Tue Jul 17 2018 Kamil Dudka <kdudka@redhat.com> - 5.33-10
+- show details about ppc swap partition (#1224668)
 - support longer version strings for clamav database (#1539107)
 
 * Fri Jul 13 2018 Fedora Release Engineering <releng@fedoraproject.org> - 5.33-9
