@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.33
-Release: 9%{?dist}
+Release: 10%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -35,6 +35,9 @@ Patch5: file-5.33-pie-executable-revert.patch
 
 # fix out-of-bounds read via a crafted ELF file (CVE-2018-10360)
 Patch6: file-5.33-CVE-2018-10360.patch
+
+# support longer version strings for clamav database (#1539107)
+Patch7: file-5.33-clamav.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -212,6 +215,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Tue Jul 17 2018 Kamil Dudka <kdudka@redhat.com> - 5.33-10
+- support longer version strings for clamav database (#1539107)
+
 * Fri Jul 13 2018 Fedora Release Engineering <releng@fedoraproject.org> - 5.33-9
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
 
