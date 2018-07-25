@@ -14,8 +14,8 @@
 
 Summary: A utility for determining file types
 Name: file
-Version: 5.33
-Release: 10%{?dist}
+Version: 5.34
+Release: 1%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -25,22 +25,6 @@ Patch0: file-localmagic.patch
 # not yet upstream
 Patch1: file-4.17-rpm-name.patch
 Patch2: file-5.04-volume_key.patch
-
-# picked from upstream
-Patch3: file-5.33-gif.patch
-Patch4: file-5.33-seccomp.patch
-
-# do not classify shared libraries as pie executables (#1581343)
-Patch5: file-5.33-pie-executable-revert.patch
-
-# fix out-of-bounds read via a crafted ELF file (CVE-2018-10360)
-Patch6: file-5.33-CVE-2018-10360.patch
-
-# support longer version strings for clamav database (#1539107)
-Patch7: file-5.33-clamav.patch
-
-# show details about ppc swap partition (#1224668)
-Patch8: file-5.33-ppc-swap.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -198,7 +182,7 @@ cd %{py3dir}
 %files -n python2-magic
 %{!?_licensedir:%global license %%doc}
 %license COPYING
-%doc python/README python/example.py
+%doc python/README.md python/example.py
 %{python2_sitelib}/magic.py
 %{python2_sitelib}/magic.pyc
 %{python2_sitelib}/magic.pyo
@@ -211,13 +195,16 @@ cd %{py3dir}
 %files -n python3-magic
 %{!?_licensedir:%global license %%doc}
 %license COPYING
-%doc python/README python/example.py
+%doc python/README.md python/example.py
 %{python3_sitelib}/magic.py
 %{python3_sitelib}/*egg-info
 %{python3_sitelib}/__pycache__/*
 %endif
 
 %changelog
+* Wed Jul 25 2018 Kamil Dudka <kdudka@redhat.com> - 5.34-1
+- update to new version 5.34
+
 * Tue Jul 17 2018 Kamil Dudka <kdudka@redhat.com> - 5.33-10
 - show details about ppc swap partition (#1224668)
 - support longer version strings for clamav database (#1539107)
