@@ -26,6 +26,9 @@ Patch0: file-localmagic.patch
 Patch1: file-4.17-rpm-name.patch
 Patch2: file-5.04-volume_key.patch
 
+# fix printing of details about ELF binaries
+Patch3: file-5.34-readelf.patch
+
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
 BuildRequires: zlib-devel
