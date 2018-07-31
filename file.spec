@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.34
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -205,6 +205,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Tue Jul 31 2018 Florian Weimer <fweimer@redhat.com> - 5.34-3
+- Rebuild with fixed binutils
+
 * Fri Jul 27 2018 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 5.34-2
 - Rebuild for new binutils
 
