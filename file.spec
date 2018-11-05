@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.33
-Release: 7%{?dist}
+Release: 8%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -42,6 +42,9 @@ Patch7: file-5.33-clamav.patch
 
 # show details about ppc swap partition (#1224668)
 Patch8: file-5.33-ppc-swap.patch
+
+# fix memory leak on an error path
+Patch9: file-5.33-covscan.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -213,6 +216,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Mon Nov 05 2018 Kamil Dudka <kdudka@redhat.com> - 5.33-8
+- fix memory leak on an error path
+
 * Tue Jul 17 2018 Kamil Dudka <kdudka@redhat.com> - 5.33-7
 - show details about ppc swap partition (#1224668)
 - support longer version strings for clamav database (#1539107)
