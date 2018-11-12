@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.33
-Release: 8%{?dist}
+Release: 9%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -45,6 +45,9 @@ Patch8: file-5.33-ppc-swap.patch
 
 # fix memory leak on an error path
 Patch9: file-5.33-covscan.patch
+
+# add magic for eBPF objects (#1648667)
+Patch10: file-5.34-ebpf-magic.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -216,6 +219,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Mon Nov 12 2018 Kamil Dudka <kdudka@redhat.com> - 5.34-9
+- add magic for eBPF objects (#1648667)
+
 * Mon Nov 05 2018 Kamil Dudka <kdudka@redhat.com> - 5.33-8
 - fix memory leak on an error path
 
