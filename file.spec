@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.34
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -28,6 +28,9 @@ Patch2: file-5.04-volume_key.patch
 
 # fix printing of details about ELF binaries
 Patch3: file-5.34-readelf.patch
+
+# add magic for eBPF objects (#1648667)
+Patch4: file-5.34-ebpf-magic.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -205,6 +208,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Mon Nov 12 2018 Kamil Dudka <kdudka@redhat.com> - 5.34-4
+- add magic for eBPF objects (#1648667)
+
 * Tue Jul 31 2018 Florian Weimer <fweimer@redhat.com> - 5.34-3
 - Rebuild with fixed binutils
 
