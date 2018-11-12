@@ -219,7 +219,7 @@ cd %{py3dir}
 %endif
 
 %changelog
-* Mon Nov 12 2018 Kamil Dudka <kdudka@redhat.com> - 5.34-9
+* Mon Nov 12 2018 Kamil Dudka <kdudka@redhat.com> - 5.33-9
 - add magic for eBPF objects (#1648667)
 
 * Mon Nov 05 2018 Kamil Dudka <kdudka@redhat.com> - 5.33-8
