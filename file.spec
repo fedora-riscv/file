@@ -5,8 +5,8 @@
 %bcond_with python3
 %endif
 
-# python2 is not available on RHEL > 7 and not needed on Fedora > 29
-%if 0%{?rhel} > 7 || 0%{?fedora} > 29
+# python2 is not available on RHEL > 7 and not needed on Fedora > 30
+%if 0%{?rhel} > 7 || 0%{?fedora} > 30
 %bcond_with python2
 %else
 %bcond_without python2
@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.34
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -208,6 +208,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Wed Nov 14 2018 Kamil Dudka <kdudka@redhat.com> - 5.34-5
+- reintroduce the python2-magic subpackage needed by python2-bugzilla (#1649547)
+
 * Mon Nov 12 2018 Kamil Dudka <kdudka@redhat.com> - 5.34-4
 - add magic for eBPF objects (#1648667)
 
