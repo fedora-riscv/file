@@ -5,8 +5,8 @@
 %bcond_with python3
 %endif
 
-# python2 is not available on RHEL > 7 and not needed on Fedora > 30
-%if 0%{?rhel} > 7 || 0%{?fedora} > 30
+# python2 is not available on RHEL > 7
+%if 0%{?rhel} > 7
 %bcond_with python2
 %else
 %bcond_without python2
