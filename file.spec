@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.34
-Release: 5%{?dist}
+Release: 6%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -31,6 +31,9 @@ Patch3: file-5.34-readelf.patch
 
 # add magic for eBPF objects (#1648667)
 Patch4: file-5.34-ebpf-magic.patch
+
+# fix misidentifying locale files
+Patch5: file-5.34-identiflocale.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -208,6 +211,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Wed Nov 21 2018 Ondrej Dubaj <odubaj@redhat.com> - 5.34-6
+- Fixed missidentifying locale files bug (#1527398)
+
 * Wed Nov 14 2018 Kamil Dudka <kdudka@redhat.com> - 5.34-5
 - reintroduce the python2-magic subpackage needed by python2-bugzilla (#1649547)
 
