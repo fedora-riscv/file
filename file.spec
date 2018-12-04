@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.35
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -28,6 +28,9 @@ Patch2: file-5.04-volume_key.patch
 
 # add magic for eBPF objects (#1648667)
 Patch4: file-5.34-ebpf-magic.patch
+
+# fixed bug misleading qcow2 v2 and v3 files (#1654349)
+Patch5: file-5.35-qcow2-misleading.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -205,6 +208,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Tue Dec 04 2018 Ondrej Dubaj <odubaj@redhat.com> - 5.35-2
+- Fixed bug misleading qcow2 v2 and v3 files (#1654349)
+
 * Tue Dec 04 2018 Kamil Dudka <kdudka@redhat.com> - 5.35-1
 - update to new version 5.35
 
