@@ -1,0 +1,25 @@
+From b26eaf218f18abbc6173eb93c8b282fe5ef7e74d Mon Sep 17 00:00:00 2001
+From: Ondrej Dubaj <odubaj@redhat.com>
+Date: Tue, 4 Dec 2018 12:28:15 +0100
+Subject: [PATCH] Changed bug report URL
+
+---
+ src/file.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/file.c b/src/file.c
+index 87dd1bb..b886d30 100644
+--- a/src/file.c
++++ b/src/file.c
+@@ -653,7 +653,7 @@ help(void)
+ #include "file_opts.h"
+ #undef OPT
+ #undef OPT_LONGONLY
+-	fprintf(stdout, "\nReport bugs to http://bugs.gw.com/\n");
++	fprintf(stdout, "\nReport bugs to http://bugs.astron.com/\n");
+ 	exit(EXIT_SUCCESS);
+ }
+ 
+-- 
+2.17.1
+

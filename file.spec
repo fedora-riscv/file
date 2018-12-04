@@ -38,6 +38,9 @@ Patch5: file-5.34-identiflocale.patch
 # fixed bug misleading qcow2 v2 and v3 files (#1654349)
 Patch6: file-5.34-qcow2-misleading.patch 
 
+# changed bug report URL
+Patch7: file-5.34-bug-report-URL.patch 
+
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
 BuildRequires: zlib-devel
@@ -216,6 +219,7 @@ cd %{py3dir}
 %changelog
 * Tue Dec 04 2018 Ondrej Dubaj <odubaj@redhat.com> - 5.34-7
 - Fixed bug misleading qcow2 v2 and v3 files (#1654349)
+- Changed bug report URL
 
 * Wed Nov 21 2018 Ondrej Dubaj <odubaj@redhat.com> - 5.34-6
 - Fixed missidentifying locale files bug (#1527398)
