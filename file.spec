@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.34
-Release: 6%{?dist}
+Release: 7%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -34,6 +34,9 @@ Patch4: file-5.34-ebpf-magic.patch
 
 # fix misidentifying locale files
 Patch5: file-5.34-identiflocale.patch
+
+# fixed bug misleading qcow2 v2 and v3 files (#1654349)
+Patch6: file-5.34-qcow2-misleading.patch 
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -211,6 +214,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Tue Dec 04 2018 Ondrej Dubaj <odubaj@redhat.com> - 5.34-7
+- Fixed bug misleading qcow2 v2 and v3 files (#1654349)
+
 * Wed Nov 21 2018 Ondrej Dubaj <odubaj@redhat.com> - 5.34-6
 - Fixed missidentifying locale files bug (#1527398)
 
