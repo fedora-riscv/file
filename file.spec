@@ -14,8 +14,8 @@
 
 Summary: A utility for determining file types
 Name: file
-Version: 5.34
-Release: 6%{?dist}
+Version: 5.35
+Release: 1%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -26,14 +26,8 @@ Patch0: file-localmagic.patch
 Patch1: file-4.17-rpm-name.patch
 Patch2: file-5.04-volume_key.patch
 
-# fix printing of details about ELF binaries
-Patch3: file-5.34-readelf.patch
-
 # add magic for eBPF objects (#1648667)
 Patch4: file-5.34-ebpf-magic.patch
-
-# fix misidentifying locale files
-Patch5: file-5.34-identiflocale.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -211,6 +205,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Tue Dec 04 2018 Kamil Dudka <kdudka@redhat.com> - 5.35-1
+- update to new version 5.35
+
 * Wed Nov 21 2018 Ondrej Dubaj <odubaj@redhat.com> - 5.34-6
 - Fixed missidentifying locale files bug (#1527398)
 
