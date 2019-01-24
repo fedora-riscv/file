@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.34
-Release: 9%{?dist}
+Release: 10%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
