@@ -1,0 +1,28 @@
+From 11fe18312484a456632d83e250d11ed02b7657a6 Mon Sep 17 00:00:00 2001
+From: Ondrej Dubaj <odubaj@redhat.com>
+Date: Thu, 24 Jan 2019 09:48:39 +0100
+Subject: [PATCH] Add Linux PowerPC core offsets for Linux + fixed bug #1161911
+
+---
+ src/readelf.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/src/readelf.c b/src/readelf.c
+index db0b35a..9850867 100644
+--- a/src/readelf.c
++++ b/src/readelf.c
+@@ -262,7 +262,10 @@ static const size_t	prpsoffsets32[] = {
+ 	84,		/* SunOS 5.x (short name) */
+ 
+ 	44,		/* Linux (command line) */
+-	28,		/* Linux 2.0.36 (short name) */
++	28,		/* Linux (short name) */
++
++	48,		/* Linux PowerPC (command line) */
++	32,		/* Linux PowerPC (short name) */
+ 
+ 	8,		/* FreeBSD */
+ };
+-- 
+2.17.1
+
