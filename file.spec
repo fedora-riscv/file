@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.35
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -34,6 +34,9 @@ Patch5: file-5.35-qcow2-misleading.patch
 
 # fixed bug missidentifying netpbm files (#856092)
 Patch6: file-5.35-netpbm-misleading.patch
+
+# added Linux PowerPC core offsets for Linux + fixed bug #1161911
+Patch7: file-5.35-add-PowerPC-core-offsets.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -211,6 +214,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Thu Jan 24 2019 Ondrej Dubaj <odubaj@redhat.com> - 5.35-4
+- Added Linux PowerPC core offsets for Linux + fixed bug #1161911
+
 * Thu Jan 24 2019 Ondrej Dubaj <odubaj@redhat.com> - 5.35-3
 - Fixed bug missidentifying netpbm files (#856092)
 
