@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.35
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -31,6 +31,9 @@ Patch4: file-5.34-ebpf-magic.patch
 
 # fixed bug misleading qcow2 v2 and v3 files (#1654349)
 Patch5: file-5.35-qcow2-misleading.patch
+
+# fixed bug missidentifying netpbm files (#856092)
+Patch6: file-5.35-netpbm-misleading.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -208,6 +211,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Thu Jan 24 2019 Ondrej Dubaj <odubaj@redhat.com> - 5.35-3
+- Fixed bug missidentifying netpbm files (#856092)
+
 * Tue Dec 04 2018 Ondrej Dubaj <odubaj@redhat.com> - 5.35-2
 - Fixed bug misleading qcow2 v2 and v3 files (#1654349)
 
