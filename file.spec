@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.34
-Release: 7%{?dist}
+Release: 8%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -39,7 +39,10 @@ Patch5: file-5.34-identiflocale.patch
 Patch6: file-5.34-qcow2-misleading.patch 
 
 # changed bug report URL
-Patch7: file-5.34-bug-report-URL.patch 
+Patch7: file-5.34-bug-report-URL.patch
+
+# fixed bug missidentifying netpbm files (#856092)
+Patch8: file-5.34-netpbm-misleading.patch 
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -217,6 +220,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Thu Jan 24 2019 Ondrej Dubaj <odubaj@redhat.com> - 5.34-8
+- Fixed bug missidentifying netpbm files (#856092) 
+
 * Tue Dec 04 2018 Ondrej Dubaj <odubaj@redhat.com> - 5.34-7
 - Fixed bug misleading qcow2 v2 and v3 files (#1654349)
 - Changed bug report URL
