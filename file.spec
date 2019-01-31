@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.35
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -214,6 +214,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Thu Jan 31 2019 Fedora Release Engineering <releng@fedoraproject.org> - 5.35-5
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
+
 * Thu Jan 24 2019 Ondrej Dubaj <odubaj@redhat.com> - 5.35-4
 - Added Linux PowerPC core offsets for Linux + fixed bug #1161911
 
