@@ -14,8 +14,8 @@
 
 Summary: A utility for determining file types
 Name: file
-Version: 5.35
-Release: 5%{?dist}
+Version: 5.36
+Release: 1%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -25,18 +25,6 @@ Patch0: file-localmagic.patch
 # not yet upstream
 Patch1: file-4.17-rpm-name.patch
 Patch2: file-5.04-volume_key.patch
-
-# add magic for eBPF objects (#1648667)
-Patch4: file-5.34-ebpf-magic.patch
-
-# fixed bug misleading qcow2 v2 and v3 files (#1654349)
-Patch5: file-5.35-qcow2-misleading.patch
-
-# fixed bug missidentifying netpbm files (#856092)
-Patch6: file-5.35-netpbm-misleading.patch
-
-# added Linux PowerPC core offsets for Linux + fixed bug #1161911
-Patch7: file-5.35-add-PowerPC-core-offsets.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -214,6 +202,13 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Thu Feb 21 2019 Siteshwar Vashisht <svashisht@redhat.com> - 5.36-1
+- update to new version 5.36, which fixes the following vulnerabilities:
+    CVE-2019-8907 - remote denial of service in do_core_note in readelf.c
+    CVE-2019-8905 - stack-based buffer over-read in do_core_note in readelf.c
+    CVE-2019-8904 - stack-based buffer over-read in do_bid_note in readelf.c
+    CVE-2019-8906 - out-of-bounds read in do_core_note in readelf.c
+
 * Thu Jan 31 2019 Fedora Release Engineering <releng@fedoraproject.org> - 5.35-5
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
 

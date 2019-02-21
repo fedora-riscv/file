@@ -1,11 +1,9 @@
-From f25107f625e88726e8ae9d4963573b5a0dda8f4c Mon Sep 17 00:00:00 2001
-From: Jan Kaluza <hanzz.k@gmail.com>
-Date: Thu, 15 Dec 2011 16:15:41 +0100
-Subject: [PATCH] file-localmagic.patch
+From 14569013793837d262084f3ac6260638d340f3bf Mon Sep 17 00:00:00 2001
+From: Siteshwar Vashisht <svashisht@redhat.com>
+Date: Thu, 21 Feb 2019 15:26:38 +0100
+Subject: [PATCH] Upstream says it's up to distributions to add a way to
+ support local-magic.
 
-Upstream says it's up to distributions to add a way to support local-magic.
-
-Signed-off-by: Kamil Dudka <kdudka@redhat.com>
 ---
  magic/magic.local | 3 +++
  src/Makefile.am   | 2 +-
@@ -24,7 +22,7 @@ index 0000000..283a863
 +# Insert here your local magic data. Format is described in magic(5).
 +
 diff --git a/src/Makefile.am b/src/Makefile.am
-index 155aec4..0f22539 100644
+index 2fbefdb..3ca3e73 100644
 --- a/src/Makefile.am
 +++ b/src/Makefile.am
 @@ -1,4 +1,4 @@
@@ -34,7 +32,7 @@ index 155aec4..0f22539 100644
  nodist_include_HEADERS = magic.h
  
 diff --git a/src/Makefile.in b/src/Makefile.in
-index b6eeb20..78dce55 100644
+index 29567c4..8222bc1 100644
 --- a/src/Makefile.in
 +++ b/src/Makefile.in
 @@ -337,7 +337,7 @@ target_alias = @target_alias@
@@ -47,11 +45,11 @@ index b6eeb20..78dce55 100644
  nodist_include_HEADERS = magic.h
  AM_CPPFLAGS = -DMAGIC='"$(MAGIC)"'
 diff --git a/src/apprentice.c b/src/apprentice.c
-index e395854..ecc1214 100644
+index eca3ae0..24b5663 100644
 --- a/src/apprentice.c
 +++ b/src/apprentice.c
 @@ -454,7 +454,7 @@ apprentice_1(struct magic_set *ms, const char *fn, int action)
- 	if (map == (struct magic_map *)-1)
+ 	if (map == RCAST(struct magic_map *, -1))
  		return -1;
  	if (map == NULL) {
 -		if (ms->flags & MAGIC_CHECK)
@@ -60,5 +58,5 @@ index e395854..ecc1214 100644
  		map = apprentice_load(ms, fn, action);
  		if (map == NULL)
 -- 
-2.5.5
+2.17.2
 
