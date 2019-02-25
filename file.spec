@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.33
-Release: 9%{?dist}
+Release: 10%{?dist}
 License: BSD
 Group: Applications/File
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
@@ -48,6 +48,9 @@ Patch9: file-5.33-covscan.patch
 
 # add magic for eBPF objects (#1648667)
 Patch10: file-5.34-ebpf-magic.patch
+
+# out-of-bounds read in do_core_note in readelf.c (CVE-2019-8906)
+Patch11: file-5.34-CVE-2019-8906.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -219,6 +222,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Mon Feb 25 2019 Kamil Dudka <kdudka@redhat.com> - 5.33-10
+- out-of-bounds read in do_core_note in readelf.c (CVE-2019-8906)
+
 * Mon Nov 12 2018 Kamil Dudka <kdudka@redhat.com> - 5.33-9
 - add magic for eBPF objects (#1648667)
 
