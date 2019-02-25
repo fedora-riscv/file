@@ -50,6 +50,9 @@ Patch9: file-5.34-add-PowerPC-core-offsets.patch
 # out-of-bounds read in do_core_note in readelf.c (CVE-2019-8906)
 Patch10: file-5.34-CVE-2019-8906.patch
 
+# stack-based buffer over-read in do_bid_note in readelf.c (CVE-2019-8904)
+Patch11: file-5.34-CVE-2019-8904.patch
+
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
 BuildRequires: zlib-devel
@@ -227,6 +230,7 @@ cd %{py3dir}
 
 %changelog
 * Mon Feb 25 2019 Kamil Dudka <kdudka@redhat.com> - 5.34-12
+- stack-based buffer over-read in do_bid_note in readelf.c (CVE-2019-8904)
 - out-of-bounds read in do_core_note in readelf.c (CVE-2019-8906)
 
 * Thu Jan 24 2019 Ondrej Dubaj <odubaj@redhat.com> - 5.34-9
