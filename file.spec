@@ -52,6 +52,10 @@ Patch10: file-5.34-ebpf-magic.patch
 # out-of-bounds read in do_core_note in readelf.c (CVE-2019-8906)
 Patch11: file-5.34-CVE-2019-8906.patch
 
+# remote denial of service in do_core_note in readelf.c (CVE-2019-8907)
+# stack-based buffer over-read in do_core_note in readelf.c (CVE-2019-8905)
+Patch12: file-5.33-CVE-2019-8905-CVE-2019-8907.patch
+
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
 BuildRequires: zlib-devel
@@ -223,6 +227,8 @@ cd %{py3dir}
 
 %changelog
 * Mon Feb 25 2019 Kamil Dudka <kdudka@redhat.com> - 5.33-10
+- remote denial of service in do_core_note in readelf.c (CVE-2019-8907)
+- stack-based buffer over-read in do_core_note in readelf.c (CVE-2019-8905)
 - out-of-bounds read in do_core_note in readelf.c (CVE-2019-8906)
 
 * Mon Nov 12 2018 Kamil Dudka <kdudka@redhat.com> - 5.33-9
