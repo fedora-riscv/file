@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.34
-Release: 11%{?dist}
+Release: 12%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -46,6 +46,9 @@ Patch8: file-5.34-netpbm-misleading.patch
 
 # added Linux PowerPC core offsets for Linux + fixed bug #1161911
 Patch9: file-5.34-add-PowerPC-core-offsets.patch 
+
+# out-of-bounds read in do_core_note in readelf.c (CVE-2019-8906)
+Patch10: file-5.34-CVE-2019-8906.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -223,6 +226,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Mon Feb 25 2019 Kamil Dudka <kdudka@redhat.com> - 5.34-12
+- out-of-bounds read in do_core_note in readelf.c (CVE-2019-8906)
+
 * Thu Jan 24 2019 Ondrej Dubaj <odubaj@redhat.com> - 5.34-9
 - Added Linux PowerPC core offsets for Linux + fixed bug #1161911 
 
