@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.36
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -25,6 +25,9 @@ Patch0: file-localmagic.patch
 # not yet upstream
 Patch1: file-4.17-rpm-name.patch
 Patch2: file-5.04-volume_key.patch
+
+# improve support for Apple formats (#1679455)
+Patch3: file-5.36-apple.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -202,6 +205,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Fri Mar 01 2019 Kamil Dudka <kdudka@redhat.com> - 5.36-2
+- improve support for Apple formats (#1679455)
+
 * Thu Feb 21 2019 Siteshwar Vashisht <svashisht@redhat.com> - 5.36-1
 - update to new version 5.36, which fixes the following vulnerabilities:
     CVE-2019-8907 - remote denial of service in do_core_note in readelf.c
