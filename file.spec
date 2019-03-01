@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.34
-Release: 12%{?dist}
+Release: 13%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -56,6 +56,9 @@ Patch11: file-5.34-CVE-2019-8904.patch
 # remote denial of service in do_core_note in readelf.c (CVE-2019-8907)
 # stack-based buffer over-read in do_core_note in readelf.c (CVE-2019-8905)
 Patch12: file-5.34-CVE-2019-8905-CVE-2019-8907.patch
+
+# improve support for Apple formats (#1679455)
+Patch13: file-5.36-apple.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -233,6 +236,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Fri Mar 01 2019 Kamil Dudka <kdudka@redhat.com> - 5.34-13
+- improve support for Apple formats (#1679455)
+
 * Mon Feb 25 2019 Kamil Dudka <kdudka@redhat.com> - 5.34-12
 - remote denial of service in do_core_note in readelf.c (CVE-2019-8907)
 - stack-based buffer over-read in do_core_note in readelf.c (CVE-2019-8905)
