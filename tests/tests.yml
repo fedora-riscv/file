@@ -10,6 +10,7 @@
     tests:
     - Support-local-additions-to-magic-files
     - command-line-options
+    - file-tests
     required_packages:
     - file          # file package required for both tests
     - bzip2         # bunzip2 command required for cmd-line-options test
