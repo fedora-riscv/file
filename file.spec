@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.37
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -25,6 +25,9 @@ Patch0: file-localmagic.patch
 # not yet upstream
 Patch1: file-4.17-rpm-name.patch
 Patch2: file-5.04-volume_key.patch
+
+# fix double free on read error (#1685217)
+Patch14: file-5.37-double-free.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -202,6 +205,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Tue Jun 11 2019 Kamil Dudka <kdudka@redhat.com> - 5.37-2
+- fix double free on read error (#1685217)
+
 * Fri May 17 2019 Kamil Dudka <kdudka@redhat.com> - 5.37-1
 - update to new version 5.37
 
