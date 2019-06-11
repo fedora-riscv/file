@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.36
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -28,6 +28,9 @@ Patch2: file-5.04-volume_key.patch
 
 # improve support for Apple formats (#1679455)
 Patch3: file-5.36-apple.patch
+
+# fix double free on read error (#1685217)
+Patch14: file-5.37-double-free.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -205,6 +208,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Tue Jun 11 2019 Kamil Dudka <kdudka@redhat.com> - 5.36-3
+- fix double free on read error (#1685217)
+
 * Fri Mar 01 2019 Kamil Dudka <kdudka@redhat.com> - 5.36-2
 - improve support for Apple formats (#1679455)
 
