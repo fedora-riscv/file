@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.37
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -205,6 +205,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Thu Jul 25 2019 Fedora Release Engineering <releng@fedoraproject.org> - 5.37-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
+
 * Tue Jun 11 2019 Kamil Dudka <kdudka@redhat.com> - 5.37-2
 - fix double free on read error (#1685217)
 
