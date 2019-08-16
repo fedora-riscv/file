@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.37
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -205,6 +205,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Fri Aug 16 2019 Miro Hrončok <mhroncok@redhat.com> - 5.37-4
+- Rebuilt for Python 3.8
+
 * Thu Jul 25 2019 Fedora Release Engineering <releng@fedoraproject.org> - 5.37-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
 
