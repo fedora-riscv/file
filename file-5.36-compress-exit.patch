@@ -1,0 +1,28 @@
+From e005116ffd02bf9eaad78b1e3345cb8b93ffc23e Mon Sep 17 00:00:00 2001
+From: Kamil Dudka <kdudka@redhat.com>
+Date: Fri, 30 Aug 2019 17:18:28 +0200
+Subject: [PATCH] compress: if exec fails, call _exit() instead of exit()
+
+... to avoid running librpm's exit handler in the forked process
+
+Bug: https://bugzilla.redhat.com/1705320
+---
+ src/compress.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/compress.c b/src/compress.c
+index 89fc570..e5aa1d0 100644
+--- a/src/compress.c
++++ b/src/compress.c
+@@ -725,7 +725,7 @@ uncompressbuf(int fd, size_t bytes_max, size_t method, const unsigned char *old,
+ 		    RCAST(char *const *, RCAST(intptr_t, compr[method].argv)));
+ 		dprintf(STDERR_FILENO, "exec `%s' failed, %s",
+ 		    compr[method].argv[0], strerror(errno));
+-		exit(1);
++		_exit(1);
+ 		/*NOTREACHED*/
+ 	case -1:
+ 		return makeerror(newch, n, "Cannot fork, %s",
+-- 
+2.20.1
+
