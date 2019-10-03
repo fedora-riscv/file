@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.37
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -205,6 +205,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Thu Oct 03 2019 Miro Hrončok <mhroncok@redhat.com> - 5.37-5
+- Rebuilt for Python 3.8.0rc1 (#1748018)
+
 * Fri Aug 16 2019 Miro Hrončok <mhroncok@redhat.com> - 5.37-4
 - Rebuilt for Python 3.8
 
