@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.37
-Release: 5%{?dist}
+Release: 6%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -67,9 +67,7 @@ The file-static package contains the static version of the libmagic library.
 %package -n python2-magic
 Summary: Python 2 bindings for the libmagic API
 BuildRequires: python2-devel
-%if 0%{?rhel} && 0%{?rhel} <= 7
-BuildRequires: python-setuptools
-%endif
+BuildRequires: python2-setuptools
 BuildArch: noarch
 Requires: %{name} = %{version}-%{release}
 %{?python_provide:%python_provide python2-magic}
@@ -205,6 +203,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Fri Oct 04 2019 Kamil Dudka <kdudka@redhat.com> - 5.37-6
+- always install python2-setuptools if python2 is enabled
+
 * Thu Oct 03 2019 Miro Hrončok <mhroncok@redhat.com> - 5.37-5
 - Rebuilt for Python 3.8.0rc1 (#1748018)
 
