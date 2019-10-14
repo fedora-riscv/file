@@ -6,7 +6,7 @@
 %endif
 
 # python2 is not available on RHEL > 7
-%if 0%{?rhel} > 7
+%if 0%{?fedora} > 31 || 0%{?rhel} > 7
 %bcond_with python2
 %else
 %bcond_without python2
@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.37
-Release: 6%{?dist}
+Release: 7%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -203,6 +203,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Mon Oct 14 2019 Kamil Dudka <kdudka@redhat.com> - 5.37-7
+- remove the python2-magic subpackage on f32+ (#1761223)
+
 * Fri Oct 04 2019 Kamil Dudka <kdudka@redhat.com> - 5.37-6
 - always install python2-setuptools if python2 is enabled
 
