@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.34
-Release: 14%{?dist}
+Release: 15%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -62,6 +62,9 @@ Patch13: file-5.36-apple.patch
 
 # fix double free on read error (#1685217)
 Patch14: file-5.37-double-free.patch
+
+# fix heap-based buffer overflow in cdf_read_property_info() (CVE-2019-18218)
+Patch15: file-5.37-CVE-2019-18218.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -239,6 +242,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Fri Oct 25 2019 Kamil Dudka <kdudka@redhat.com> - 5.34-15
+- fix heap-based buffer overflow in cdf_read_property_info() (CVE-2019-18218)
+
 * Tue Jun 11 2019 Kamil Dudka <kdudka@redhat.com> - 5.34-14
 - fix double free on read error (#1685217)
 
