@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.36
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -34,6 +34,9 @@ Patch4: file-5.36-compress-exit.patch
 
 # fix double free on read error (#1685217)
 Patch14: file-5.37-double-free.patch
+
+# fix heap-based buffer overflow in cdf_read_property_info() (CVE-2019-18218)
+Patch15: file-5.37-CVE-2019-18218.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -211,6 +214,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Fri Oct 25 2019 Kamil Dudka <kdudka@redhat.com> - 5.36-5
+- fix heap-based buffer overflow in cdf_read_property_info() (CVE-2019-18218)
+
 * Fri Aug 30 2019 Kamil Dudka <kdudka@redhat.com> - 5.36-4
 - avoid running librpm's exit handler in a forked process (#1705320)
 
