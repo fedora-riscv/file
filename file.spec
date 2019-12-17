@@ -14,8 +14,8 @@
 
 Summary: A utility for determining file types
 Name: file
-Version: 5.37
-Release: 9%{?dist}
+Version: 5.38
+Release: 1%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -25,15 +25,6 @@ Patch0: file-localmagic.patch
 # not yet upstream
 Patch1: file-4.17-rpm-name.patch
 Patch2: file-5.04-volume_key.patch
-
-# remove wrong magic for JFFS file system (#1771242)
-Patch5: file-5.37-jffs-magic.patch
-
-# fix double free on read error (#1685217)
-Patch14: file-5.37-double-free.patch
-
-# fix heap-based buffer overflow in cdf_read_property_info() (CVE-2019-18218)
-Patch15: file-5.37-CVE-2019-18218.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -209,6 +200,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Tue Dec 17 2019 Kamil Dudka <kdudka@redhat.com> - 5.38-1
+- update to new version 5.38
+
 * Mon Nov 18 2019 Kamil Dudka <kdudka@redhat.com> - 5.37-9
 - remove wrong magic for JFFS file system (#1771242)
 
