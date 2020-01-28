@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.38
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -200,6 +200,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Tue Jan 28 2020 Fedora Release Engineering <releng@fedoraproject.org> - 5.38-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
+
 * Tue Dec 17 2019 Kamil Dudka <kdudka@redhat.com> - 5.38-1
 - update to new version 5.38
 
