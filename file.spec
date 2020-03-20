@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.38
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -76,13 +76,16 @@ file(1) command.
 %endif
 
 %if %{with python3}
-%package -n python3-magic
+%package -n python3-file-magic
 Summary: Python 3 bindings for the libmagic API
 BuildRequires: python3-devel
 BuildArch: noarch
 Requires: %{name} = %{version}-%{release}
+Provides: python3-magic = %{version}-%{release}
+Obsoletes: python3-magic < %{version}-%{release}
+Conflicts: python3-magic < %{version}-%{release}
 
-%description -n python3-magic
+%description -n python3-file-magic
 This package contains the Python 3 bindings to allow access to the
 libmagic API. The libmagic library is also used by the familiar
 file(1) command.
@@ -190,7 +193,7 @@ cd %{py3dir}
 %endif
 
 %if %{with python3}
-%files -n python3-magic
+%files -n python3-file-magic
 %{!?_licensedir:%global license %%doc}
 %license COPYING
 %doc python/README.md python/example.py
@@ -200,6 +203,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Wed Mar 11 2020 Vincent Mihalkovič <vmihalko@redhat.com> - 5.38-3
+- use python3-file-magic instead of python3-magic (#1793689)
+
 * Tue Jan 28 2020 Fedora Release Engineering <releng@fedoraproject.org> - 5.38-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 
