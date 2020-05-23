@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.38
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -203,6 +203,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Sat May 23 2020 Miro Hrončok <mhroncok@redhat.com> - 5.38-4
+- Rebuilt for Python 3.9
+
 * Wed Mar 11 2020 Vincent Mihalkovič <vmihalko@redhat.com> - 5.38-3
 - use python3-file-magic instead of python3-magic (#1793689)
 
