@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.38
-Release: 5%{?dist}
+Release: 6%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -206,6 +206,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Wed May 27 2020 Miro Hrončok <mhroncok@redhat.com> - 5.38-6
+- Rebuilt for Python 3.9
+
 * Tue May 26 2020 Vincent Mihalkovič <vmihalko@redhat.com> - 5.38-5
 - increase CDROM strength to beat MBR (#1696798)
 
