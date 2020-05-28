@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.38
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -25,6 +25,9 @@ Patch0: file-localmagic.patch
 # not yet upstream
 Patch1: file-4.17-rpm-name.patch
 Patch2: file-5.04-volume_key.patch
+
+# fixed in upstream; increase CDROM strength to beat MBR (#1696798) 
+Patch3:file-magic-filesystems.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -200,6 +203,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Wed May 27 2020 Vincent Mihalkovič <vmihalko@redhat.com> - 5.38-3
+- increase CDROM strength to beat MBR (#1696798)  
+
 * Tue Jan 28 2020 Fedora Release Engineering <releng@fedoraproject.org> - 5.38-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 
