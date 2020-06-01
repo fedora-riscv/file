@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.37
-Release: 8%{?dist}
+Release: 9%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -25,6 +25,9 @@ Patch0: file-localmagic.patch
 # not yet upstream
 Patch1: file-4.17-rpm-name.patch
 Patch2: file-5.04-volume_key.patch
+
+# fixed in upstream; increase CDROM strength to beat MBR (#1696798) 
+Patch3:file-magic-filesystems.patch
 
 # fix double free on read error (#1685217)
 Patch14: file-5.37-double-free.patch
@@ -206,6 +209,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Mon Jun  1 2020 Vincent Mihalkovič <vmihalko@redhat.com> - 5.37-9
+- increase CDROM strength to beat MBR (#1696798) 
+
 * Fri Oct 25 2019 Kamil Dudka <kdudka@redhat.com> - 5.37-8
 - fix heap-based buffer overflow in cdf_read_property_info() (CVE-2019-18218)
 
