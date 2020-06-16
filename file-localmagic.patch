@@ -1,4 +1,4 @@
-From 14569013793837d262084f3ac6260638d340f3bf Mon Sep 17 00:00:00 2001
+From 95c993ff6bdfe92a7f519c4db60157a421e65b38 Mon Sep 17 00:00:00 2001
 From: Siteshwar Vashisht <svashisht@redhat.com>
 Date: Thu, 21 Feb 2019 15:26:38 +0100
 Subject: [PATCH] Upstream says it's up to distributions to add a way to
@@ -22,7 +22,7 @@ index 0000000..283a863
 +# Insert here your local magic data. Format is described in magic(5).
 +
 diff --git a/src/Makefile.am b/src/Makefile.am
-index 2fbefdb..3ca3e73 100644
+index 3f67f2c..b43cb8e 100644
 --- a/src/Makefile.am
 +++ b/src/Makefile.am
 @@ -1,4 +1,4 @@
@@ -32,10 +32,10 @@ index 2fbefdb..3ca3e73 100644
  nodist_include_HEADERS = magic.h
  
 diff --git a/src/Makefile.in b/src/Makefile.in
-index 29567c4..8222bc1 100644
+index 59f3b5e..a8f56cf 100644
 --- a/src/Makefile.in
 +++ b/src/Makefile.in
-@@ -337,7 +337,7 @@ target_alias = @target_alias@
+@@ -356,7 +356,7 @@ target_alias = @target_alias@
  top_build_prefix = @top_build_prefix@
  top_builddir = @top_builddir@
  top_srcdir = @top_srcdir@
@@ -45,12 +45,12 @@ index 29567c4..8222bc1 100644
  nodist_include_HEADERS = magic.h
  AM_CPPFLAGS = -DMAGIC='"$(MAGIC)"'
 diff --git a/src/apprentice.c b/src/apprentice.c
-index eca3ae0..24b5663 100644
+index 1437bcc..b609dd1 100644
 --- a/src/apprentice.c
 +++ b/src/apprentice.c
-@@ -454,7 +454,7 @@ apprentice_1(struct magic_set *ms, const char *fn, int action)
- 	if (map == RCAST(struct magic_map *, -1))
- 		return -1;
+@@ -460,7 +460,7 @@ apprentice_1(struct magic_set *ms, const char *fn, int action)
+ #ifndef COMPILE_ONLY
+ 	map = apprentice_map(ms, fn);
  	if (map == NULL) {
 -		if (ms->flags & MAGIC_CHECK)
 +		if (ms->flags & MAGIC_CHECK && strcmp("/etc/magic", fn) != 0)
@@ -58,5 +58,5 @@ index eca3ae0..24b5663 100644
  		map = apprentice_load(ms, fn, action);
  		if (map == NULL)
 -- 
-2.17.2
+2.25.4
 

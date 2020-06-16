@@ -14,8 +14,8 @@
 
 Summary: A utility for determining file types
 Name: file
-Version: 5.38
-Release: 6%{?dist}
+Version: 5.39
+Release: 1%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -25,9 +25,6 @@ Patch0: file-localmagic.patch
 # not yet upstream
 Patch1: file-4.17-rpm-name.patch
 Patch2: file-5.04-volume_key.patch
-
-# fixed in upstream; increase CDROM strength to beat MBR (#1696798) 
-Patch3:file-magic-filesystems.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -178,6 +175,7 @@ cd %{py3dir}
 %{_libdir}/*.so
 %{_includedir}/magic.h
 %{_mandir}/man3/*
+%{_libdir}/pkgconfig/libmagic.pc
 
 %files static
 %{_libdir}/libmagic.a
@@ -206,6 +204,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Tue Jun 16 2020 Vincent Mihalkovic <vmihalko@redhat.com> - 5.39-1
+- update to new version 5.39
+
 * Wed May 27 2020 Miro Hrončok <mhroncok@redhat.com> - 5.38-6
 - Rebuilt for Python 3.9
 
