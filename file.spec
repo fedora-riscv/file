@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.39
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -79,6 +79,7 @@ file(1) command.
 %package -n python3-file-magic
 Summary: Python 3 bindings for the libmagic API
 BuildRequires: python3-devel
+BuildRequires: python3-setuptools
 BuildArch: noarch
 Requires: %{name} = %{version}-%{release}
 Provides: python3-magic = %{version}-%{release}
@@ -204,6 +205,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Wed Jun 24 2020 Vincent Mihalkovic <vmihalko@redhat.com> - 5.39-2
+- BuildRequires: python3-setuptools
+
 * Tue Jun 16 2020 Vincent Mihalkovic <vmihalko@redhat.com> - 5.39-1
 - update to new version 5.39
 
