@@ -114,7 +114,7 @@ CFLAGS="%{optflags} -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE" \
 sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
 sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
 export LD_LIBRARY_PATH=%{_builddir}/%{name}-%{version}/src/.libs
-make %{?_smp_mflags} V=1
+%make_build
 %if %{with python2}
 cd python
 CFLAGS="%{optflags}" %{__python2} setup.py build
@@ -131,7 +131,7 @@ mkdir -p ${RPM_BUILD_ROOT}%{_mandir}/man5
 mkdir -p ${RPM_BUILD_ROOT}%{_datadir}/misc
 mkdir -p ${RPM_BUILD_ROOT}%{_datadir}/file
 
-make DESTDIR=${RPM_BUILD_ROOT} install
+%make_install
 rm -f ${RPM_BUILD_ROOT}%{_libdir}/*.la
 
 # local magic in /etc/magic
