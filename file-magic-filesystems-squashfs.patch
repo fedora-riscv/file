@@ -1,0 +1,13 @@
+diff --git a/magic/Magdir/filesystems b/magic/Magdir/filesystems
+index 8e91ba1..38354f2 100644
+--- a/magic/Magdir/filesystems
++++ b/magic/Magdir/filesystems
+@@ -2182,7 +2182,7 @@
+ >0	use	squashfs
+ 
+ 0	string	hsqs	Squashfs filesystem, little endian,
+->0	use	^squashfs
++>0	use	\^squashfs
+ 
+ # AFS Dump Magic
+ # From: Ty Sarna <tsarna@sarna.org>

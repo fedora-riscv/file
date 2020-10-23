@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.38
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -28,6 +28,8 @@ Patch2: file-5.04-volume_key.patch
 
 # fixed in upstream; increase CDROM strength to beat MBR (#1696798) 
 Patch3:file-magic-filesystems.patch
+# fixed in upstream; fix little-endian Squashfs parsing (#1889185)
+Patch4:file-magic-filesystems-squashfs.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -203,6 +205,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Thu Oct 22 2020 Vincent Mihalkovic <vmihalko@redhat.com> - 5.38-4
+- fix little-endian Squashfs parsing. (#1889184)
+
 * Wed May 27 2020 Vincent Mihalkovič <vmihalko@redhat.com> - 5.38-3
 - increase CDROM strength to beat MBR (#1696798)  
 
