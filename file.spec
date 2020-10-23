@@ -30,6 +30,8 @@ Patch2: file-5.04-volume_key.patch
 Patch3:file-magic-filesystems.patch
 # fixed in upstream; fix little-endian Squashfs parsing (#1889185)
 Patch4:file-magic-filesystems-squashfs.patch
+# fixed in upstream; fix matching in magic/python
+Patch5:file-magic-python.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -206,7 +208,7 @@ cd %{py3dir}
 
 %changelog
 * Thu Oct 22 2020 Vincent Mihalkovic <vmihalko@redhat.com> - 5.38-4
-- fix little-endian Squashfs parsing. (#1889184)
+- Steve Grubb magic/python patch; fix little-endian Squashfs parsing. (#1889184)
 
 * Wed May 27 2020 Vincent Mihalkovič <vmihalko@redhat.com> - 5.38-3
 - increase CDROM strength to beat MBR (#1696798)  
