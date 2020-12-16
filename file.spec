@@ -15,7 +15,7 @@
 Summary: A utility for determining file types
 Name: file
 Version: 5.39
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: BSD
 Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -25,6 +25,9 @@ Patch0: file-localmagic.patch
 # not yet upstream
 Patch1: file-4.17-rpm-name.patch
 Patch2: file-5.04-volume_key.patch
+
+# Fix close_on_exec multithreaded decompression issue (#1906751)
+Patch3: file-5.39-CLOEXEC.patch
 
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
@@ -205,6 +208,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Wed Dec 16 2020 Vincent Mihalkovic <vmihalko@redhat.com> - 5.39-4
+- Fix close_on_exec multithreaded decompression issue (#1906751)
+
 * Mon Jul 27 2020 Fedora Release Engineering <releng@fedoraproject.org> - 5.39-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
 
