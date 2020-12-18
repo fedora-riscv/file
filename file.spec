@@ -83,6 +83,7 @@ file(1) command.
 Summary: Python 3 bindings for the libmagic API
 BuildRequires: python3-devel
 BuildRequires: python3-setuptools
+BuildRequires: make
 BuildArch: noarch
 Requires: %{name} = %{version}-%{release}
 Provides: python3-magic = %{version}-%{release}
