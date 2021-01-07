@@ -32,7 +32,10 @@ Patch3: file-5.39-CLOEXEC.patch
 URL: http://www.darwinsys.com/file/
 Requires: file-libs = %{version}-%{release}
 BuildRequires: zlib-devel
-BuildRequires: autoconf automake libtool
+BuildRequires: autoconf
+BuildRequires: automake
+BuildRequires: libtool
+BuildRequires: make
 
 %description
 The file command is used to identify a particular file according to the
@@ -83,7 +86,6 @@ file(1) command.
 Summary: Python 3 bindings for the libmagic API
 BuildRequires: python3-devel
 BuildRequires: python3-setuptools
-BuildRequires: make
 BuildArch: noarch
 Requires: %{name} = %{version}-%{release}
 Provides: python3-magic = %{version}-%{release}
