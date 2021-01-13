@@ -12,12 +12,12 @@
 %bcond_without python2
 %endif
 
-Summary: A utility for determining file types
+Summary: Utility for determining file types
 Name: file
 Version: 5.39
 Release: 4%{?dist}
 License: BSD
-Source0: ftp://ftp.astron.com/pub/file/file-%{version}.tar.gz
+Source0: http://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
 # Upstream says it's up to distributions to add a way to support local-magic.
 Patch0: file-localmagic.patch
@@ -29,8 +29,8 @@ Patch2: file-5.04-volume_key.patch
 # Fix close_on_exec multithreaded decompression issue (#1906751)
 Patch3: file-5.39-CLOEXEC.patch
 
-URL: http://www.darwinsys.com/file/
-Requires: file-libs = %{version}-%{release}
+URL: https://www.darwinsys.com/file/
+Requires: file-libs%{?_isa} = %{version}-%{release}
 BuildRequires: zlib-devel
 BuildRequires: autoconf
 BuildRequires: automake
@@ -161,7 +161,6 @@ cd %{py3dir}
 %ldconfig_scriptlets libs
 
 %files
-%{!?_licensedir:%global license %%doc}
 %license COPYING
 %doc ChangeLog README
 %{_bindir}/*
@@ -169,7 +168,6 @@ cd %{py3dir}
 %config(noreplace) %{_sysconfdir}/magic
 
 %files libs
-%{!?_licensedir:%global license %%doc}
 %license COPYING
 %doc ChangeLog README
 %{_libdir}/*so.*
@@ -189,7 +187,6 @@ cd %{py3dir}
 
 %if %{with python2}
 %files -n python2-magic
-%{!?_licensedir:%global license %%doc}
 %license COPYING
 %doc python/README.md python/example.py
 %{python2_sitelib}/magic.py
@@ -202,7 +199,6 @@ cd %{py3dir}
 
 %if %{with python3}
 %files -n python3-file-magic
-%{!?_licensedir:%global license %%doc}
 %license COPYING
 %doc python/README.md python/example.py
 %{python3_sitelib}/magic.py
