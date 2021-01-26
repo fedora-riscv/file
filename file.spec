@@ -15,7 +15,7 @@
 Summary: Utility for determining file types
 Name: file
 Version: 5.39
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: BSD
 Source0: http://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -207,6 +207,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Tue Jan 26 2021 Fedora Release Engineering <releng@fedoraproject.org> - 5.39-5
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
+
 * Wed Dec 16 2020 Vincent Mihalkovic <vmihalko@redhat.com> - 5.39-4
 - Fix close_on_exec multithreaded decompression issue (#1906751)
 
