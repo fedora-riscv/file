@@ -15,7 +15,7 @@
 Summary: Utility for determining file types
 Name: file
 Version: 5.40
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: BSD
 Source0: http://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -69,7 +69,7 @@ Summary: Python 2 bindings for the libmagic API
 BuildRequires: python2-devel
 BuildRequires: python2-setuptools
 BuildArch: noarch
-Requires: %{name} = %{version}-%{release}
+Requires: file-libs = %{version}-%{release}
 %{?python_provide:%python_provide python2-magic}
 
 %description -n python2-magic
@@ -84,7 +84,7 @@ Summary: Python 3 bindings for the libmagic API
 BuildRequires: python3-devel
 BuildRequires: python3-setuptools
 BuildArch: noarch
-Requires: %{name} = %{version}-%{release}
+Requires: file-libs = %{version}-%{release}
 Provides: python3-magic = %{version}-%{release}
 Obsoletes: python3-magic < %{version}-%{release}
 Conflicts: python3-magic < %{version}-%{release}
@@ -204,6 +204,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Thu Apr 08 2021 Vincent Mihalkovic <vmihalko@redhat.com> - 5.40-2
+- make python{2,3}-magic depend on file-libs (#1947453)
+
 * Wed Mar 31 2021 Vincent Mihalkovic <vmihalko@redhat.com> - 5.40-1
 - update to new version 5.40
 
