@@ -1,0 +1,18 @@
+diff --git a/magic/Magdir/compress b/magic/Magdir/compress
+index 64d11a7..d830c64 100644
+--- a/magic/Magdir/compress
++++ b/magic/Magdir/compress
+@@ -264,12 +264,7 @@
+ >>5	lequad		!0xffffffffffffffff	non-streamed, size %lld
+ 
+ # http://tukaani.org/xz/xz-file-format.txt
+-0	ustring		\xFD7zXZ\x00		XZ compressed data, checksum
+->7	byte&0xf	0x0			NONE
+->7	byte&0xf	0x1			CRC32
+->7	byte&0xf	0x4			CRC64
+->7	byte&0xf	0xa			SHA-256
+-
++0	ustring		\xFD7zXZ\x00		XZ compressed data
+ !:strength * 2
+ !:mime	application/x-xz
+ 

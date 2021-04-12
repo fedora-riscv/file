@@ -15,7 +15,7 @@
 Summary: Utility for determining file types
 Name: file
 Version: 5.40
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: BSD
 Source0: http://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -25,6 +25,9 @@ Patch0: file-localmagic.patch
 # not yet upstream
 Patch1: file-4.17-rpm-name.patch
 Patch2: file-5.04-volume_key.patch
+
+# hotfix, revert the https://github.com/file/file/commit/4ebd747d commit.
+Patch3: file-5.40-magic-xzip.patch
 
 URL: https://www.darwinsys.com/file/
 Requires: file-libs%{?_isa} = %{version}-%{release}
@@ -204,6 +207,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Mon Apr 12 2021 Vincent Mihalkovic <vmihalko@redhat.com> - 5.40-3
+- revert the https://github.com/file/file/commit/3ebd747d commit (#1947317)
+
 * Thu Apr 08 2021 Vincent Mihalkovic <vmihalko@redhat.com> - 5.40-2
 - make python{2,3}-magic depend on file-libs (#1947453)
 
