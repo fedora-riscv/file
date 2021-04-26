@@ -15,7 +15,7 @@
 Summary: Utility for determining file types
 Name: file
 Version: 5.40
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: BSD
 Source0: http://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -28,6 +28,8 @@ Patch2: file-5.04-volume_key.patch
 
 # Upstream commit 9b0459afab309a82aa4e46f73a4e50dd641f3d39
 Patch3: file-5.40-magic-xzip.patch
+# Upstream commit f06015040e7ffb3be21bb7622f9f8291b749aaf9
+Patch4: file-5.40-magic-unsigned.patch
 
 URL: https://www.darwinsys.com/file/
 Requires: file-libs%{?_isa} = %{version}-%{release}
@@ -207,6 +209,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Mon Apr 26 2021 Vincent Mihalkovic <vmihalko@redhat.com> - 5.40-5
+- fix printing ext4 filesystem UUIDs (#1945122)
+
 * Mon Apr 19 2021 Stephen Gallagher <sgallagh@redhat.com> - 5.40-4
 - Restore the xz commit with the upstream fix (#1947317)
 
