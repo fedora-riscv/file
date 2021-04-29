@@ -15,7 +15,7 @@
 Summary: Utility for determining file types
 Name: file
 Version: 5.40
-Release: 5%{?dist}
+Release: 6%{?dist}
 License: BSD
 Source0: http://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -121,7 +121,7 @@ CFLAGS="%{optflags} -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE" \
 # remove hardcoded library paths from local libtool
 sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
 sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
-export LD_LIBRARY_PATH=%{_builddir}/%{name}-%{version}/src/.libs
+export LD_LIBRARY_PATH=$PWD/src/.libs
 %make_build
 %if %{with python2}
 cd python
@@ -161,6 +161,10 @@ cd %{py3dir}
 %{__install} -d ${RPM_BUILD_ROOT}%{_datadir}/%{name}
 
 %ldconfig_scriptlets libs
+
+%check
+export LD_LIBRARY_PATH=$PWD/src/.libs
+make -C tests check
 
 %files
 %license COPYING
@@ -209,6 +213,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Wed Apr 28 2021 Vincent Mihalkovic <vmihalko@redhat.com> - 5.40-6
+- enable the upstream test suite
+
 * Mon Apr 26 2021 Vincent Mihalkovic <vmihalko@redhat.com> - 5.40-5
 - fix printing ext4 filesystem UUIDs (#1945122)
 
