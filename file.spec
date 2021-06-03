@@ -15,7 +15,7 @@
 Summary: Utility for determining file types
 Name: file
 Version: 5.40
-Release: 6%{?dist}
+Release: 7%{?dist}
 License: BSD
 Source0: http://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -213,6 +213,9 @@ make -C tests check
 %endif
 
 %changelog
+* Thu Jun 03 2021 Python Maint <python-maint@redhat.com> - 5.40-7
+- Rebuilt for Python 3.10
+
 * Wed Apr 28 2021 Vincent Mihalkovic <vmihalko@redhat.com> - 5.40-6
 - enable the upstream test suite
 
