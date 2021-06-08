@@ -15,7 +15,7 @@
 Summary: Utility for determining file types
 Name: file
 Version: 5.39
-Release: 5%{?dist}
+Release: 6%{?dist}
 License: BSD
 Source0: http://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -28,6 +28,8 @@ Patch2: file-5.04-volume_key.patch
 
 # Fix close_on_exec multithreaded decompression issue (#1906751)
 Patch3: file-5.39-CLOEXEC.patch
+# Upstream commit 7d9b0f0d853957ad88dae0f440fecd58d2740ca7
+Patch4: file-5.40-magic-python.patch
 
 URL: https://www.darwinsys.com/file/
 Requires: file-libs%{?_isa} = %{version}-%{release}
@@ -207,6 +209,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Tue Jun 08 2021 Vincent Mihalkovic <vmihalko@redhat.com> - 5.39-6
+- do not classify python bytecode files as text (#1963895)
+
 * Tue Jan 26 2021 Fedora Release Engineering <releng@fedoraproject.org> - 5.39-5
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
 
