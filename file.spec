@@ -15,7 +15,7 @@
 Summary: Utility for determining file types
 Name: file
 Version: 5.40
-Release: 7%{?dist}
+Release: 8%{?dist}
 License: BSD
 Source0: http://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -30,6 +30,8 @@ Patch2: file-5.04-volume_key.patch
 Patch3: file-5.40-magic-xzip.patch
 # Upstream commit f06015040e7ffb3be21bb7622f9f8291b749aaf9
 Patch4: file-5.40-magic-unsigned.patch
+# Upstream commit 7d9b0f0d853957ad88dae0f440fecd58d2740ca7
+Patch5: file-5.40-magic-python.patch
 
 URL: https://www.darwinsys.com/file/
 Requires: file-libs%{?_isa} = %{version}-%{release}
@@ -213,6 +215,9 @@ make -C tests check
 %endif
 
 %changelog
+* Tue Jun 08 2021 Vincent Mihalkovic <vmihalko@redhat.com> - 5.40-8
+- do not classify python bytecode files as text (#1963895)
+
 * Thu Jun 03 2021 Python Maint <python-maint@redhat.com> - 5.40-7
 - Rebuilt for Python 3.10
 
