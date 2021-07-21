@@ -15,7 +15,7 @@
 Summary: Utility for determining file types
 Name: file
 Version: 5.40
-Release: 8%{?dist}
+Release: 9%{?dist}
 License: BSD
 Source0: http://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -215,6 +215,9 @@ make -C tests check
 %endif
 
 %changelog
+* Wed Jul 21 2021 Fedora Release Engineering <releng@fedoraproject.org> - 5.40-9
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
+
 * Tue Jun 08 2021 Vincent Mihalkovic <vmihalko@redhat.com> - 5.40-8
 - do not classify python bytecode files as text (#1963895)
 
