@@ -1,0 +1,13 @@
+diff --git a/src/funcs.c b/src/funcs.c
+index 6320cf2..d6c485f 100644
+--- a/src/funcs.c
++++ b/src/funcs.c
+@@ -96,7 +96,7 @@ file_checkfmt(char *msg, size_t mlen, const char *fmt)
+ 		if (*++p == '%')
+ 			continue;
+ 		// Skip uninteresting.
+-		while (strchr("0.'+- ", *p) != NULL)
++		while (strchr("#0.'+- ", *p) != NULL)
+ 			p++;
+ 		if (*p == '*') {
+ 			if (msg)

@@ -15,7 +15,7 @@
 Summary: Utility for determining file types
 Name: file
 Version: 5.39
-Release: 6%{?dist}
+Release: 7%{?dist}
 License: BSD
 Source0: http://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -30,6 +30,8 @@ Patch2: file-5.04-volume_key.patch
 Patch3: file-5.39-CLOEXEC.patch
 # Upstream commit 7d9b0f0d853957ad88dae0f440fecd58d2740ca7
 Patch4: file-5.40-magic-python.patch
+# Upstream commit 85b7ab83257b3191a1a7ca044589a092bcef2bb3
+Patch5: file-5.40-formats.patch
 
 URL: https://www.darwinsys.com/file/
 Requires: file-libs%{?_isa} = %{version}-%{release}
@@ -209,6 +211,9 @@ cd %{py3dir}
 %endif
 
 %changelog
+* Wed Sep 29 2021 Vincent Mihalkovic <vmihalko@redhat.com> - 5.39-7
+- fix .wasm format recognition (#2008470)
+
 * Tue Jun 08 2021 Vincent Mihalkovic <vmihalko@redhat.com> - 5.39-6
 - do not classify python bytecode files as text (#1963895)
 
