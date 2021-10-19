@@ -14,8 +14,8 @@
 
 Summary: Utility for determining file types
 Name: file
-Version: 5.40
-Release: 9%{?dist}
+Version: 5.41
+Release: 1%{?dist}
 License: BSD
 Source0: http://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -25,13 +25,6 @@ Patch0: file-localmagic.patch
 # not yet upstream
 Patch1: file-4.17-rpm-name.patch
 Patch2: file-5.04-volume_key.patch
-
-# Upstream commit 9b0459afab309a82aa4e46f73a4e50dd641f3d39
-Patch3: file-5.40-magic-xzip.patch
-# Upstream commit f06015040e7ffb3be21bb7622f9f8291b749aaf9
-Patch4: file-5.40-magic-unsigned.patch
-# Upstream commit 7d9b0f0d853957ad88dae0f440fecd58d2740ca7
-Patch5: file-5.40-magic-python.patch
 
 URL: https://www.darwinsys.com/file/
 Requires: file-libs%{?_isa} = %{version}-%{release}
@@ -170,14 +163,14 @@ make -C tests check
 
 %files
 %license COPYING
-%doc ChangeLog README
+%doc ChangeLog
 %{_bindir}/*
 %{_mandir}/man1/*
 %config(noreplace) %{_sysconfdir}/magic
 
 %files libs
 %license COPYING
-%doc ChangeLog README
+%doc ChangeLog
 %{_libdir}/*so.*
 %{_datadir}/magic*
 %{_mandir}/man5/*
@@ -215,6 +208,9 @@ make -C tests check
 %endif
 
 %changelog
+* Tue Oct 19 2021 Vincent Mihalkovic <vmihalko@redhat.com> - 5.41-1
+- update to new version 5.41
+
 * Wed Jul 21 2021 Fedora Release Engineering <releng@fedoraproject.org> - 5.40-9
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
 
