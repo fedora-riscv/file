@@ -15,7 +15,7 @@
 Summary: Utility for determining file types
 Name: file
 Version: 5.41
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: BSD
 Source0: http://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -25,6 +25,9 @@ Patch0: file-localmagic.patch
 # not yet upstream
 Patch1: file-4.17-rpm-name.patch
 Patch2: file-5.04-volume_key.patch
+
+# Upstream commit: https://github.com/file/file/commit/f687fa2b92cd9231
+Patch3: file-5.41-javascript-magic.patch
 
 URL: https://www.darwinsys.com/file/
 Requires: file-libs%{?_isa} = %{version}-%{release}
@@ -208,6 +211,9 @@ make -C tests check
 %endif
 
 %changelog
+* Wed Dec 08 2021 Vincent Mihalkovic <vmihalko@redhat.com> - 5.41-2
+- fix the JavaScript detection (#2029975)
+
 * Tue Oct 19 2021 Vincent Mihalkovic <vmihalko@redhat.com> - 5.41-1
 - update to new version 5.41
 
