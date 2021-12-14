@@ -15,7 +15,7 @@
 Summary: Utility for determining file types
 Name: file
 Version: 5.41
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: BSD
 Source0: http://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -28,6 +28,12 @@ Patch2: file-5.04-volume_key.patch
 
 # Upstream commit: https://github.com/file/file/commit/f687fa2b92cd9231
 Patch3: file-5.41-javascript-magic.patch
+# Upstream commit: https://github.com/file/file/commit/c49e7805fd8aa48b
+Patch4: file-5.41-json-magic.patch
+# Upstream commit: https://github.com/file/file/commit/3012be8ca1cdee72
+Patch5: file-5.41-json-tests.patch
+# Upstream commit: https://github.com/file/file/commit/e83f5046ef2d8967
+Patch6: file-5.41-json-tests-fix.patch
 
 URL: https://www.darwinsys.com/file/
 Requires: file-libs%{?_isa} = %{version}-%{release}
@@ -211,6 +217,9 @@ make -C tests check
 %endif
 
 %changelog
+* Tue Dec 14 2021 Vincent Mihalkovic <vmihalko@redhat.com> - 5.41-3
+- change the identification for JSON files (#2020715)
+
 * Wed Dec 08 2021 Vincent Mihalkovic <vmihalko@redhat.com> - 5.41-2
 - fix the JavaScript detection (#2029975)
 

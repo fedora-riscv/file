@@ -1,0 +1,35 @@
+From 3012be8ca1cdee72471118eea0192e1e32cab862 Mon Sep 17 00:00:00 2001
+From: Christos Zoulas <christos@zoulas.com>
+Date: Fri, 10 Dec 2021 18:36:41 +0000
+Subject: [PATCH] Adjust tests to match what JSON prints now (Avinash Sonawane)
+
+---
+ tests/json1.result | 2 +-
+ tests/json2.result | 2 +-
+ tests/json3.result | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/tests/json1.result b/tests/json1.result
+index 01442dc9c..7d635242f 100644
+--- a/tests/json1.result
++++ b/tests/json1.result
+@@ -1 +1 @@
+-JSON data
+\ No newline at end of file
++JSON text data
+diff --git a/tests/json2.result b/tests/json2.result
+index 01442dc9c..7d635242f 100644
+--- a/tests/json2.result
++++ b/tests/json2.result
+@@ -1 +1 @@
+-JSON data
+\ No newline at end of file
++JSON text data
+diff --git a/tests/json3.result b/tests/json3.result
+index 01442dc9c..7d635242f 100644
+--- a/tests/json3.result
++++ b/tests/json3.result
+@@ -1 +1 @@
+-JSON data
+\ No newline at end of file
++JSON text data
