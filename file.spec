@@ -15,7 +15,7 @@
 Summary: Utility for determining file types
 Name: file
 Version: 5.41
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: BSD
 Source0: http://ftp.astron.com/pub/file/file-%{version}.tar.gz
 
@@ -217,6 +217,9 @@ make -C tests check
 %endif
 
 %changelog
+* Thu Jan 20 2022 Fedora Release Engineering <releng@fedoraproject.org> - 5.41-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
+
 * Tue Dec 14 2021 Vincent Mihalkovic <vmihalko@redhat.com> - 5.41-3
 - change the identification for JSON files (#2020715)
 
