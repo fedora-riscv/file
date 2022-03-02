@@ -15,9 +15,12 @@
 Summary: Utility for determining file types
 Name: file
 Version: 5.41
-Release: 4%{?dist}
+Release: 5%{?dist}
 License: BSD
 Source0: http://ftp.astron.com/pub/file/file-%{version}.tar.gz
+Source1: http://ftp.astron.com/pub/file/file-%{version}.tar.gz.asc
+# Key is from: https://github.com/file/file/commit/4cf8a0864a7fa654ee53ebc042e9a4ee8ccacd22
+Source2: christoskey.asc
 
 # Upstream says it's up to distributions to add a way to support local-magic.
 Patch0: file-localmagic.patch
@@ -42,6 +45,7 @@ BuildRequires: autoconf
 BuildRequires: automake
 BuildRequires: libtool
 BuildRequires: make
+BuildRequires: gnupg2
 
 %description
 The file command is used to identify a particular file according to the
@@ -105,6 +109,7 @@ file(1) command.
 %endif
 
 %prep
+%{gpgverify} --keyring='%{SOURCE2}' --signature='%{SOURCE1}' --data='%{SOURCE0}'
 %autosetup -p1
 
 iconv -f iso-8859-1 -t utf-8 < doc/libmagic.man > doc/libmagic.man_
@@ -217,6 +222,9 @@ make -C tests check
 %endif
 
 %changelog
+* Wed Mar 02 2022 Vincent Mihalkovic <vmihalko@redhat.com> - 5.41-5
+- gpgverify source tarball
+
 * Thu Jan 20 2022 Fedora Release Engineering <releng@fedoraproject.org> - 5.41-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
 
