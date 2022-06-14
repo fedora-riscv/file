@@ -1,0 +1,31 @@
+From c49e7805fd8aa48b8d2afad98d2115560ffaaf21 Mon Sep 17 00:00:00 2001
+From: Christos Zoulas <christos@zoulas.com>
+Date: Thu, 9 Dec 2021 18:38:43 +0000
+Subject: [PATCH] JSON is text data, requested by Vincent Mihalkovic.
+
+---
+ src/is_json.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/is_json.c b/src/is_json.c
+index 0b12438ff..4ff49b3bb 100644
+--- a/src/is_json.c
++++ b/src/is_json.c
+@@ -32,7 +32,7 @@
+ #include "file.h"
+ 
+ #ifndef lint
+-FILE_RCSID("@(#)$File: is_json.c,v 1.15 2020/06/07 19:05:47 christos Exp $")
++FILE_RCSID("@(#)$File: is_json.c,v 1.16 2021/12/09 18:38:43 christos Exp $")
+ #endif
+ 
+ #include <string.h>
+@@ -414,7 +414,7 @@ file_is_json(struct magic_set *ms, const struct buffer *b)
+ 			return -1;
+ 		return 1;
+ 	}
+-	if (file_printf(ms, "JSON data") == -1)
++	if (file_printf(ms, "JSON text data") == -1)
+ 		return -1;
+ #if JSON_COUNT
+ #define P(n) st[n], st[n] > 1 ? "s" : ""

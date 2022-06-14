@@ -1,0 +1,35 @@
+From e83f5046ef2d8967f14db5063a09c91f54f68063 Mon Sep 17 00:00:00 2001
+From: Christos Zoulas <christos@zoulas.com>
+Date: Sun, 12 Dec 2021 16:23:06 +0000
+Subject: [PATCH] remove trailing newline
+
+---
+ tests/json1.result | 2 +-
+ tests/json2.result | 2 +-
+ tests/json3.result | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/tests/json1.result b/tests/json1.result
+index 7d635242f..550d7ac2f 100644
+--- a/tests/json1.result
++++ b/tests/json1.result
+@@ -1 +1 @@
+-JSON text data
++JSON text data
+\ No newline at end of file
+diff --git a/tests/json2.result b/tests/json2.result
+index 7d635242f..550d7ac2f 100644
+--- a/tests/json2.result
++++ b/tests/json2.result
+@@ -1 +1 @@
+-JSON text data
++JSON text data
+\ No newline at end of file
+diff --git a/tests/json3.result b/tests/json3.result
+index 7d635242f..550d7ac2f 100644
+--- a/tests/json3.result
++++ b/tests/json3.result
+@@ -1 +1 @@
+-JSON text data
++JSON text data
+\ No newline at end of file
