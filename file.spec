@@ -15,7 +15,7 @@
 Summary: Utility for determining file types
 Name: file
 Version: 5.42
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: BSD
 Source0: http://ftp.astron.com/pub/file/file-%{version}.tar.gz
 Source1: http://ftp.astron.com/pub/file/file-%{version}.tar.gz.asc
@@ -216,6 +216,9 @@ make -C tests check
 %endif
 
 %changelog
+* Thu Jul 21 2022 Vincent Mihalkovic <vmihalko@redhat.com> - 5.42-2
+- release bump to 5.42-2
+
 * Thu Jul 21 2022 Vincent Mihalkovic <vmihalko@redhat.com> - 5.42-1
 - update to new version 5.42
 
