@@ -14,8 +14,8 @@
 
 Summary: Utility for determining file types
 Name: file
-Version: 5.41
-Release: 7%{?dist}
+Version: 5.42
+Release: 1%{?dist}
 License: BSD
 Source0: http://ftp.astron.com/pub/file/file-%{version}.tar.gz
 Source1: http://ftp.astron.com/pub/file/file-%{version}.tar.gz.asc
@@ -29,14 +29,8 @@ Patch0: file-localmagic.patch
 Patch1: file-4.17-rpm-name.patch
 Patch2: file-5.04-volume_key.patch
 
-# Upstream commit: https://github.com/file/file/commit/f687fa2b92cd9231
-Patch3: file-5.41-javascript-magic.patch
-# Upstream commit: https://github.com/file/file/commit/c49e7805fd8aa48b
-Patch4: file-5.41-json-magic.patch
-# Upstream commit: https://github.com/file/file/commit/3012be8ca1cdee72
-Patch5: file-5.41-json-tests.patch
-# Upstream commit: https://github.com/file/file/commit/e83f5046ef2d8967
-Patch6: file-5.41-json-tests-fix.patch
+# Upstream commit: https://github.com/file/file/commit/19bf47777d0002ee884467e45e6ace702e40a4c1
+Patch3: file-5.42-fix-stdin-input.patch
 
 URL: https://www.darwinsys.com/file/
 Requires: file-libs%{?_isa} = %{version}-%{release}
@@ -222,6 +216,9 @@ make -C tests check
 %endif
 
 %changelog
+* Thu Jul 21 2022 Vincent Mihalkovic <vmihalko@redhat.com> - 5.42-1
+- update to new version 5.42
+
 * Thu Jul 21 2022 Fedora Release Engineering <releng@fedoraproject.org> - 5.41-7
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild
 
