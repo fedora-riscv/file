@@ -15,7 +15,7 @@
 Summary: Utility for determining file types
 Name: file
 Version: 5.42
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: BSD
 Source0: http://ftp.astron.com/pub/file/file-%{version}.tar.gz
 Source1: http://ftp.astron.com/pub/file/file-%{version}.tar.gz.asc
@@ -31,6 +31,7 @@ Patch2: file-5.04-volume_key.patch
 
 # Upstream commit: https://github.com/file/file/commit/19bf47777d0002ee884467e45e6ace702e40a4c1
 Patch3: file-5.42-fix-stdin-input.patch
+Patch4: file-rh2110622.patch
 
 URL: https://www.darwinsys.com/file/
 Requires: file-libs%{?_isa} = %{version}-%{release}
@@ -216,6 +217,9 @@ make -C tests check
 %endif
 
 %changelog
+* Tue Jul 26 2022 Florian Weimer <fweimer@redhat.com> - 5.42-4
+- Fix use-after-free with large file -f list (#2110622)
+
 * Mon Jul 25 2022 Vincent Mihalkovic <vmihalko@redhat.com> - 5.42-3
 - bump release to 5.42-3
 

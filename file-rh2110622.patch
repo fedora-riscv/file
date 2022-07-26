@@ -1,0 +1,14 @@
+Fix use-after-free with large file -f list
+
+diff --git a/src/file.c b/src/file.c
+index bb058ce1e0082e95..a41018fc1670373c 100644
+--- a/src/file.c
++++ b/src/file.c
+@@ -529,6 +529,7 @@ out:		file_err(EXIT_FAILURE, "Cannot allocate memory for file list");
+ 			char **nf = realloc(flist, fimax * sizeof(*flist));
+ 			if (nf == NULL)
+ 				goto out;
++			flist = nf;
+ 		}
+ 		flist[fi++] = line;
+ 		cwid = file_mbswidth(ms, line);
