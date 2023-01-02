@@ -1,54 +1,55 @@
-#!/bin/bash
+#!/bin/bash -ex
 
+# Clone
 rm -rf runtest.sh db tmp
 git clone https://github.com/file/file-tests.git
 cp -a file-tests/db .
 rm -rf file-tests
 
-blacklist=`python -c 'from readfile import *; print " ".join(main())'`
+blocklist="$(python3 -c 'from readfile import *; print(" ".join(main()))')"
 
-printf "#!/bin/bash
+# Prepare
+printf $'#!/bin/bash
+. /usr/share/beakerlib/beakerlib.sh
 
-mkdir tmp
-cd db
-for d in * ; do
-	mkdir ../tmp/\$d
-	for f in \$d/* ; do
-		if [[ \${f: -11} != \".source.txt\" ]]; then
-			file \$1 \$f | sed -n -e \"s:\$f\: ::p\" | sed 's/,//g' > ../tmp/\$f.my
-		fi
-	done
-done
+compare() {
+    IN="db/$1"
+    OUT="$TMPDIR/out"
+    rlRun "file \'$IN\' > \'$OUT\'" "0" "Run file on $1"
+    sed -i "s|^$IN: ||" "$OUT"
+    REF="reference/$1.ref"
+    if ! rlAssertNotDiffer "$REF" "$OUT"; then
+        rlRun -l "diff -u \'$REF\' \'$OUT\'" 1
+    fi
+}
 
-cd ..
-
-. /usr/bin/rhts-environment.sh 
-. /usr/share/beakerlib/beakerlib.sh 
-
-PACKAGE=\"file\"
+PACKAGE="file"
 
 rlJournalStart
 
-	rlPhaseStartSetup
-        rlAssertRpm \$PACKAGE
-    rlPhaseEnd\n\n" > runtest.sh
+    rlPhaseStartSetup
+        rlAssertRpm "$PACKAGE"
+        TMPDIR="$(mktemp -d)"
+    rlPhaseEnd\n\n' > runtest.sh
 
-cd db
+(
+    cd db
+    for d in * ; do
+        printf "    rlPhaseStartTest '%s'\n" "$d" >> ../runtest.sh
+        for f in "$d"/* ; do
+            if [[ ${f: -11} != ".source.txt" && "${blocklist[*]}" != *"$f"* ]]; then
+                printf "        compare '%s'\n" "$f" >> ../runtest.sh
+            fi
+        done
+        printf "    rlPhaseEnd\n\n" >> ../runtest.sh
+    done
+)
 
-for d in * ; do
-	printf "    rlPhaseStartTest \"$d\"\n" >> ../runtest.sh
-	for f in $d/* ; do
-		if [[ ${f: -11} != ".source.txt" && "${blacklist[*]}" != *"$f"* ]]; then
-			printf "        rlAssertNotDiffer \"reference/$f.ref\" \"tmp/$f.my\"\n" >> ../runtest.sh
-		fi
-	done
-	printf "    rlPhaseEnd\n\n" >> ../runtest.sh
-done
+printf "    rlPhaseStartCleanup
+        rm -rf \"\$TMPDIR\"
+    rlPhaseEnd
 
-cd ..
-
-printf "    rlJournalPrintText
-rlJournalEnd
-rm -rf tmp" >> runtest.sh
+    rlJournalPrintText
+rlJournalEnd\n" >> runtest.sh
 
 chmod +x runtest.sh

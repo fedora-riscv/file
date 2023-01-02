@@ -27,7 +27,6 @@
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # Include rhts environment
-. /usr/bin/rhts-environment.sh
 . /usr/share/beakerlib/beakerlib.sh
 
 PACKAGE="file"
@@ -117,8 +116,8 @@ rlJournalStart
     rlPhaseEnd
 
     rlPhaseStartTest "--version"
-	rlRun "file -v 2>&1 | egrep 'file-[[:digit:]]\.[[:digit:]]'" 0  "Checking -v"
-	rlRun "file --version 2>&1 | egrep 'file-[[:digit:]]\.[[:digit:]]'" 0  "Checking --version"
+	rlRun "file -v 2>&1 | grep -E 'file-[[:digit:]]\.[[:digit:]]'" 0  "Checking -v"
+	rlRun "file --version 2>&1 | grep -E 'file-[[:digit:]]\.[[:digit:]]'" 0  "Checking --version"
     rlPhaseEnd
 
   if ! rlIsRHEL 4; then   # not for RHEL4 - this will never be fixed
