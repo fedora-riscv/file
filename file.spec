@@ -15,7 +15,7 @@
 Summary: Utility for determining file types
 Name: file
 Version: 5.42
-Release: 4%{?dist}
+Release: 4.0%{?dist}
 License: BSD
 Source0: http://ftp.astron.com/pub/file/file-%{version}.tar.gz
 Source1: http://ftp.astron.com/pub/file/file-%{version}.tar.gz.asc
@@ -217,6 +217,9 @@ make -C tests check
 %endif
 
 %changelog
+* Sat Jan 21 2023 Liu Yang <Yang.Liu.sn@gmail.com> - 5.42-4.rv64
+- Rebuild with python3.11
+
 * Tue Jul 26 2022 Florian Weimer <fweimer@redhat.com> - 5.42-4
 - Fix use-after-free with large file -f list (#2110622)
 
